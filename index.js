@@ -26,6 +26,7 @@ const chatbot = require('./chatbot')
 
 const { GiveawaysManager } = require('discord-giveaways');
 const mongo = require('./mongo');
+const loadCommands = require('./commands/load-commands');
 
 require('events').EventEmitter.defaultMaxListeners = 100
 
@@ -48,16 +49,10 @@ new ttt({
 
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`)
-
-	client.commands.set(command.name, command);
-}
-
 client.on('ready', async () => {
 	await status(client)
-	counting(client)
+	await loadCommands(client)
+	await counting(client)
 	await mongo()
 })
 

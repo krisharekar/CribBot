@@ -15,11 +15,11 @@ module.exports = {
         if (isNaN(deleteCount))
             return message.channel.send('Provide a valid number.')
 
+        await message.delete()
+
         const fetched = await message.channel.messages.fetch({
             limit: deleteCount
         });
-
-        message.delete()
 
         try {
             await message.channel.bulkDelete(fetched)

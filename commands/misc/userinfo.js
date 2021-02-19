@@ -27,15 +27,16 @@ module.exports = {
             .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
             .setColor('RANDOM')
             .setThumbnail(user.displayAvatarURL({ dynamic: true }))
-            .setDescription(`**❯ User Name:** ${user.tag}
-            **❯ ID:** ${user.id}
-            **❯ Nickname:** ${member.nickname !== null ? member.nickname : 'None'}
-            **❯ Status:** ${status}
-            **❯ Playing Game:** ${user.presence.game ? user.presence.game.name : 'None'}
-            **❯ Bot:** ${user.bot}
-            **❯ Joined The Server On:** ${moment.utc(member.joinedAt).format("dddd, MMMM Do YYYY")}
-            **❯ Account Created On:** ${moment.utc(user.createdAt).format("dddd, MMMM Do YYYY")}
-            **❯ Roles:** ${member.roles.cache.filter(role => role.id !== message.guild.id).map(roles => roles).join(', ')}`)
+            .setDescription(`
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Username:** ${user.tag}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) ID:** ${user.id}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Nickname:** ${member.nickname !== null ? member.nickname : 'None'}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Status:** ${status}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Playing Game:** ${user.presence.game ? user.presence.game.name : 'None'}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Bot:** ${user.bot}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Joined The Server On:** ${moment.utc(member.joinedAt).format("dddd, MMMM Do YYYY")}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Account Created On:** ${moment.utc(user.createdAt).format("dddd, MMMM Do YYYY")}
+            **[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Roles:** ${member.roles.cache.filter(role => role.id !== message.guild.id).map(roles => roles).join(' ')}`)
             .setFooter(`Requested by: ${user.tag}`)
 
         message.channel.send(embed);

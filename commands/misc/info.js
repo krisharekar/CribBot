@@ -37,30 +37,30 @@ module.exports = {
 		const core = os.cpus()[0];
 
 		const InfoEmbed = new Discord.MessageEmbed()
-			.setTitle('Bot Info')
+			.setTitle(client.user.username)
 			.setThumbnail(client.user.displayAvatarURL())
 			.setColor('RANDOM')
 			.addField('General', [
-				`**❯ Client:** ${client.user.tag} (${client.user.id})`,
-				`**❯ Commands:** 23`,
-				`**❯ Servers:** ${client.guilds.cache.size.toLocaleString()} `,
-				`**❯ Users:** ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
-				`**❯ Channels:** ${client.channels.cache.size.toLocaleString()}`,
-				`**❯ Creation Date:** ${utc(client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
-				`**❯ Created By:** Krish#7476`,
-				`**❯ Node.js:** ${process.version}`,
-				`**❯ Version:** v${version}`,
-				`**❯ Discord.js:** v${djsversion}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Client:** ${client.user.tag} (${client.user.id})`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Commands:** ${client.commands.size}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Servers:** ${client.guilds.cache.size.toLocaleString()} `,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Users:** ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Channels:** ${client.channels.cache.size.toLocaleString()}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Creation Date:** ${utc(client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Created By:** Krish#7476`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Node.js:** ${process.version}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Version:** v${version}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Discord.js:** v${djsversion}`,
 				'\u200b'
 			])
 			.addField('System', [
-				`**❯ Platform:** ${process.platform}`,
-				`**❯ Uptime:** ${ms(os.uptime() * 1000, { long: true })}`,
-				`**❯ CPU:**`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Platform:** ${process.platform}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Uptime:** ${ms(os.uptime() * 1000, { long: true })}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) CPU:**`,
 				`\u3000 Cores: ${os.cpus().length}`,
 				`\u3000 Model: ${core.model}`,
 				`\u3000 Speed: ${core.speed}MHz`,
-				`**❯ Memory:**`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Memory:**`,
 				`\u3000 Total: ${totalMemory}`,
 				`\u3000 Used: ${memoryUsed}`
 			])

@@ -12,7 +12,7 @@ module.exports = {
 	maxArgs: 1,
 
 	execute(message, args, client) {
-		const commands = loadCommands()
+		const { commands } = client
 
 		if (!args.length || args[0] == 'help') {
 
@@ -24,7 +24,7 @@ module.exports = {
 
 				for (const command of commands) {
 					// console.log(command[0].commands[0])
-					const mainCommand = `\`${command.commands[0]}\``
+					const mainCommand = `\`${command[0].commands[0]}\``
 					mainCommands.push(mainCommand)
 				}
 
@@ -56,8 +56,10 @@ module.exports = {
 		if (args[0]) {
 			for (const command of commands) {
 				const cmd = args[0]
-				const commandAliases = command.commands.includes(args[0])
-				const aliases = command.commands.join(', ')
+				const description = command[0].description
+				const commandAliases = command[0].commands.includes(args[0])
+				const aliases = command[0].commands.join(', ')
+				const usage = command[0].usage ? ` ${command[0].usage}` : ''
 
 				if (commandAliases) {
 					status = true
@@ -66,8 +68,8 @@ module.exports = {
 						.setTitle(`**${cmd.toUpperCase()} Command**`)
 						.setColor('RANDOM')
 						.setDescription([
-							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Description : **\`${command.description}\``,
-							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Usage      : **\`${prefix}${cmd} ${command.usage}\``,
+							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Description : **\`${description}\``,
+							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Usage      : **\`${prefix}${cmd}${usage}\``,
 							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Aliases       : **\`${aliases}\``						])
 						.setFooter(`<> are mandatory, [] are optional`)
 
