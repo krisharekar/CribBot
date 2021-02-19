@@ -5,7 +5,7 @@ const loadCommands = require('./load-commands')
 const { prefix } = require('../config.json')
 
 module.exports = {
-	commands: ['help', 'commands', 'cmds'],
+	commands: ['help', 'commands', 'cmds', 'h'],
 	description: 'Shows the help menu',
 	aliases: ['commands', 'cmds'],
 	usage: '',
@@ -18,12 +18,25 @@ module.exports = {
 
 			let reply = ''
 
-			for (const command of commands) {
-				const mainCommand = command.commands[0]
-				const usage = command.usage ? `${command.usage}` : ''
-				const { description } = command
-				let usageReply = `${prefix}${mainCommand} ${usage}`
-				reply += `**❯ ${mainCommand.toUpperCase()}**\n`
+			if (!args.length || args[0] == 'help') {
+
+				const mainCommands = []
+
+				for (const command of commands) {
+					// console.log(command[0].commands[0])
+					const mainCommand = `\`${command.commands[0]}\``
+					mainCommands.push(mainCommand)
+				}
+
+				const helpEmbed = new Discord.MessageEmbed()
+					.setAuthor(client.user.username, client.user.displayAvatarURL())
+					.setTitle('**__Help Menu__**')
+					.setColor('RANDOM')
+					.setDescription(`**My prefix is \`${prefix}\`**`)
+					.addField('Commands:', `${mainCommands.join(' ')}`, true)
+					.setFooter(`Type ${prefix}help [command] to get help on a specific command`)
+
+				return message.channel.send(helpEmbed)
 			}
 
 			const helpEmbed = new Discord.MessageEmbed()
@@ -53,17 +66,16 @@ module.exports = {
 						.setTitle(`**${cmd.toUpperCase()} Command**`)
 						.setColor('RANDOM')
 						.setDescription([
-							`**❯ Description:** ${command.description}`,
-							`**❯ Usage:** \`${prefix}${cmd} ${command.usage}\``,
-							`**❯ Aliases:** ${aliases}`
-						])
+							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Description : **\`${command.description}\``,
+							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Usage      : **\`${prefix}${cmd} ${command.usage}\``,
+							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Aliases       : **\`${aliases}\``						])
 						.setFooter(`<> are mandatory, [] are optional`)
 
-						return message.channel.send(helpEmbed)
+					return message.channel.send(helpEmbed)
 				}
 			}
-			if(status == false)
-			return message.channel.send(`There is no such command as \`${args[0]}\`.`)
+			if (status == false)
+				return message.channel.send(`There is no such command as \`${args[0]}\`.`)
 		}
 	}
 }

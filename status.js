@@ -2,59 +2,49 @@ const Discord = require('discord.js')
 
 module.exports = async (client) => {
 
-    client.on('ready', async () => {
+    // client.on('ready', async () => {
 
-        setInterval(async () => {
+    //     setInterval(async () => {
 
-            let activitiesList = ['WATCHING', 'LISTENING', 'PLAYING']
+    //         let activitiesList = ['WATCHING', 'LISTENING', 'PLAYING']
 
-            let randomActivityList = activitiesList[Math.floor(Math.random() * activitiesList.length)]
+    //         let randomActivityList = activitiesList[Math.floor(Math.random() * activitiesList.length)]
 
-            var activities
+    //         var activities
 
-            if (randomActivityList === 'WATCHING') {
+    //         if (randomActivityList === 'WATCHING') {
 
-                activities = [
-                    'Krish not study.',
-                    'You.',
-                    'muffins.',
-                    'my code.',
-                    'Mrbeast\'s Videos'
-                ];
-            }
+    //             activities = [
+    //                 'Krish not study.',
+    //                 'You.',
+    //                 'muffins.',
+    //                 'my code.',
+    //                 'Mrbeast\'s Videos'
+    //             ];
+    //         }
 
-            if (randomActivityList === 'LISTENING') {
+    //         if (randomActivityList === 'LISTENING') {
 
-                activities = [
-                    'Krish.',
-                    'Spotify.'
-                ];
-            }
+    //             activities = [
+    //                 'Krish.',
+    //                 'Spotify.'
+    //             ];
+    //         }
 
-            if (randomActivityList === 'PLAYING') {
+    //         if (randomActivityList === 'PLAYING') {
 
-                activities = [
-                    'with my errors.',
-                    'with Krish.'
-                ];
-            }
+    //             activities = [
+    //                 'with my errors.',
+    //                 'with Krish.'
+    //             ];
+    //         }
 
-            let randomActivity = activities[Math.floor(Math.random() * activities.length)]
+    //         let randomActivity = activities[Math.floor(Math.random() * activities.length)]
 
-            await client.user.setActivity(randomActivity, { type: `${randomActivityList}` });
+    //         await client.user.setActivity(randomActivity, { type: `${randomActivityList}` });
 
-        }, 10 * 60 * 1000);
-    })
-
-    client.on('ready', async () => {
-        const names = ['You', 'Mango']
-        const random = names[Math.floor(Math.random() * names.length)]
-        setInterval(() => {
-          client.user.setPresence({
-            name: `${random}`,
-            type: 'WATCHING'
-          })
-    }, 5 * 1000) //every 5 seconds
-    })
-        
+    //     }, 10 * 60 * 1000);
+    // })
+    
+    await client.user.setActivity('The Crib', { type: 'WATCHING' })
 }

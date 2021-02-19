@@ -56,7 +56,7 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', async () => {
-	status(client)
+	await status(client)
 	counting(client)
 	await mongo()
 })
@@ -67,7 +67,11 @@ client.on('guildMemberAdd', member => {
 		console.log('Nalaude spotted.')
 		return;
 	}
-	console.log('NO naluade spotted.')
+})
+
+client.on('message', async message => {
+	if(message.channel.id == '805791291312308266' && message.author.id != client.user.id)
+	return message.channel.send('nO')
 })
 
 client.once('ready', async () => {
