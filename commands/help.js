@@ -2,8 +2,6 @@ const Discord = require('discord.js')
 
 const loadCommands = require('./load-commands')
 
-const { prefix } = require('../config.json')
-
 module.exports = {
 	commands: ['help', 'commands', 'cmds', 'h'],
 	description: 'Shows the help menu',
@@ -11,7 +9,7 @@ module.exports = {
 	usage: '',
 	maxArgs: 1,
 
-	execute(message, args, client) {
+	execute(message, args, client, prefix) {
 		const { commands } = client
 
 		if (!args.length || args[0] == 'help') {

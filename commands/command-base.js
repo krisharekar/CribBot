@@ -1,4 +1,4 @@
-const { prefix } = require('../config.json')
+const { prefixFinder } = require('../prefix-finder')
 const Discord = require('discord.js')
 
 const validatePermissions = (permissions) => {
@@ -69,6 +69,7 @@ module.exports = (client, commandOptions) => {
     const cooldowns = new Discord.Collection()
 
     client.on('message', message => {
+        const prefix = prefixFinder(message.guild.id)
         if(!message.content.startsWith(prefix) || message.author.bot)
         return;
         
@@ -118,7 +119,7 @@ module.exports = (client, commandOptions) => {
                 if(args.length < minArgs || (maxArgs != null && args.length > maxArgs))
                 return message.channel.send(`Incorrect usage.\nThe correct usage would be \`${prefix}${alias} ${usage}\``)
             
-                execute(message, args, client)
+                execute(message, args, client, prefix)
             }
         }
     })

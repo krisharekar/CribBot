@@ -1,13 +1,13 @@
 const mongo = require('./mongo')
 const welcomeSchema = require('./schemas/welcome-schema')
-const { prefix } = require('./config.json')
-const { Guild } = require('discord.js')
+const { prefixFinder } = require('./prefix-finder')
 
 module.exports = (client) => {
     //!setwelcome <message>
     const cache = {} // guildId: [channelId, text]
 
     client.on('message', async (message) => {
+        const prefix = prefixFinder(message.guild.id)
         if (!message.content.toLowerCase().startsWith(prefix + 'setwelcome'))
             return;
         const { member, channel, content, guild } = message

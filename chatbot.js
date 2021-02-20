@@ -1,6 +1,6 @@
 const mongo = require('./mongo')
 const chatBotSchema = require('./schemas/chatbot-schema')
-const { prefix } = require('./config.json')
+const { prefixFinder } = require('./prefix-finder')
 const fetch = require('node-fetch')
 const alexa = require('alexa-bot-api')
 const ai = new alexa('aw2plm')
@@ -10,6 +10,7 @@ module.exports = (client) => {
     const cache = {}
 
     client.on('message', async (message) => {
+        const prefix = prefixFinder(message.guild.id)
         if (!message.content.toLowerCase().startsWith(prefix + 'setchatbot'))
             return;
 
