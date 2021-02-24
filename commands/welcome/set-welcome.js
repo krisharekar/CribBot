@@ -7,7 +7,7 @@ module.exports = {
     permissions: ['ADMINISTRATOR'],
 
     async execute(message) {
-        const guild = message.guild.id
+        const guildId = message.guild.id
         const channelId = message.channel.id
 
         await welcomeSchema.findOneAndUpdate({ guildId }, { guildId, channelId }, { upsert: true })
