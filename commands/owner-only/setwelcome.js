@@ -23,8 +23,6 @@
 //         if(!welcomeMessage)
 //         return message.channel.send('Specify the welcome message to be sent.')
 
-//         await mongo().then(async (mongoose) => {
-//             try {
 //                 const result = await welcomeSchema.findOneAndUpdate(
 //                     {
 //                         guildId
@@ -40,9 +38,6 @@
 //                 )
 
 //                 message.channel.send('Welcome message and welcome channel have been set.')
-//             } finally {
-//                 mongoose.connection.close()
-//             }
-//         })
+//        
 //     }
 // }

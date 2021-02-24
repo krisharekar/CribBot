@@ -27,26 +27,21 @@ module.exports = (client) => {
         cache[guild.id] = [channel.id]
         // console.log(cache)
 
-        await mongo().then(async (mongoose) => {
-            try {
-                await chatBotSchema.findOneAndUpdate(
-                    {
-                        guildId
-                    },
-                    {
-                        guildId,
-                        channelId: channel.id
-                    },
-                    {
-                        upsert: true
-                    }
-                )
-
-                message.channel.send('Chat Bot channel has been successfully set. You can now chat with me here.')
-            } finally {
-                mongoose.connection.close()
+        await chatBotSchema.findOneAndUpdate(
+            {
+                guildId
+            },
+            {
+                guildId,
+                channelId: channel.id
+            },
+            {
+                upsert: true
             }
-        })
+        )
+
+        message.channel.send('Chat Bot channel has been successfully set. You can now chat with me here.')
+
     })
 
     client.on('message', async (message) => {
@@ -62,18 +57,12 @@ module.exports = (client) => {
         let result = 'something'
 
         if (!data) {
-            await mongo().then(async (mongoose) => {
-                try {
-                    result = await chatBotSchema.findOne({ guildId })
+            result = await chatBotSchema.findOne({ guildId })
 
-                    if (!result)
-                        return;
+            if (!result)
+                return;
 
-                    cache[guildId] = data = [result.channelId]
-                } finally {
-                    mongoose.connection.close()
-                }
-            })
+            cache[guildId] = data = [result.channelId]
         }
 
         if (!result)

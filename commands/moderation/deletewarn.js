@@ -21,31 +21,27 @@ module.exports = {
         let result
 
         if (args[1] == 'all' || args[1] == 'everything') {
-            await mongo().then(async (mongoose) => {
-                try {
-                    result = await warnSchema.findOne({
-                        guildId,
-                        userId
-                    })
-                    if (!result)
-                        return;
 
-                    await warnSchema.findOneAndDelete(
-                        {
-                            guildId,
-                            userId
-                        }
-                    )
-
-                } finally {
-                    mongoose.connection.close()
-                }
+            result = await warnSchema.findOne({
+                guildId,
+                userId
             })
-            if(!result)
-            return message.channel.send('The user has no warnings.')
-            
+            if (!result)
+                return;
+
+            await warnSchema.findOneAndDelete(
+                {
+                    guildId,
+                    userId
+                }
+            )
+
+
+            if (!result)
+                return message.channel.send('The user has no warnings.')
+
             else
-            return message.channel.send(`Removed all warnings for ${user.username}.`)
+                return message.channel.send(`Removed all warnings for ${user.username}.`)
         }
 
         if (isNaN(args[1]))
@@ -55,59 +51,53 @@ module.exports = {
 
         let value = false
 
-        await mongo().then(async (mongoose) => {
-            try {
-                result = await warnSchema.findOne({
-                    guildId,
-                    userId
-                })
 
-                if (!result)
-                    return message.channel.send('The user has no warnings.')
-
-                for (warning of result.warnings) {
-                    if (warning.warnId == warnId) {
-                        value = true
-                        
-                        await warnSchema.findOneAndUpdate(
-                            {
-                                guildId,
-                                userId
-                            },
-                            {
-                                $inc: {
-                                    totalWarnings: -1
-                                },
-                                $pull: {
-                                    warnings: warning
-                                }
-                            })
-
-                            const info = await warnSchema.findOne(
-                                {
-                                    guildId,
-                                    userId
-                                }
-                            )
-                            if(info.totalWarnings == 0)
-                            await warnSchema.findOneAndDelete(
-                                {
-                                    guildId,
-                                    userId
-                                }
-                            )
-                    }
-                }
-
-                if(value == true)
-                message.channel.send(`Removed warn with warn ID: ${warnId} from ${user.username}.`)
-
-                else
-                message.channel.send(`The user has no warning with warn ID: ${warnId}.`)
-
-            } finally {
-                mongoose.connection.close()
-            }
+        result = await warnSchema.findOne({
+            guildId,
+            userId
         })
+
+        if (!result)
+            return message.channel.send('The user has no warnings.')
+
+        for (warning of result.warnings) {
+            if (warning.warnId == warnId) {
+                value = true
+
+                await warnSchema.findOneAndUpdate(
+                    {
+                        guildId,
+                        userId
+                    },
+                    {
+                        $inc: {
+                            totalWarnings: -1
+                        },
+                        $pull: {
+                            warnings: warning
+                        }
+                    })
+
+                const info = await warnSchema.findOne(
+                    {
+                        guildId,
+                        userId
+                    }
+                )
+                if (info.totalWarnings == 0)
+                    await warnSchema.findOneAndDelete(
+                        {
+                            guildId,
+                            userId
+                        }
+                    )
+            }
+        }
+
+        if (value == true)
+            message.channel.send(`Removed warn with warn ID: ${warnId} from ${user.username}.`)
+
+        else
+            message.channel.send(`The user has no warning with warn ID: ${warnId}.`)
     }
 }

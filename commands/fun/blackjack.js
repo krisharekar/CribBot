@@ -5,7 +5,6 @@ module.exports = {
     descriptions: 'A game of blackjack',
     aliases: ['bj'],
     usage: '',
-    maxArgs: 0,
 
     async execute(message, args, client) {
 

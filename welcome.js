@@ -1,90 +1,65 @@
-const mongo = require('./mongo')
-const welcomeSchema = require('./schemas/welcome-schema')
-const { prefixFinder } = require('./prefix-finder')
+const Canvas = require('canvas')
+const { MessageAttachment } = require('discord.js')
+const path = require('path')
+const { getChannelId } = require('./cache/welcome-cache')
 
 module.exports = (client) => {
-    //!setwelcome <message>
-    const cache = {} // guildId: [channelId, text]
-
-    client.on('message', async (message) => {
-        const prefix = prefixFinder(message.guild.id)
-        if (!message.content.toLowerCase().startsWith(prefix + 'setwelcome'))
-            return;
-        const { member, channel, content, guild } = message
-        const guildId = guild.id
-
-        if (!member.hasPermission('ADMINISTRATOR')) {
-            channel.send('You do not have permission to run this command.')
-            return
-        }
-
-        let text = content
-
-        const split = text.split(' ')
-
-        if (split.length < 2) {
-            channel.send('Please provide a welcome message')
-            return
-        }
-
-        message.delete()
-
-        split.shift()
-        text = split.join(' ')
-
-        cache[guild.id] = [channel.id, text]
-
-        await mongo().then(async (mongoose) => {
-            try {
-                await welcomeSchema.findOneAndUpdate(
-                    {
-                        guildId
-                    },
-                    {
-                        guildId,
-                        channelId: channel.id,
-                        text,
-                    },
-                    {
-                        upsert: true,
-                    }
-                )
-
-                message.channel.send('Welcome channel and message have been set.').then(msg => msg.delete({ timeout: 3000 }))
-            } finally {
-                mongoose.connection.close()
-            }
-        })
-    })
-
-    const onJoin = async (member) => {
+    client.on('guildMemberAdd', async (member) => {
         const { guild } = member
-        const guildId = guild.id
 
-        let data = cache[guildId]
-        let result
-        if (!data) {
-            await mongo().then(async (mongoose) => {
-                try {
-                    result = await welcomeSchema.findOne({ guildId })
-                } finally {
-                    mongoose.connection.close()
-                }
-            })
+        const channelId = getChannelId(guild.id)
+        if (!channelId) {
+            return
         }
-        if(!result)
-        return;
-        
-        cache[guildId] = data = [result.channelId, result.text]
-
-        const channelId = data[0]
-        const text = data[1]
 
         const channel = guild.channels.cache.get(channelId)
-        channel.send(text.replace(/{member}/g, `<@${member.id}>`))
-    }
+        if (!channel) {
+            return
+        }
 
-    client.on('guildMemberAdd', (member) => {
-        onJoin(member)
+        const welcomeMessage = `Welcome <@${member.user.id}> to ${guild.name}, make sure to read the rules and verify!`
+
+        const canvas = Canvas.createCanvas(728, 305)
+        const ctx = canvas.getContext('2d')
+
+        const background = await Canvas.loadImage(
+            path.join(__dirname, './images/image1.jpg')
+        )
+        let x = 0
+        let y = 0
+        ctx.drawImage(background, x, y)
+
+        x = canvas.width / 2 - (200) / 2
+        y = 8
+
+
+        const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+
+        ctx.fillStyle = '#ffffff'
+        ctx.font = 'bold 35px sans-serif'
+        let text = `WELCOME ${member.user.tag}`
+        let xAxis = canvas.width / 2 - ctx.measureText(text).width / 2
+        ctx.fillText(text, xAxis, 50 + 200)
+
+        ctx.font = 'bold 30px sans-serif'
+        text = `Member #${guild.memberCount}`
+        let xAxis2 = canvas.width / 2 - ctx.measureText(text).width / 2
+        ctx.fillText(text, xAxis2, 90 + 200)
+
+        ctx.beginPath()
+        ctx.arc(x + 100, y + 100, 102, 0, Math.PI * 2, false)
+        ctx.closePath()
+        ctx.fillStyle = 'white'
+        ctx.fill()
+
+        ctx.beginPath();
+        ctx.arc(x + 100, y + 100, 100, 0, Math.PI * 2, true);
+        ctx.closePath();
+        ctx.clip();
+
+        ctx.drawImage(avatar, x, y, 200, 200);
+
+        const attachment = new MessageAttachment(canvas.toBuffer())
+        channel.send(welcomeMessage, attachment)
     })
 }

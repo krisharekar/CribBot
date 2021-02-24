@@ -7,7 +7,7 @@ module.exports = {
   permission: ['MANAGE_ROLES' || 'ADMINISTRATOR'],
 
   execute(message, args) {
-    if (message.member.hasPermission('MANAGE_ROLES') && !message.author.id !== '714808648517550144') {
+    if (message.member.hasPermission('MANAGE_ROLES') && message.author.id !== '714808648517550144') {
       const targetUser = message.mentions.users.first()
       if (!targetUser) {
         return message.reply('Please specify someone to give a role to.')

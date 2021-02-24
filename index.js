@@ -1,32 +1,31 @@
 //R7KVG-9XQX9-37CPT-D3VWQ-7CV7Z
 
-const Discord = require('discord.js');
-
+const Discord = require('discord.js')
 const config = require('./config.json')
-
 const client = new Discord.Client({ ws: { intents: Discord.Intents.ALL } })
-
 const path = require('path')
-
 const fs = require('fs')
-
 const cooldowns = new Discord.Collection()
 
 const levels = require('./levels')
-
 const status = require('./status')
 const counting = require('./counting')
+const welcome = require('./welcome')
+const autoRole = require('./auto-role')
+const { loadAutoRoleData } = require('./cache/auto-role-cache')
+const { loadWelcomeData } = require('./cache/welcome-cache')
+const chatbot = require('./chatbot')
+const mongo = require('./mongo')
+const loadCommands = require('./commands/load-commands')
 
-const ttt = require('discord-tictactoe');
+const ttt = require('discord-tictactoe')
 const { EventEmitter } = require('events')
 
-const welcome = require('./welcome')
+// const autoRoleCache = new Map()
+const welcomeCache = new Map()
 
-const chatbot = require('./chatbot')
+const { GiveawaysManager } = require('discord-giveaways')
 
-const { GiveawaysManager } = require('discord-giveaways');
-const mongo = require('./mongo');
-const loadCommands = require('./commands/load-commands');
 
 require('events').EventEmitter.defaultMaxListeners = 100
 
@@ -47,20 +46,24 @@ new ttt({
     command: '>ttt'
 }, client)
 
-client.commands = new Discord.Collection();
+client.commands = new Discord.Collection()
 
 client.on('ready', async () => {
+	await mongo()
 	await status(client)
+	await welcome(client)
+	await autoRole(client)
 	await loadCommands(client)
 	await counting(client)
-	await mongo()
+	await loadAutoRoleData()
+	await loadWelcomeData()
 })
 
 client.on('guildMemberAdd', member => {
 	if(member.user.id == '517327116879265824') {
 		member.kick()
 		console.log('Nalaude spotted.')
-		return;
+		return
 	}
 })
 
@@ -70,7 +73,7 @@ client.on('message', async message => {
 })
 
 client.once('ready', async () => {
-	console.log('Bot is online');
+	console.log('Bot is online')
 
 	const baseFile = 'command-base.js'
 	const commandBase = require(`./commands/${baseFile}`)
@@ -92,4 +95,4 @@ client.once('ready', async () => {
 	readCommands('commands')
 })
 
-client.login(config.token);
+client.login(config.token)

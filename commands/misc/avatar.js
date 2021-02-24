@@ -8,11 +8,7 @@ module.exports = {
     
     execute(message, args){
 
-        let mentionedUser = message.mentions.users.first();
-
-        if(!mentionedUser){
-            mentionedUser = message.author;
-        }
+        let mentionedUser = message.mentions.users.first() || message.author
 
         const avatarEmbed = new Discord.MessageEmbed()
         .setColor('RANDOM')

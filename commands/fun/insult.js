@@ -3,7 +3,6 @@ module.exports = {
     description: 'Insults a user (pretty offensive).',
     aliases: ['roast'],
 	usage: '',
-    maxArgs: 1,
 
     execute(message, args) {
 
