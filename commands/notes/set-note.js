@@ -1,7 +1,7 @@
 const notesSchema = require('../../schemas/notes-schema')
 
 module.exports = {
-    commands: ['set-note', 'setnote'],
+    commands: ['set-note', 'setnote', 'sn'],
     description: 'Set notes for a user',
     minArgs: 2,
     usage: '<user> <note>',
@@ -9,32 +9,24 @@ module.exports = {
 
     async execute(message, args) {
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        const userId = user.id
+        if(!user)
+        return message.channel.send('Specify a user that exists.')
+        const userId = user.user.id
         const guildId = message.guild.id
         const newNote = args.slice(1).join(' ')
+        
+        const result = await notesSchema.findOne({ guildId, userId })
 
-        const result = await notesSchema.findOne({ guildId })
-        let newNotes
-        const exists = false
-
-        for(const note of result.notes) {
-            if(note.userId == userId) {
-                newNotes = note.notes.push(newNote)
-                exists = true
-            }
-        }
-
-        if(!exists) {
-            newNotes = [newNote]
-        }
+        const noteId = result ? result.totalNotes+1 : 1
 
         const notesData = {
-            userId,
-            notes: newNotes
+            authorId: message.author.id,
+            noteId,
+            note: newNote
         }
 
-        await notesSchema.findOneAndUpdate({ guildId }, { $push: { notes: notesData } })
+        await notesSchema.findOneAndUpdate({ guildId, userId }, { $inc: { totalNotes: 1 }, $push: { notes: notesData } }, { upsert: true })
 
-        message.channel.send(`Note Set\n`)
+        message.channel.send(`<a:yes:812287920198123540> **Note Set!**\n**User:** ${user.user.tag}\n**Note:** *${newNote}*`)
     }
 }
