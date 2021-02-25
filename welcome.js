@@ -87,8 +87,8 @@ module.exports = (client) => {
 function fitText(context, text, fontface, maxWidth, xPosition, yPosition) {
 
     // start with a large font size
-    let fontsize = 100;
-    // xPosition = xPosition < 60 ? 60 : xPosition
+    let fontsize = 101;
+    xPosition = xPosition < 50 ? 50 : xPosition
 
     // lower the font size until the text fits the canvas
     do {
