@@ -77,7 +77,7 @@ module.exports = (client) => {
         ctx.closePath();
         ctx.clip();
 
-        ctx.drawImage(avatar, 665, 65, 600, 600);
+        ctx.drawImage(avatar, (width/2) - (600/2), 65, 600, 600);
 
         const attachment = new MessageAttachment(canvas.toBuffer())
         channel.send(welcomeMessage, attachment)
