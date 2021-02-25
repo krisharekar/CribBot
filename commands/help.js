@@ -16,8 +16,6 @@ module.exports = {
 
 			let reply = ''
 
-			if (!args.length || args[0] == 'help') {
-
 				const mainCommands = []
 
 				for (const command of commands) {
@@ -35,19 +33,19 @@ module.exports = {
 					.setFooter(`Type ${prefix}help [command] to get help on a specific command`)
 
 				return message.channel.send(helpEmbed)
-			}
+			
 
-			const helpEmbed = new Discord.MessageEmbed()
-				.setAuthor(client.user.username, client.user.displayAvatarURL())
-				.setTitle('**__Help Menu__**')
-				.setColor('RANDOM')
-				.setDescription(`**My prefix is \`${prefix}\`**`)
-				.addFields({
-					name: 'Commands:', value: `${reply}`, inline: true
-				})
-				.setFooter(`Type ${prefix}help [command] to get help on a specific command`)
+			// const helpEmbed = new Discord.MessageEmbed()
+			// 	.setAuthor(client.user.username, client.user.displayAvatarURL())
+			// 	.setTitle('**__Help Menu__**')
+			// 	.setColor('RANDOM')
+			// 	.setDescription(`**My prefix is \`${prefix}\`**`)
+			// 	.addFields({
+			// 		name: 'Commands:', value: `${reply}`, inline: true
+			// 	})
+			// 	.setFooter(`Type ${prefix}help [command] to get help on a specific command`)
 
-			return message.channel.send(helpEmbed)
+			// return message.channel.send(helpEmbed)
 		}
 
 		let status = false

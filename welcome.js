@@ -32,9 +32,10 @@ module.exports = (client) => {
         )
         let x = 0
         let y = 0
-        ctx.drawImage(background, x, y)
         const { width } = canvas
         const { height } = canvas
+        roundCorner(ctx, 10, 10, width - 10, height - 10, 40);
+        ctx.drawImage(background, x, y)
 
         x = canvas.width / 2 - (200) / 2
         y = 8
@@ -45,15 +46,15 @@ module.exports = (client) => {
         ctx.fillStyle = '#ffffff'
         ctx.font = '100px Montserrat'
         let text = `WELCOME ${member.user.tag}`
-        let xAxis = (width - ctx.measureText(text).width)/2
-        console.log(xAxis)
+        let xAxis = (width - ctx.measureText(text).width) / 2
+        // console.log(xAxis)
         ctx.shadowColor = '#000000';
         ctx.shadowBlur = 20;
         ctx.shadowOffsetX = 20;
         ctx.shadowOffsetY = 20;
         // ctx.fillText(text, xAxis, 800)
         // wrapText(ctx, text, xAxis, 800, width - 75, 50)
-        fitText(ctx, text, 'Montserrat', width-100, xAxis, 800)
+        fitText(ctx, text, 'Montserrat', width - 100, xAxis, 800)
 
         ctx.font = '100px Montserrat'
         text = `Member #${guild.memberCount}`
@@ -63,6 +64,11 @@ module.exports = (client) => {
         ctx.shadowOffsetX = 20;
         ctx.shadowOffsetY = 20;
         ctx.fillText(text, xAxis2, 930)
+
+        // roundRect(ctx, 20, 20, width - 30, height - 30, 20);
+
+        ctx.shadowOffsetX = 20;
+        ctx.shadowOffsetY = 20;
 
         ctx.beginPath()
         ctx.arc(width / 2, height / 3, 300, 0, Math.PI * 2, false)
@@ -77,7 +83,7 @@ module.exports = (client) => {
         ctx.closePath();
         ctx.clip();
 
-        ctx.drawImage(avatar, (width/2) - (600/2), 65, 600, 600);
+        ctx.drawImage(avatar, (width / 2) - (600 / 2), 65, 600, 600);
 
         const attachment = new MessageAttachment(canvas.toBuffer())
         channel.send(welcomeMessage, attachment)
@@ -99,6 +105,46 @@ function fitText(context, text, fontface, maxWidth, xPosition, yPosition) {
     // draw the text
     context.fillText(text, xPosition, yPosition);
 
-    console.log("A fontsize of " + fontsize + "px fits this text on the canvas");
+    // console.log("A fontsize of " + fontsize + "px fits this text on the canvas");
 
+}
+
+function roundRect(context, x, y, w, h, radius) {
+    var r = x + w;
+    var b = y + h;
+    context.beginPath();
+    context.strokeStyle = "white";
+    context.lineWidth = "20";
+    context.shadowOffsetX = 0;
+    context.shadowOffsetY = 0;
+    context.moveTo(x + radius, y);
+    context.lineTo(r - radius, y);
+    context.quadraticCurveTo(r, y, r, y + radius);
+    context.lineTo(r, y + h - radius);
+    context.quadraticCurveTo(r, b, r - radius, b);
+    context.lineTo(x + radius, b);
+    context.quadraticCurveTo(x, b, x, b - radius);
+    context.lineTo(x, y + radius);
+    context.quadraticCurveTo(x, y, x + radius, y);
+    context.stroke();
+    context.closePath();
+}
+
+function roundCorner(context, x, y, w, h, radius) {
+    var r = x + w;
+    var b = y + h;
+    context.beginPath();
+    context.strokeStyle = "green";
+    context.lineWidth = "20";
+    context.moveTo(x + radius, y);
+    context.lineTo(r - radius, y);
+    context.quadraticCurveTo(r, y, r, y + radius);
+    context.lineTo(r, y + h - radius);
+    context.quadraticCurveTo(r, b, r - radius, b);
+    context.lineTo(x + radius, b);
+    context.quadraticCurveTo(x, b, x, b - radius);
+    context.lineTo(x, y + radius);
+    context.quadraticCurveTo(x, y, x + radius, y);
+    context.closePath();
+    context.clip();
 }
