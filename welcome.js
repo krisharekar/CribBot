@@ -45,7 +45,7 @@ module.exports = (client) => {
         ctx.fillStyle = '#ffffff'
         ctx.font = '100px Montserrat'
         let text = `WELCOME ${member.user.tag}`
-        let xAxis = width - ctx.measureText(text).width
+        let xAxis = (width - ctx.measureText(text).width)/2
         console.log(xAxis)
         ctx.shadowColor = '#000000';
         ctx.shadowBlur = 20;
@@ -87,8 +87,8 @@ module.exports = (client) => {
 function fitText(context, text, fontface, maxWidth, xPosition, yPosition) {
 
     // start with a large font size
-    let fontsize = 101;
-    xPosition = xPosition < 60 ? 60 : xPosition
+    let fontsize = 100;
+    // xPosition = xPosition < 60 ? 60 : xPosition
 
     // lower the font size until the text fits the canvas
     do {
