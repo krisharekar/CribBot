@@ -44,7 +44,7 @@ module.exports = (client) => {
 
         ctx.fillStyle = '#ffffff'
         ctx.font = '100px Montserrat'
-        let text = `WELCOME aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa${member.user.tag}`
+        let text = `WELCOME ${member.user.tag}`
         let xAxis = width - ctx.measureText(text).width
         console.log(xAxis)
         ctx.shadowColor = '#000000';
