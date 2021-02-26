@@ -4,7 +4,7 @@ const { updateHighestDonorChannel } = require('../../donations')
 
 module.exports = {
     commands: ['set-donations', 'setdonations', 'set-donos', 'setdonos', 'sd'],
-    description: 'Adds or subtracts donations from a user',
+    description: 'Sets donations for a user',
     minArgs: 2,
     usage: '<user> <amount>',
     permssions: ['MANAGE_GUILD'],
