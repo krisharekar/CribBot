@@ -1,0 +1,86 @@
+const Discord = require('discord.js')
+const donationsSchema = require('../../schemas/donations-schema')
+
+module.exports = {
+    commands: ['donations-leaderboard', 'donationsleaderboard', 'donos-leaderboard', 'donosleaderboard', 'donoslb', 'dlb'],
+    description: 'Shows donations leaderboard of the server',
+    usage: '[page]',
+
+    async execute(message, args, client) {
+        const guildId = message.guild.id
+        const page = parseInt(args[0]) || 1
+
+        if (isNaN(page))
+            return message.channel.send('Page number must be a number.')
+
+        // const result = await donationsSchema.findOne({ guildId })
+
+        // if (!result)
+        //     return message.channel.send('The server has no donations.')
+
+        // const { donationAmount } = result
+
+        let reply = ''
+
+        const rawLeaderboard = await fetchLeaderboard(guildId, 10)
+
+        if (rawLeaderboard.length < 1) return reply('Nobody\'s in leaderboard yet.')
+
+        const leaderboard = await computeLeaderboard(client, rawLeaderboard, true)
+
+        const lb = leaderboard.map(e => `**${e.position}.** ${e.username}#${e.discriminator}\nDonations: ${e.donationAmount.toLocaleString()}`)
+
+        reply += lb.join('\n\n')
+
+        const embed = new Discord.MessageEmbed()
+            .setTitle(`${message.guild.name}'s Leaderboard`)
+            .setColor('BLUE')
+            .setDescription(reply)
+
+        message.channel.send(embed)
+    }
+}
+
+async function fetchLeaderboard(guildId, limit) {
+    if (!guildId) throw new TypeError('A guild id was not provided.');
+    if (!limit) throw new TypeError('A limit was not provided.');
+
+    const rawLb = await donationsSchema.find({ guildId }).sort([['donationAmount', 'descending']]).exec();
+    // console.log(rawLb)
+    return rawLb.slice(0, limit);
+}
+
+async function computeLeaderboard(client, leaderboard, fetchUsers = false) {
+    if (!client) throw new TypeError('A client was not provided.');
+    if (!leaderboard) throw new TypeError('A leaderboard id was not provided.');
+
+    if (leaderboard.length < 1) return [];
+
+    const computedArray = [];
+
+    if (fetchUsers) {
+        for (const key of leaderboard) {
+            // console.log(key.userId)
+            const user = await client.users.fetch(key.userId) || { username: 'Unknown', discriminator: '0000' };
+            computedArray.push({
+                guildID: key.guildId,
+                userID: key.userId,
+                donationAmount: key.donationAmount,
+                position: (leaderboard.findIndex(i => i.guildId === key.guildId && i.userId === key.userId) + 1),
+                username: user.username,
+                discriminator: user.discriminator
+            });
+        }
+    } else {
+        leaderboard.map(key => computedArray.push({
+            guildID: key.guildId,
+            userID: key.userId,
+            donationAmount: key.donationAmount,
+            position: (leaderboard.findIndex(i => i.guildId === key.guildId && i.userId === key.userId) + 1),
+            username: client.users.cache.get(key.userId) ? client.users.cache.get(key.userId).username : 'Unknown',
+            discriminator: client.users.cache.get(key.userId) ? client.users.cache.get(key.userId).discriminator : '0000'
+        }));
+    }
+
+    return computedArray;
+}

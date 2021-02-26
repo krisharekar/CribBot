@@ -14,8 +14,10 @@ const welcome = require('./welcome')
 const autoRole = require('./auto-role')
 const { loadAutoRoleData } = require('./cache/auto-role-cache')
 const { loadWelcomeData } = require('./cache/welcome-cache')
+const { loadDonationsChannelData } = require('./cache/donations-channel-cache')
 const chatbot = require('./chatbot')
 const mongo = require('./mongo')
+const donations = require('./donations')
 const loadCommands = require('./commands/load-commands')
 
 const ttt = require('discord-tictactoe')
@@ -55,8 +57,10 @@ client.on('ready', async () => {
 	await autoRole(client)
 	await loadCommands(client)
 	await counting(client)
+	await donations(client)
 	await loadAutoRoleData()
 	await loadWelcomeData()
+	await loadDonationsChannelData()
 })
 
 client.on('guildMemberAdd', member => {
