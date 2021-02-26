@@ -25,10 +25,9 @@ module.exports = (client) => {
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount } }, { upsert: true, new: true })
     
         const embed = new Discord.MessageEmbed()
-        .setAuthor(message.mentions.users.first().tag, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
+        .setAuthor(`Thank you for your donation ${message.mentions.users.first().tag}`, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
         .setColor('BLUE')
-        .setDescription(`Thank you for you donation.
-        **Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`
+        .setDescription(`**Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`
         **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
         .setFooter('If this information was incorrect, report it to Krish')
 
