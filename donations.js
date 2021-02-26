@@ -1,3 +1,4 @@
+const Discord = require('discord.js')
 const donationsSchema = require('./schemas/donations-schema')
 const { getDonationsChannel } = require('./cache/donations-channel-cache')
 
@@ -19,8 +20,18 @@ module.exports = (client) => {
         const guildId = message.guild.id
         const temp = (content.substring(content.indexOf('⏣')+2))
         const donationAmount = parseInt(temp.substring(0, temp.indexOf('*')).replace(/,/g, ''))
-        console.log(donationAmount)
+        // console.log(donationAmount)
 
-        await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount } }, { upsert: true })
+        const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount } }, { upsert: true, new: true })
+    
+        const embed = new Discord.MessageEmbed()
+        .setAuthor(message.mentions.users.first().tag, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
+        .setColor('BLUE')
+        .setDescription(`Thank you for you donation.
+        **Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`
+        **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+        .setFooter('If this information was incorrect, report it to Krish')
+
+        message.channel.send(embed)
     })
 }
