@@ -24,8 +24,8 @@ module.exports = {
 
         const rawLeaderboard = await fetchLeaderboard(guildId, 10)
 
-        if (rawLeaderboard.length < 1) return 
-        message.channel.send('Nobody\'s in leaderboard yet.')
+        if (rawLeaderboard.length < 1) 
+        return message.channel.send('Nobody\'s in leaderboard yet.')
 
         const leaderboard = await computeLeaderboard(client, rawLeaderboard, true)
 
