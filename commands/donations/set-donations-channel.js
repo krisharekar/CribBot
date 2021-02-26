@@ -11,11 +11,11 @@ module.exports = {
     async execute(message, args) {
         const guildId = message.guild.id
         const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel
-        const channelId = channel.id
+        const donationsChannelId = channel.id
 
-        await donationsChannelSchema.findOneAndUpdate({ guildId }, { channelId }, { upsert: true })
+        await donationsChannelSchema.findOneAndUpdate({ guildId }, { donationsChannelId }, { upsert: true })
         loadDonationsChannelData()
 
-        message.channel.send(`Donations channel set to <#${channelId}>`)
+        message.channel.send(`Donations channel set to <#${donationsChannelId}>`)
     }
 }

@@ -15,6 +15,8 @@ const autoRole = require('./auto-role')
 const { loadAutoRoleData } = require('./cache/auto-role-cache')
 const { loadWelcomeData } = require('./cache/welcome-cache')
 const { loadDonationsChannelData } = require('./cache/donations-channel-cache')
+const { loadHighestDonorChannelData } = require('./cache/highest-donor-channel-cache')
+const { updateHighestDonorChannel } = require('./donations')
 const chatbot = require('./chatbot')
 const mongo = require('./mongo')
 const donations = require('./donations')
@@ -61,6 +63,8 @@ client.on('ready', async () => {
 	await loadAutoRoleData()
 	await loadWelcomeData()
 	await loadDonationsChannelData()
+	await loadHighestDonorChannelData()
+	console.log('ok')
 })
 
 client.on('guildMemberAdd', member => {
@@ -74,6 +78,14 @@ client.on('guildMemberAdd', member => {
 client.on('message', async message => {
 	if(message.channel.id == '805791291312308266' && message.author.id != client.user.id)
 	return message.channel.send('nO')
+})
+
+client.on('ready', async () => {
+	setTimeout(() => {
+		client.guilds.cache.forEach(async g => {
+			await updateHighestDonorChannel(client, g.id)
+		})
+	}, 5 * 60 * 1000)
 })
 
 client.once('ready', async () => {

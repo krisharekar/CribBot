@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const donationsSchema = require('../../schemas/donations-schema')
+const { updateHighestDonorChannel } = require('../../donations')
 
 module.exports = {
     commands: ['set-donations', 'setdonations', 'set-donos', 'setdonos', 'sd'],
@@ -8,7 +9,7 @@ module.exports = {
     usage: '<user> <amount>',
     permssions: ['MANAGE_GUILD'],
 
-    async execute(message, args) {
+    async execute(message, args, client) {
         const guildId = message.guild.id
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         let donationAmount = args[1]

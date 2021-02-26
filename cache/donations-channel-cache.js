@@ -5,7 +5,8 @@ module.exports.loadDonationsChannelData = async () => {
     const results = await donationsChannelSchema.find()
     if(!results) return;
     for (const result of results) {
-        donationsChannelCache.set(result.guildId, result.channelId)
+        if(result.donationsChannelId)
+        donationsChannelCache.set(result.guildId, result.donationsChannelId)
     }
 }
 
