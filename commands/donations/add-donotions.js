@@ -6,7 +6,7 @@ module.exports = {
     description: 'Adds or subtracts donations from a user',
     minArgs: 2,
     usage: '<user> <amount>',
-    permssions: ['MANAGE_GUILD'],
+    permissions: ['MANAGE_GUILD'],
 
     async execute(message, args) {
         const guildId = message.guild.id

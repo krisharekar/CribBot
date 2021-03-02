@@ -1,7 +1,7 @@
 const Canvas = require('canvas')
 const { MessageAttachment } = require('discord.js')
 const path = require('path')
-const { getChannelId } = require('./cache/welcome-cache')
+const { getChannelId } = require('./cache/caches/welcome-cache')
 
 module.exports = (client) => {
     client.on('guildMemberAdd', async (member) => {

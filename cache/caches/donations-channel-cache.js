@@ -1,7 +1,7 @@
 const donationsChannelCache = new Map()
-const donationsChannelSchema = require('../schemas/donations-channel-schema')
+const donationsChannelSchema = require('../../schemas/donations-channel-schema')
 
-module.exports.loadDonationsChannelData = async () => {
+module.exports.loadCache = async () => {
     const results = await donationsChannelSchema.find()
     if(!results) return;
     for (const result of results) {

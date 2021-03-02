@@ -1,5 +1,5 @@
 const welcomeSchema = require('../../schemas/welcome-schema')
-const { loadWelcomeData } = require('../../cache/welcome-cache')
+const { loadWelcomeData } = require('../../cache/caches/welcome-cache')
 
 module.exports = {
     commands: ['set-welcome', 'setwelcome'],

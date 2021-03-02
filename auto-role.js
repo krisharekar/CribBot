@@ -1,5 +1,5 @@
 const autoRoleSchema = require('./schemas/autorole-schema')
-const { getAutoRoles } = require('./cache/auto-role-cache')
+const { getAutoRoles } = require('./cache/caches/auto-role-cache')
 
 module.exports = (client, autoRoleCache) => {
     client.on('guildMemberAdd', async (member) => {

@@ -1,7 +1,7 @@
 const welcomeCache = new Map()
-const welcomeSchema = require('../schemas/welcome-schema')
+const welcomeSchema = require('../../schemas/welcome-schema')
 
-module.exports.loadWelcomeData = async () => {
+module.exports.loadCache = async () => {
     const results = await welcomeSchema.find()
 
     for (const result of results) {

@@ -1,7 +1,7 @@
 const autoRoleCache = new Map()
-const autoRoleSchema = require('../schemas/autorole-schema')
+const autoRoleSchema = require('../../schemas/autorole-schema')
 
-module.exports.loadAutoRoleData = async () => {
+module.exports.loadCache = async () => {
     const results = await autoRoleSchema.find()
     if(!results) return;
     for (const result of results) {

@@ -1,12 +1,12 @@
 const Discord = require('discord.js')
 const donationsChannelSchema = require('../../schemas/donations-channel-schema')
-const { loadDonationsChannelData } = require('../../cache/donations-channel-cache')
+const { loadDonationsChannelData } = require('../../cache/caches/donations-channel-cache')
 
 module.exports = {
     commands: ['set-donations-channel', 'setdonationschannel', 'setdonoschan', 'setdc'],
     description: 'Sets donation channel',
     usage: '[channel]',
-    permssions: ['MANAGE_GUILD'],
+    permissions: ['MANAGE_GUILD'],
 
     async execute(message, args) {
         const guildId = message.guild.id

@@ -1,14 +1,11 @@
-const fs = require('fs')
+const { getPrefix } = require('./cache/caches/prefix-cache')
 
 module.exports.prefixFinder = (guildId) => {
     const config = require('./config.json')
-    const path = './commands/misc/prefix.json'
-    const rawData = fs.readFileSync(path, 'utf-8')
-    const data = JSON.parse(rawData)
-    const guildData = data.find(data => data.guildId == guildId, 'utf-8')
+    const guildPrefix = getPrefix(guildId)
 
-    if (!guildData)
+    if (!guildPrefix)
         return config.prefix
 
-    return guildData.prefix
+    return guildPrefix
 }

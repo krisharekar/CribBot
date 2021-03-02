@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const donationsSchema = require('./schemas/donations-schema')
-const { getDonationsChannel } = require('./cache/donations-channel-cache')
-const { getHighestDonorChannel } = require('./cache/highest-donor-channel-cache')
+const { getDonationsChannel } = require('./cache/caches/donations-channel-cache')
+const { getHighestDonorChannel } = require('./cache/caches/highest-donor-channel-cache')
 
 module.exports = (client) => {
     client.on('message', async message => {

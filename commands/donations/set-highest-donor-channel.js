@@ -1,13 +1,13 @@
 const Discord = require('discord.js')
 const donationsChannelSchema = require('../../schemas/donations-channel-schema')
-const { loadHighestDonorChannelData } = require('../../cache/highest-donor-channel-cache')
+const { loadHighestDonorChannelData } = require('../../cache/caches/highest-donor-channel-cache')
 
 module.exports = {
     commands: ['set-highest-donor-channel', 'sethighestdonorchannel', 'sethdc'],
     description: 'Sets highest donor channel',
     minArgs: 1,
     usage: '<channel>',
-    permssions: ['MANAGE_GUILD'],
+    permissions: ['MANAGE_GUILD'],
 
     async execute(message, args) {
         const guildId = message.guild.id

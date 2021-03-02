@@ -72,7 +72,7 @@ module.exports = (client, commandOptions) => {
         const prefix = prefixFinder(message.guild.id)
         if(!message.content.startsWith(prefix) || message.author.bot)
         return;
-        
+
         const { member, content, guild } = message
 
         for(const alias of commands){

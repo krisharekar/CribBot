@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const autoRoleSchema = require('../../schemas/autorole-schema')
-const { loadAutoRoleData } = require('../../cache/auto-role-cache')
+const { loadAutoRoleData } = require('../../cache/caches/auto-role-cache')
 
 module.exports = {
     commands: ['add-auto-role', 'addautorole'],
