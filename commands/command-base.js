@@ -1,4 +1,5 @@
 const { prefixFinder } = require('../prefix-finder')
+const { getBlacklists } = require('../cache/caches/blacklists-cache')
 const Discord = require('discord.js')
 
 const validatePermissions = (permissions) => {
@@ -71,6 +72,10 @@ module.exports = (client, commandOptions) => {
     client.on('message', message => {
         const prefix = prefixFinder(message.guild.id)
         if(!message.content.startsWith(prefix) || message.author.bot)
+        return;
+        const users = getBlacklists(message.guild.id)
+
+        if(users && users.includes(message.author.id))
         return;
 
         const { member, content, guild } = message
