@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const donationsChannelSchema = require('../../schemas/donations-channel-schema')
-const { loadDonationsChannelData } = require('../../cache/caches/donations-channel-cache')
+const { loadCache } = require('../../cache/caches/donations-channel-cache')
 
 module.exports = {
     commands: ['set-donations-channel', 'setdonationschannel', 'setdonoschan', 'setdc'],
@@ -14,7 +14,7 @@ module.exports = {
         const donationsChannelId = channel.id
 
         await donationsChannelSchema.findOneAndUpdate({ guildId }, { donationsChannelId }, { upsert: true })
-        loadDonationsChannelData()
+        loadCache()
 
         message.channel.send(`Donations channel set to <#${donationsChannelId}>`)
     }

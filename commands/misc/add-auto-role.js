@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const autoRoleSchema = require('../../schemas/autorole-schema')
-const { loadAutoRoleData } = require('../../cache/caches/auto-role-cache')
+const { loadCache } = require('../../cache/caches/auto-role-cache')
 
 module.exports = {
     commands: ['add-auto-role', 'addautorole'],
@@ -23,7 +23,7 @@ module.exports = {
 
         await autoRoleSchema.findOneAndUpdate({ guildId }, { $push: { roles: role.id } }, { upsert: true })
 
-        await loadAutoRoleData()
+        await loadCache()
 
         const embed = new Discord.MessageEmbed()
             .setAuthor('Auto-role added', message.guild.iconURL({ dynamic: true }))
