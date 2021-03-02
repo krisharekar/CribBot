@@ -56,6 +56,22 @@ module.exports = {
 				const commandAliases = command[0].commands.includes(args[0])
 				const aliases = command[0].commands.join(', ')
 				const usage = command[0].usage ? ` ${command[0].usage}` : ''
+				const permissions = command[0].permissions
+
+				// const desc = [
+				// 	`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Description : **\`${description}\``,
+				// 	`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Usage      : **\`${prefix}${cmd}${usage}\``,
+				// 	`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Aliases       : **\`${aliases}\``,
+				// 	`${permissions ? `**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Permission   : **\`${permissions}\`` : ''}`
+				// ]
+
+				const desc = [
+					`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Description : **\`${description}\``,
+					`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Usage                  : **\`${prefix}${cmd}${usage}\``,
+					`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Aliases               : **\`${aliases}\``,
+					`${permissions ? `**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Permission   : **\`${permissions}\`` : ''}`
+				]
+
 
 				if (commandAliases) {
 					status = true
@@ -63,10 +79,7 @@ module.exports = {
 						.setAuthor(client.user.username, client.user.displayAvatarURL())
 						.setTitle(`**${cmd.toUpperCase()} Command**`)
 						.setColor('RANDOM')
-						.setDescription([
-							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Description : **\`${description}\``,
-							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Usage      : **\`${prefix}${cmd}${usage}\``,
-							`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Aliases       : **\`${aliases}\``						])
+						.setDescription(desc)
 						.setFooter(`<> are mandatory, [] are optional`)
 
 					return message.channel.send(helpEmbed)
