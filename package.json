@@ -23,7 +23,7 @@
     "novelcovid": "^3.0.0",
     "opusscript": "0.0.7",
     "os": "^0.1.1",
-    "pm2": "^4.5.0",
+    "pm2": "^4.5.5",
     "random-puppy": "^1.1.0",
     "sqlite": "^4.0.17",
     "youtube-sr": "^2.0.4",
