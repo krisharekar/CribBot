@@ -46,5 +46,5 @@ module.exports = async (client) => {
     //     }, 10 * 60 * 1000);
     // })
     
-    await client.user.setActivity('The Crib', { type: 'WATCHING' })
+    await client.user.setActivity('to Krish', { type: 'LISTENING' })
 }
