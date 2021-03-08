@@ -4,6 +4,8 @@ const { loadCache } = require('../../cache/caches/welcome-message-cache')
 module.exports = {
     commands: ['set-welcome-message', 'setwelcomemessage'],
     description: 'Sets welcome message ',
+    minArgs: 1,
+    usage: '<message>',
     permissions: ['ADMINISTRATOR'],
 
     async execute(message, args) {
