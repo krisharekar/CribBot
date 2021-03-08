@@ -2,6 +2,7 @@ const Canvas = require('canvas')
 const { MessageAttachment } = require('discord.js')
 const path = require('path')
 const { getChannelId } = require('./cache/caches/welcome-cache')
+const { getWelcomeMessage } = require('./cache/caches/welcome-message-cache')
 
 module.exports = (client) => {
     client.on('guildMemberAdd', async (member) => {
@@ -19,8 +20,13 @@ module.exports = (client) => {
 
         const welcomeImages = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg']
 
-        const welcomeMessage = `Welcome <@${member.user.id}> to ${guild.name}, make sure to read the rules and verify!`
+        let welcomeMessage = getWelcomeMessage(guild.id)
 
+        if(!welcomeMessage)
+        welcomeMessage = `Welcome <@${member.user.id}> to **${guild.name}**, make sure to read the rules!`
+
+        welcomeMessage = welcomeMessage.replace(/{member}/g, `<@${member.id}>`)
+        welcomeMessage = welcomeMessage.replace(/{server}/g, `${guild.name}`)
         // Canvas.registerFont('../../../AppData/Local/Microsoft/Windows/Fonts/Uni Sans Heavy.otf', { family: 'Uni Sans' })
         const canvas = Canvas.createCanvas(1920, 1080)
         const ctx = canvas.getContext('2d')
