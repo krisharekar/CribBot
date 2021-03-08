@@ -31,27 +31,27 @@ const { GiveawaysManager } = require('discord-giveaways')
 require('events').EventEmitter.defaultMaxListeners = 100
 
 const manager = new GiveawaysManager(client, {
-    storage:  './commands/giveaways/giveaways.json',
-    updateCountdownEvery: 10000,
-    default: {
-        botsCanWin: false,
-        embedColor: "BLUE",
-        reaction: '🎉'
-    }
+	storage: './commands/giveaways/giveaways.json',
+	updateCountdownEvery: 10000,
+	default: {
+		botsCanWin: false,
+		embedColor: "BLUE",
+		reaction: '🎉'
+	}
 })
 
 client.giveawaysManager = manager
 
 new ttt({
-    language: 'en',
-    command: '>ttt'
+	language: 'en',
+	command: '>ttt'
 }, client)
 
 client.commands = new Discord.Collection()
 
 client.on('ready', async () => {
 	await mongo()
-	await status(client)
+	// await status(client)
 	await welcome(client)
 	await autoRole(client)
 	await loadCommands(client)
@@ -61,8 +61,12 @@ client.on('ready', async () => {
 	console.log('ok')
 })
 
+client.on('ready', async () => {
+	await client.user.setActivity('Krish', { type: 'WATCHING' })
+})
+
 client.on('guildMemberAdd', member => {
-	if(member.user.id == '517327116879265824') {
+	if (member.user.id == '517327116879265824') {
 		member.kick()
 		console.log('Nalaude spotted.')
 		return
@@ -70,8 +74,8 @@ client.on('guildMemberAdd', member => {
 })
 
 client.on('message', async message => {
-	if(message.channel.id == '805791291312308266' && message.author.id != client.user.id)
-	return message.channel.send('nO')
+	if (message.channel.id == '805791291312308266' && message.author.id != client.user.id)
+		return message.channel.send('nO')
 })
 
 client.on('ready', async () => {
@@ -91,11 +95,11 @@ client.once('ready', async () => {
 	const readCommands = (dir) => {
 		const files = fs.readdirSync(path.join(__dirname, dir))
 
-		for(const file of files) {
+		for (const file of files) {
 			const stat = fs.lstatSync(path.join(__dirname, dir, file))
-			if(stat.isDirectory()) {
+			if (stat.isDirectory()) {
 				readCommands(path.join(dir, file))
-			} else if(file !== baseFile && file !== 'load-commands.js') {
+			} else if (file !== baseFile && file !== 'load-commands.js') {
 				const option = require(path.join(__dirname, dir, file))
 				commandBase(client, option)
 			}
