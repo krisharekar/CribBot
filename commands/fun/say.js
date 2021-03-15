@@ -6,7 +6,8 @@ module.exports = {
     minArgs: 1,
 
     execute (message, args) {
-        if(message.mentions)
+        // console.log(message.mentions.users.first(), message.mentions.roles.first(), message.mentions.everyone)
+        if(message.mentions.users.first() || message.mentions.roles.first() || message.mentions.everyone)
         return message.channel.send('You cannot mention users/roles.')
         
         const sayMessage = args.join(' ');
