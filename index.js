@@ -78,10 +78,10 @@ client.on('message', async message => {
 		return message.channel.send('nO')
 })
 
-client.on('message', async message => {
-	if (message.author.id == '697815325650976789')
-		return message.delete()
-})
+// client.on('message', async message => {
+// 	if (message.author.id == '697815325650976789')
+// 		return message.delete()
+// })
 
 client.on('ready', async () => {
 	setTimeout(() => {
