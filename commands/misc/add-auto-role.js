@@ -11,7 +11,7 @@ module.exports = {
 
     async execute(message, args) {
         const guildId = message.guild.id
-        const role = message.mentions.roles.first() || message.guild.roles.autoRoleCache.get(args[0]) || message.guild.role.autoRoleCache.find(r => r.name == args.join(' '))
+        const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[0]) || message.guild.role.cache.find(r => r.name == args.join(' '))
 
         if (!role)
             return message.channel.send('Specify a role that exists.')

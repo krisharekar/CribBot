@@ -1,5 +1,6 @@
 const { prefixFinder } = require('../prefix-finder')
 const { getBlacklists } = require('../cache/caches/blacklists-cache')
+const { getPermissions } = require('../cache/caches/permissions-cache')
 const Discord = require('discord.js')
 
 const validatePermissions = (permissions) => {
@@ -71,6 +72,7 @@ module.exports = (client, commandOptions) => {
 
     client.on('message', message => {
         const prefix = prefixFinder(message.guild.id)
+        const guildPermissions = getPermissions(message.guild.id)
         if(!message.content.startsWith(prefix) || message.author.bot)
         return;
         const users = getBlacklists(message.guild.id)
@@ -82,12 +84,14 @@ module.exports = (client, commandOptions) => {
 
         for(const alias of commands){
             const command = `${alias.toLowerCase()}`
+            let cmdName
 
             const args = content.slice(prefix.length).trim().split(/ +/)
 
             const commandName = args.shift().toLowerCase()
             
             if(commandName === command){
+                cmdName = commands[0]
 
                 if (!cooldowns.has(command)) {
                     cooldowns.set(command, new Discord.Collection());
@@ -109,17 +113,32 @@ module.exports = (client, commandOptions) => {
                 if(ownerOnly && message.author.id != '714808648517550144')
                 return message.channel.send('Nice try but only Krish can use this command.')
 
+                let perm
+                // console.log(guildPermissions)
+                if(guildPermissions) {
+                    for(const permission of guildPermissions) {
+                        // console.log(commandName, permission.commandName)
+                        if(cmdName == permission.commandName && (permission.entityId == message.author.id || message.member.roles.cache.has(permission.entityId))) {
+                            perm = permission.permission
+                            break;
+                        }
+                    }
+                }
+                
                 for(const permission of permissions){
-                    if(!member.hasPermission(permission))
-                    return message.channel.send(`You don't have permission to use this command. Required permission \`${permission}\`.`)
+                    if(!member.hasPermission(permission) && perm != 'allow')
+                    return message.channel.send(`You don't have permission to use this command.`)
+
+                    if(!member.hasPermission('ADMINISTRATOR') && perm != 'allow')
+                    return message.channel.send(`You don't have permission to use this command.`)
                 }
 
-                for(const requiredRole of requiredRoles){
-                    const role = guild.roles.cache.find(role => role.name === requiredRole)
+                // for(const requiredRole of requiredRoles){
+                //     const role = guild.roles.cache.find(role => role.name === requiredRole)
 
-                    if(!role || !member.roles.cache.has(role.id))
-                    return message.channel.send(`You must have the \`${requiredRole}\` role to use this command.`)
-                }
+                //     if(!role || !member.roles.cache.has(role.id))
+                //     return message.channel.send(`You must have the \`${requiredRole}\` role to use this command.`)
+                // }
 
                 if(args.length < minArgs || (maxArgs != null && args.length > maxArgs))
                 return message.channel.send(`Incorrect usage.\nThe correct usage would be \`${prefix}${alias} ${usage}\``)
