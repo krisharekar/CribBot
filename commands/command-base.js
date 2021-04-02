@@ -120,6 +120,8 @@ module.exports = (client, commandOptions) => {
                         // console.log(commandName, permission.commandName)
                         if(cmdName == permission.commandName && (permission.entityId == message.author.id || message.member.roles.cache.has(permission.entityId))) {
                             perm = permission.permission
+                            console.log(perm)
+                            if(perm == 'allow')
                             break;
                         }
                     }
