@@ -65,23 +65,23 @@ client.on('ready', async () => {
 	await client.user.setActivity('Krish', { type: 'LISTENING' })
 })
 
-client.on('guildMemberAdd', member => {
-	if (member.user.id == '517327116879265824') {
-		member.kick()
-		console.log('Nalaude spotted.')
-		return
-	}
-})
+// client.on('guildMemberAdd', member => {
+// 	if (member.user.id == '807318024976728085') {
+// 		member.kick()
+// 		console.log('Nalaude spotted.')
+// 		return
+// 	}
+// })
 
 client.on('message', async message => {
 	if (message.channel.id == '805791291312308266' && message.author.id != client.user.id)
 		return message.channel.send('nO')
 })
 
-// client.on('message', async message => {
-// 	if (message.author.id == '697815325650976789')
-// 		return message.delete()
-// })
+client.on('message', async message => {
+	if (message.author.id == '807318024976728085') //697815325650976789
+		return message.delete()
+})
 
 client.on('ready', async () => {
 	setTimeout(() => {
