@@ -13,11 +13,11 @@ const counting = require('./counting')
 const welcome = require('./welcome')
 const autoRole = require('./auto-role')
 const loadCaches = require('./cache/load-caches')
-const { updateHighestDonorChannel } = require('./donations')
 const chatbot = require('./chatbot')
 const mongo = require('./mongo')
 const donations = require('./donations')
 const loadCommands = require('./commands/load-commands')
+const updateDonorChannel = require('./update-donor-channel')
 
 const ttt = require('discord-tictactoe')
 const { EventEmitter } = require('events')
@@ -57,6 +57,7 @@ client.on('ready', async () => {
 	await loadCommands(client)
 	await counting(client)
 	await donations(client)
+	await updateDonorChannel(client)
 	await loadCaches()
 	console.log('ok')
 })
@@ -83,13 +84,6 @@ client.on('message', async message => {
 		return message.delete()
 })
 
-client.on('ready', async () => {
-	setTimeout(() => {
-		client.guilds.cache.forEach(async g => {
-			await updateHighestDonorChannel(client, g.id)
-		})
-	}, 5 * 60 * 1000)
-})
 
 client.once('ready', async () => {
 	console.log('Bot is online')
