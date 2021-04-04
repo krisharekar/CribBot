@@ -9,9 +9,11 @@ module.exports = {
     async execute(message, args, client) {
         const guildId = message.guild.id
         const page = parseInt(args[0]) || 1
+        const start = (parseInt(args[0]) * 10) - 10 || 0
+        const end = parseInt(args[0]) * 10 || 10
 
         if (isNaN(page))
-            return message.channel.send('Page number must be a number.')
+            return message.channel.send('Page must be a number.')
 
         // const result = await donationsSchema.findOne({ guildId })
 
@@ -21,15 +23,19 @@ module.exports = {
         // const { donationAmount } = result
 
         let reply = ''
+        const rawLeaderboard = await fetchLeaderboard(guildId, start, end)
+        const completeLb = await fetchLeaderboard(guildId)
+        const pageCount = Math.ceil(completeLb.length/10)
 
-        const rawLeaderboard = await fetchLeaderboard(guildId, 10)
-
-        if (rawLeaderboard.length < 1) 
+        if (rawLeaderboard.length < 1 && page == 1) 
         return message.channel.send('Nobody\'s in leaderboard yet.')
+
+        else if(rawLeaderboard.length < 1)
+        return message.channel.send(`Page \`${page}\` doesnt exist.`)
 
         const leaderboard = await computeLeaderboard(client, rawLeaderboard, true)
 
-        const lb = leaderboard.map(e => `**${e.position}.** ${e.username}#${e.discriminator}\nDonations: \`${e.donationAmount.toLocaleString()}\``)
+        const lb = leaderboard.map(e => `**${e.position+start}.** ${e.username}#${e.discriminator}\nDonations: \`${e.donationAmount.toLocaleString()}\``)
 
         reply += lb.join('\n\n')
 
@@ -37,18 +43,23 @@ module.exports = {
             .setTitle(`${message.guild.name}'s Leaderboard`)
             .setColor('BLUE')
             .setDescription(reply)
+            .setFooter(`Page ${page}/${pageCount}`)
 
         message.channel.send(embed)
     }
 }
 
-async function fetchLeaderboard(guildId, limit) {
+async function fetchLeaderboard(guildId, start, end) {
     if (!guildId) throw new TypeError('A guild id was not provided.');
-    if (!limit) throw new TypeError('A limit was not provided.');
+    // if (!start) throw new TypeError('A start limit was not provided.');
+    // if (!end) throw new TypeError('A end limit was not provided.');
 
     const rawLb = await donationsSchema.find({ guildId }).sort([['donationAmount', 'descending']]).exec();
     // console.log(rawLb)
-    return rawLb.slice(0, limit);
+    if(!start && !end)
+    return rawLb
+    else
+    return rawLb.slice(start, end);
 }
 
 async function computeLeaderboard(client, leaderboard, fetchUsers = false) {
