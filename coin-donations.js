@@ -30,7 +30,7 @@ module.exports = (client) => {
             .setAuthor(`Thank you for your donation ${message.mentions.users.first().tag}`, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
             .setColor('BLUE')
             .setDescription(`**Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`
-        **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+                            **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
             .setFooter('If this information was incorrect, report it to Krish')
 
         message.channel.send(embed)
