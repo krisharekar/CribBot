@@ -21,7 +21,6 @@ module.exports = (client) => {
         const userId = message.mentions.users.first().id
         const guildId = message.guild.id
         const temp = (content.substring(content.indexOf('⏣') + 2))
-        // console.log(temp)
         const donationAmount = parseInt(temp.substring(0, temp.indexOf('*')).replace(/,/g, ''))
         // console.log(donationAmount)
 
