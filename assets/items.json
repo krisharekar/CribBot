@@ -1,0 +1,319 @@
+[
+    {
+        "name": "Alcohol",
+        "id": "alcohol",
+        "value": 10000,
+        "link": "https://cdn.discordapp.com/emojis/709406795097047090.png"
+    },
+    {
+        "name": "Apple",
+        "id": "apple",
+        "value": 5000,
+        "link": "https://cdn.discordapp.com/emojis/714980848692101130.png"
+    },
+    {
+        "name": "Bank Note",
+        "id": "banknote",
+        "value": 100000,
+        "link": "https://cdn.discordapp.com/emojis/830509316888985621.png"
+    },
+    {
+        "name": "Boar",
+        "id": "boar",
+        "value": 10000,
+        "link": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/boar_1f417.png"
+    },
+    {
+        "name": "Fresh Bread",
+        "id": "bread",
+        "value": 10000,
+        "link": "https://cdn.discordapp.com/emojis/716848527149629490.png"
+    },
+    {
+        "name": "Blob",
+        "id": "blob",
+        "value": 3000000000,
+        "link": "https://cdn.discordapp.com/emojis/639826478866890773.gif"
+    },
+    {
+        "name": "Candy",
+        "id": "candy",
+        "value": 1000,
+        "link": "https://cdn.discordapp.com/emojis/792397132828114965.png"
+    },
+    {
+        "name": "Shredded Cheese",
+        "id": "cheese",
+        "value": 10000,
+        "link": "https://cdn.discordapp.com/emojis/830509316933943307.png"
+    },
+    {
+        "name": "Chill Pill",
+        "id": "chillpill",
+        "value": 5000,
+        "link": "https://cdn.discordapp.com/emojis/716825781908537395.png"
+    },
+    {
+        "name": "Coin Bomb",
+        "id": "coinbomb",
+        "value": 25000,
+        "link": "https://cdn.discordapp.com/emojis/688456543372312594.png"
+    },
+    {
+        "name": "Cookie",
+        "id": "cookie",
+        "value": 1000,
+        "link": "https://cdn.discordapp.com/emojis/573152241289003036.png"
+    },
+    {
+        "name": "Cupid's Big Toe",
+        "id": "cupidsbigtoe",
+        "value": 100000,
+        "link": "https://cdn.discordapp.com/emojis/718136880163586169.png"
+    },
+    {
+        "name": "Bolt Cutters",
+        "id": "cutters",
+        "value": 500000000,
+        "link": "https://cdn.discordapp.com/emojis/831023529255632898.png"
+    },
+    {
+        "name": "Dank Box",
+        "id": "dank",
+        "value": 100000,
+        "link": "https://i.imgur.com/GSGADYX.gif"
+    },
+    {
+        "name": "Deer",
+        "id": "deer",
+        "value": 10000,
+        "link": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/deer_1f98c.png"
+    },
+    {
+        "name": "Dragon",
+        "id": "dragon",
+        "value": 50000,
+        "link": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/dragon-face_1f432.png"
+    },
+    {
+        "name": "Duck",
+        "id": "duck",
+        "value": 5000,
+        "link": "https://cdn.discordapp.com/emojis/573152043125178368.png"
+    },
+    {
+        "name": "Exotic Fish",
+        "id": "exoticfish",
+        "value": 20000,
+        "link": "https://cdn.discordapp.com/emojis/714981026245378088.png"
+    },
+    {
+        "name": "Odd eye",
+        "id": "eye",
+        "value": 696969696969,
+        "link": "https://cdn.discordapp.com/emojis/787964747848089642.gif"
+    },
+    {
+        "name": "Fake ID",
+        "id": "fakeid",
+        "value": 1000,
+        "link": "https://cdn.discordapp.com/emojis/573151946911776798.png"
+    },
+    {
+        "name": "Common Fish",
+        "id": "fish",
+        "value": 1000,
+        "link": "https://cdn.discordapp.com/emojis/714980893999104051.png"
+    },    {
+        "name": "Fishing Pole",
+        "id": "fishingpole",
+        "value": 20000,
+        "link": "https://cdn.discordapp.com/emojis/714998788397465732.png"
+    },
+    {
+        "name": "Fool's Notif",
+        "id": "fool",
+        "value": 100000,
+        "link": "https://cdn.discordapp.com/emojis/826974895295692840.png"
+    },
+    {
+        "name": "Friend's Gift",
+        "id": "gift",
+        "value": 275000,
+        "link": "https://cdn.discordapp.com/emojis/784505770603184148.png"
+    },
+    {
+        "name": "Gift Box",
+        "id": "giftbox",
+        "value": 50000,
+        "link": "https://cdn.discordapp.com/emojis/784505770603184148.png"
+    },
+    {
+        "name": "God Box",
+        "id": "god",
+        "value": 10000000,
+        "link": "https://i.imgur.com/GSGADYX.gif"
+    },
+    {
+        "name": "Lucky Horseshoe",
+        "id": "horseshoe",
+        "value": 50000,
+        "link": "https://cdn.discordapp.com/emojis/813911522975678476.png"
+    },
+    {
+        "name": "Hunting Rifle",
+        "id": "huntingrifle",
+        "value": 20000,
+        "link": "https://cdn.discordapp.com/emojis/714543607947722822.png"
+    },
+    {
+        "name": "Jacky o' Lanty",
+        "id": "jacky",
+        "value": 7000000,
+        "link": "https://cdn.discordapp.com/emojis/758662115841802271.png"
+    },
+    {
+        "name": "Landmine",
+        "id": "landmine",
+        "value": 7500,
+        "link": "https://cdn.discordapp.com/emojis/573151813130518548.png"
+    },
+    {
+        "name": "Laptop",
+        "id": "laptop",
+        "value": 3000,
+        "link": "https://cdn.discordapp.com/emojis/830509316674813974.png"
+    },
+    {
+        "name": "Legendary Fish",
+        "id": "legendaryfish",
+        "value": 100000,
+        "link": "https://cdn.discordapp.com/emojis/714981071548186684.png"
+    },
+    {
+        "name": "Life Saver",
+        "id": "lifesaver",
+        "value": 30000,
+        "link": "https://cdn.discordapp.com/emojis/573151706641203210.png"
+    },
+    {
+        "name": "Meme Box",
+        "id": "meme",
+        "value": 150000,
+        "link": "https://i.imgur.com/GSGADYX.gif"
+    },
+    {
+        "name": "Normie Box",
+        "id": "normie",
+        "value": 50000,
+        "link": "https://i.imgur.com/GSGADYX.gif"
+    },
+    {
+        "name": "Padlock",
+        "id": "padlock",
+        "value": 3000,
+        "link": "https://cdn.discordapp.com/emojis/830509316900651059.png"
+    },
+    {
+        "name": "Rare Pepe",
+        "id": "pepe",
+        "value": 75000,
+        "link": "https://cdn.discordapp.com/emojis/668945671427981312.gif"
+    },
+    {
+        "name": "Pepe Coin",
+        "id": "pepecoin",
+        "value": 625000,
+        "link": "https://cdn.discordapp.com/emojis/718138332982280272.gif"
+    },
+    {
+        "name": "Pepe Medal",
+        "id": "pepemedal",
+        "value": 10000000,
+        "link": "https://cdn.discordapp.com/emojis/716848179022397462.gif"
+    },
+    {
+        "name": "Pepe Trophy",
+        "id": "pepetrophy",
+        "value": 50000000,
+        "link": "https://cdn.discordapp.com/emojis/718136428219072662.gif"
+    },
+    {
+        "name": "Cell Phone",
+        "id": "phone",
+        "value": 2000,
+        "link": "https://cdn.discordapp.com/emojis/830509316632346625.png"
+    },
+    {
+        "name": "Pink Phallic Object",
+        "id": "pinkphallicobject",
+        "value": 5,
+        "link": "https://cdn.discordapp.com/emojis/718136370320769074.png"
+    },
+    {
+        "name": "Pizza Slice",
+        "id": "pizza",
+        "value": 150000,
+        "link": "https://cdn.discordapp.com/emojis/788070334640422942.png"
+    },
+    {
+        "name": "Rabbit",
+        "id": "rabbit",
+        "value": 3000,
+        "link": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/rabbit_1f407.png"
+    },
+    {
+        "name": "Rare Fish",
+        "id": "rarefish",
+        "value": 10000,
+        "link": "https://cdn.discordapp.com/emojis/714980949149876316.png"
+    },
+    {
+        "name": "Reversal Card",
+        "id": "reversal",
+        "value": 20000000,
+        "link": "https://cdn.discordapp.com/emojis/573150370579087360.png"
+    },
+    {
+        "name": "Box of Sand",
+        "id": "sand",
+        "value": 5000,
+        "link": "https://cdn.discordapp.com/emojis/830509316901175366.png"
+    },
+    {
+        "name": "Santa's Hat",
+        "id": "santashat",
+        "value": 200000,
+        "link": "https://cdn.discordapp.com/emojis/573150240954253352.png"
+    },
+    {
+        "name": "Skunk",
+        "id": "skunk",
+        "value": 5000,
+        "link": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/skunk_1f9a8.png"
+    },
+    {
+        "name": "Snowball",
+        "id": "snowball",
+        "value": 20000,
+        "link": "https://cdn.discordapp.com/emojis/573150143524765699.png"
+    },
+    {
+        "name": "Fidget Spinner",
+        "id": "spinner",
+        "value": 10000,
+        "link": "https://cdn.discordapp.com/emojis/573150030030962699.png"
+    },
+    {
+        "name": "Tidepod",
+        "id": "tidepod",
+        "value": 20000,
+        "link": "https://cdn.discordapp.com/emojis/573149030951944202.png"
+    },
+    {
+        "name": "Robbers Wishlist",
+        "id": "wishlist",
+        "value": 25000,
+        "link": "https://cdn.discordapp.com/emojis/723641465615548447.png"
+    }
+]

@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 
-const economy = require('../economy-system/economy')
+// const economy = require('../economy-system/economy')
 
 module.exports = {
     commands: ['addcoins'],

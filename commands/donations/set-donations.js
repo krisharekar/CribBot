@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 const donationsSchema = require('../../schemas/donations-schema')
-const { updateHighestDonorChannel } = require('../../donations')
+const { updateHighestDonorChannel } = require('../../coin-donations')
 
 module.exports = {
     commands: ['set-donations', 'setdonations', 'set-donos', 'setdonos', 'sd'],

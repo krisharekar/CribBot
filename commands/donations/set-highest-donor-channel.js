@@ -17,7 +17,7 @@ module.exports = {
         const highestDonorChannelId = channel.id
 
         await donationsChannelSchema.findOneAndUpdate({ guildId }, { highestDonorChannelId }, { upsert: true })
-        loadHighestDonorChannelData()
+        loadCache()
 
         message.channel.send(`Highest donor channel set to \`${channel.name}\``)
     }

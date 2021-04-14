@@ -5,8 +5,8 @@ module.exports.loadCache = async () => {
     const results = await donationsChannelSchema.find()
     if(!results) return;
     for (const result of results) {
-        if(result.donationsChannelId)
-        donationsChannelCache.set(result.guildId, result.donationsChannelId)
+        if(result.donationsChannelIds)
+        donationsChannelCache.set(result.guildId, result.donationsChannelIds)
     }
 }
 

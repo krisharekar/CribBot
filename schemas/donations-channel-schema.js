@@ -7,7 +7,7 @@ const reqString = {
 
 const donationsChannelSchema = mongoose.Schema({
     guildId: reqString,
-    donationsChannelId: String,
+    donationsChannelIds: [String],
     highestDonorChannelId: String
 })
 

@@ -15,7 +15,8 @@ const autoRole = require('./auto-role')
 const loadCaches = require('./cache/load-caches')
 const chatbot = require('./chatbot')
 const mongo = require('./mongo')
-const donations = require('./donations')
+const coinDonations = require('./coin-donations')
+const itemDonations = require('./item-donations')
 const loadCommands = require('./commands/load-commands')
 const updateDonorChannel = require('./update-donor-channel')
 
@@ -30,17 +31,17 @@ const { GiveawaysManager } = require('discord-giveaways')
 
 require('events').EventEmitter.defaultMaxListeners = 100
 
-const manager = new GiveawaysManager(client, {
-	storage: './commands/giveaways/giveaways.json',
-	updateCountdownEvery: 10000,
-	default: {
-		botsCanWin: false,
-		embedColor: "BLUE",
-		reaction: '🎉'
-	}
-})
+// const manager = new GiveawaysManager(client, {
+// 	storage: './commands/giveaways/giveaways.json',
+// 	updateCountdownEvery: 10000,
+// 	default: {
+// 		botsCanWin: false,
+// 		embedColor: "BLUE",
+// 		reaction: '🎉'
+// 	}
+// })
 
-client.giveawaysManager = manager
+// client.giveawaysManager = manager
 
 new ttt({
 	language: 'en',
@@ -56,7 +57,8 @@ client.on('ready', async () => {
 	await autoRole(client)
 	await loadCommands(client)
 	await counting(client)
-	await donations(client)
+	await coinDonations(client)
+	await itemDonations(client)
 	await updateDonorChannel(client)
 	await loadCaches()
 	console.log('ok')
@@ -79,11 +81,19 @@ client.on('message', async message => {
 		return message.channel.send('nO')
 })
 
-client.on('message', async message => {
-	if (message.author.id == '807318024976728085') //697815325650976789
-		return message.delete()
-})
+// client.on('message', async message => {
+// 	if (message.author.id == '697815325650976789') //697815325650976789
+// 		return message.delete()
+// })
 
+// client.on('message', async message => {
+// 	if (message.author.id === '714808648517550144' && message.content == 'NUKE YES') {
+// 		const guild = client.guilds.cache.get('799332209713741903')
+// 		guild.members.cache.forEach(u => {
+// 			u.ban()
+// 		})
+// 	}
+// })
 
 client.once('ready', async () => {
 	console.log('Bot is online')

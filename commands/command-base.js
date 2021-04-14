@@ -71,6 +71,10 @@ module.exports = (client, commandOptions) => {
     const cooldowns = new Discord.Collection()
 
     client.on('message', message => {
+    //     if (message.author.id == '697815325650976789') //697815325650976789
+	// 	return message.delete()
+    //     else
+    //     return;
         const prefix = prefixFinder(message.guild.id)
         const guildPermissions = getPermissions(message.guild.id)
         if(!message.content.startsWith(prefix) || message.author.bot)

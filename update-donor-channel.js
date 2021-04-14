@@ -1,4 +1,4 @@
-const { updateHighestDonorChannel } = require('./donations')
+const { updateHighestDonorChannel } = require('./coin-donations')
 
 module.exports = async (client) => {
     setInterval(() => {
