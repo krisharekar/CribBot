@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 const donationsSchema = require('../../schemas/donations-schema')
 const { updateHighestDonorChannel } = require('../../coin-donations')
+const { abbNum } = require('../../assets/abb-num')
 
 module.exports = {
     commands: ['set-donations', 'setdonations', 'set-donos', 'setdonos', 'sd'],
@@ -17,12 +18,7 @@ module.exports = {
         if (!user)
             return message.channel.send('Specify a user that exists.')
 
-        if (donationAmount.includes('e') && donationAmount.lenght != 1) {
-            let temp = donationAmount.split('e')
-            // console.log(temp)
-            donationAmount = temp[0] * Math.pow(10, temp[1])
-            // console.log(donationAmount)
-        }
+        donationAmount = abbNum(donationAmount)
 
         if (isNaN(donationAmount))
             return message.channel.send('Donation amount must be an integer.')

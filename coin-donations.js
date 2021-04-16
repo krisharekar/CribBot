@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const donationsSchema = require('./schemas/donations-schema')
 const { getDonationsChannel } = require('./cache/caches/donations-channel-cache')
 const { getHighestDonorChannel } = require('./cache/caches/highest-donor-channel-cache')
+const { addDonationRoles } = require('./donation-roles')
 
 module.exports = (client) => {
     client.on('message', async message => {
@@ -103,7 +104,7 @@ function abbNum(num) {
     }
 
     if (num < 1000000000000) {
-        return Math.floor((num / 1000000000)) + "B";
+        return ((num / 1000000000)).toFixed(1) + "B";
     }
 
     return "1T+";
@@ -134,6 +135,7 @@ module.exports.updateHighestDonorChannel = async (client, guildId) => {
 
     await highestDonorChannel.edit({ name: `${highestDonor} (${highestAmount})` }).catch(e => console.log(e))
     console.log(`${highestDonor} (${highestAmount})`)
+    console.log()
 }
 
 // async function updateHighestDonorChannel (client, guildId) {
