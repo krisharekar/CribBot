@@ -1,5 +1,6 @@
 const permissionSchema = require('../../schemas/permission-schema')
 const { loadCache } = require('../../cache/caches/permissions-cache')
+const getUserFromMention = require('../../get-user-from-mention')
 
 module.exports = {
     commands: ['permission', 'perm'],
@@ -12,7 +13,7 @@ module.exports = {
         const guildId = message.guild.id
         const permission = args[0]
         const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
-        const member = message.mentions.members.first() || message.guild.members.cache.get(args[1])
+        const member = getUserFromMention(args[1]) || message.guild.users.cache.get(args[1])
         const command = args[2]
 
         if (permission.toLowerCase() != 'allow' && permission.toLowerCase() != 'deny')
@@ -37,8 +38,8 @@ module.exports = {
         if (!exists)
             return message.channel.send(`\`${command}\` command doesnt exist.`)
 
-        const entityId = role ? role.id : member.user.id
-        const entityName = role ? role.name : member.user.tag
+        const entityId = role ? role.id : member.id
+        const entityName = role ? role.name : member.tag
 
         // const result = await permissionSchema.find({ guildId, permissions: { $elemMatch: { entityId, commandName }}})
         const result = await permissionSchema.find({ guildId })

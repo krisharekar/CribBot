@@ -31,17 +31,7 @@ const { GiveawaysManager } = require('discord-giveaways')
 
 require('events').EventEmitter.defaultMaxListeners = 100
 
-// const manager = new GiveawaysManager(client, {
-// 	storage: './commands/giveaways/giveaways.json',
-// 	updateCountdownEvery: 10000,
-// 	default: {
-// 		botsCanWin: false,
-// 		embedColor: "BLUE",
-// 		reaction: '🎉'
-// 	}
-// })
-
-// client.giveawaysManager = manager
+module.exports.getClient = () => { return client };
 
 new ttt({
 	language: 'en',

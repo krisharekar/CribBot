@@ -19,7 +19,7 @@ module.exports.addDonationRoles = async (client, guildId, userId) => {
         if(userDonations >= donationRole.donationAmount) {
             if(!user.roles.cache.has(donationRole.roleId)) {
                 if(guild.roles.cache.has(donationRole.roleId))
-                await user.roles.add(donationRole.roleId)
+                await user.roles.add(donationRole.roleId, `Donation role added (user reached ${donationRole.donationAmount.toLocaleString()} amount of donations)`)
             }
         }
     }
