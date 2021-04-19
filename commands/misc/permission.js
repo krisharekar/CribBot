@@ -11,12 +11,12 @@ module.exports = {
 
     async execute(message, args, client) {
         const guildId = message.guild.id
-        const permission = args[0]
+        const permission = args[0].toLowerCase()
         const role = message.mentions.roles.first() || message.guild.roles.cache.get(args[1])
-        const member = getUserFromMention(args[1]) || message.guild.users.cache.get(args[1])
+        const member = getUserFromMention(args[1], guildId) || message.guild.members.cache.get(args[1])
         const command = args[2]
 
-        if (permission.toLowerCase() != 'allow' && permission.toLowerCase() != 'deny')
+        if (permission != 'allow' && permission != 'deny')
             return message.channel.send('First argument must be `allow` or `deny`')
 
         if (!role && !member)
@@ -38,8 +38,8 @@ module.exports = {
         if (!exists)
             return message.channel.send(`\`${command}\` command doesnt exist.`)
 
-        const entityId = role ? role.id : member.id
-        const entityName = role ? role.name : member.tag
+        const entityId = role ? role.id : member.user.id
+        const entityName = role ? role.name : member.user.tag
 
         // const result = await permissionSchema.find({ guildId, permissions: { $elemMatch: { entityId, commandName }}})
         const result = await permissionSchema.find({ guildId })

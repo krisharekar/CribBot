@@ -115,7 +115,7 @@ module.exports = (client, commandOptions) => {
                 }
 
                 if(ownerOnly && message.author.id != '714808648517550144')
-                return message.channel.send('Nice try but only Krish can use this command.')
+                return;
 
                 let perm
                 // console.log(guildPermissions)

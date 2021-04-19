@@ -18,6 +18,6 @@ module.exports = mongoose.model('permissions', permissionSchema)
  * {
  *     enitity: <id>
  *     permission: <allow/deny>
- *     command: <command>
+ *     commandName: <command>
  * }
  */
