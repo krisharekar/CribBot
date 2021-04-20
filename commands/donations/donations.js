@@ -19,7 +19,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(`Donations of ${user.user.username}`, user.user.displayAvatarURL())
                 .setColor('BLUE')
-                .setDescription(`**Amount:** \`⏣ 0\`
+                .setDescription(`**Total Donation:** \`⏣ 0\`
                                 **Today's Donation:** \`⏣ 0\``)
 
             return message.channel.send(embed)

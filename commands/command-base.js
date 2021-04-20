@@ -1,5 +1,5 @@
 const { prefixFinder } = require('../prefix-finder')
-const { getBlacklists } = require('../cache/caches/blacklists-cache')
+// const { getBlacklists } = require('../cache/caches/blacklists-cache')
 const { getPermissions } = require('../cache/caches/permissions-cache')
 const Discord = require('discord.js')
 
@@ -79,10 +79,10 @@ module.exports = (client, commandOptions) => {
         const guildPermissions = getPermissions(message.guild.id)
         if(!message.content.startsWith(prefix) || message.author.bot)
         return;
-        const users = getBlacklists(message.guild.id)
+        // const users = getBlacklists(message.guild.id)
 
-        if(users && users.includes(message.author.id))
-        return;
+        // if(users && users.includes(message.author.id))
+        // return;
 
         const { member, content, guild } = message
 
@@ -130,14 +130,18 @@ module.exports = (client, commandOptions) => {
                         }
                     }
                 }
-                
+                console.log(perm)
+                console.log(permissions)
                 for(const permission of permissions){
+                    console.log(member.hasPermission(permission))
                     if(!member.hasPermission(permission) && perm != 'allow')
                     return message.channel.send(`You don't have permission to use this command.`)
 
                     if(!member.hasPermission('ADMINISTRATOR') && perm != 'allow')
                     return message.channel.send(`You don't have permission to use this command.`)
                 }
+                if(!permissions.length && !member.hasPermission('ADMINISTRATOR') && perm == 'deny')
+                return message.channel.send(`You don't have permission to use this command.`)
 
                 // for(const requiredRole of requiredRoles){
                 //     const role = guild.roles.cache.find(role => role.name === requiredRole)

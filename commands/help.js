@@ -20,7 +20,7 @@ module.exports = {
 
 				for (const command of commands) {
 					// console.log(command[0].commands[0])
-					const mainCommand = `\`${command[0].commands[0]}\``
+					const mainCommand = `\`${command[0].commands[0]}\`\n`
 					mainCommands.push(mainCommand)
 				}
 
