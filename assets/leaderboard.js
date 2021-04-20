@@ -1,11 +1,20 @@
 const donationsSchema = require('../schemas/donations-schema')
 
-module.exports.fetchLeaderboard = async (guildId, start, end) => {
+module.exports.fetchLeaderboard = async (guildId, lbName, start, end) => {
     if (!guildId) throw new TypeError('A guild id was not provided.');
-    // if (!start) throw new TypeError('A start limit was not provided.');
-    // if (!end) throw new TypeError('A end limit was not provided.');
+    if (!lbName) throw new TypeError('Leaderboard name was not provided.');
 
-    const rawLb = await donationsSchema.find({ guildId }).sort([['donationAmount', 'descending']]).exec();
+    let rawLb
+
+    if(lbName == 'total')
+    rawLb = await donationsSchema.find({ guildId }).sort([['donationAmount', 'descending']]).exec();
+
+    else if (lbName == 'daily')
+    rawLb = await donationsSchema.find({ guildId }).sort([['dailyDonation', 'descending']]).exec();
+
+    start && end ? rawLb = rawLb.slice(start, end) : rawLb
+
+    lbName == 'total' ? rawLb = rawLb.filter(key => key.donationAmount > 0) : rawLb = rawLb.filter(key => key.dailyDonation > 0)
     // console.log(rawLb)
     if(!start && !end)
     return rawLb
@@ -29,6 +38,7 @@ module.exports.computeLeaderboard = async (client, leaderboard, fetchUsers = fal
                 guildID: key.guildId,
                 userID: key.userId,
                 donationAmount: key.donationAmount,
+                dailyDonation: key.dailyDonation,
                 position: (leaderboard.findIndex(i => i.guildId === key.guildId && i.userId === key.userId) + 1),
                 username: user.username,
                 discriminator: user.discriminator
@@ -39,6 +49,7 @@ module.exports.computeLeaderboard = async (client, leaderboard, fetchUsers = fal
             guildID: key.guildId,
             userID: key.userId,
             donationAmount: key.donationAmount,
+            dailyDonation: key.dailyDonation,
             position: (leaderboard.findIndex(i => i.guildId === key.guildId && i.userId === key.userId) + 1),
             username: client.users.cache.get(key.userId) ? client.users.cache.get(key.userId).username : 'Unknown',
             discriminator: client.users.cache.get(key.userId) ? client.users.cache.get(key.userId).discriminator : '0000'

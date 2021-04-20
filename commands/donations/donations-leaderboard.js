@@ -5,13 +5,18 @@ const { computeLeaderboard } = require('../../assets/leaderboard')
 module.exports = {
     commands: ['donations-leaderboard', 'donationsleaderboard', 'donos-leaderboard', 'donosleaderboard', 'donoslb', 'dlb'],
     description: 'Shows donations leaderboard of the server',
-    usage: '[page]',
+    minArgs: 1,
+    usage: '<total/daily> [page]',
 
     async execute(message, args, client) {
         const guildId = message.guild.id
-        const page = parseInt(args[0]) || 1
-        const start = (parseInt(args[0]) * 10) - 10 || 0
-        const end = parseInt(args[0]) * 10 || 10
+        const lbName = args[0]
+        const page = parseInt(args[1]) || 1
+        const start = (parseInt(args[1]) * 10) - 10 || 0
+        const end = parseInt(args[1]) * 10 || 10
+
+        if(lbName != 'total' && lbName != 'daily')
+        return message.channel.send('Second argument must be either `total` or `daily`')
 
         if (isNaN(page))
             return message.channel.send('Page must be a number.')
@@ -24,8 +29,8 @@ module.exports = {
         // const { donationAmount } = result
 
         let reply = ''
-        const rawLeaderboard = await fetchLeaderboard(guildId, start, end)
-        const completeLb = await fetchLeaderboard(guildId)
+        const rawLeaderboard = await fetchLeaderboard(guildId, lbName, start, end)
+        const completeLb = await fetchLeaderboard(guildId, lbName)
         const pageCount = Math.ceil(completeLb.length/10)
 
         if (rawLeaderboard.length < 1 && page == 1) 
@@ -36,7 +41,13 @@ module.exports = {
 
         const leaderboard = await computeLeaderboard(client, rawLeaderboard, true)
 
-        const lb = leaderboard.map(e => `**${e.position+start}.** ${e.username}#${e.discriminator}\nDonations: \`${e.donationAmount.toLocaleString()}\``)
+        let lb
+
+        if(lbName == 'total')
+        lb = leaderboard.map(e => `**${e.position+start}.** ${e.username}#${e.discriminator}\n**Total Donations:** \`⏣ ${e.donationAmount.toLocaleString()}\``)
+
+        if(lbName == 'daily')
+        lb = leaderboard.map(e => `**${e.position+start}.** ${e.username}#${e.discriminator}\n**Today's Donations:** \`⏣ ${e.dailyDonation ? e.dailyDonation.toLocaleString() : '0'}\``)
 
         reply += lb.join('\n\n')
 
