@@ -7,7 +7,7 @@ module.exports = async (client) => {
 		client.guilds.cache.forEach(async g => {
 			updateHighestDonorChannel(client, g.id)
 		})
-	}, 5 * 60 * 1000)
+	},1000)
 }
 
 function abbNum(num) {
@@ -29,7 +29,7 @@ function abbNum(num) {
     }
 
     if (num < 1000000000000) {
-        return (num / 1000000000).toFixed(1) + "B";
+        return (num / 1000000000).toFixed(9).slice(0, -8) + "B";
     }
 
     return "1T+";
@@ -46,7 +46,7 @@ async function updateHighestDonorChannel(client, guildId) {
     if(!highestDonorChannel)
     return;
 
-    const rawLeaderboard = await fetchLeaderboard(guildId, 0, 1)
+    const rawLeaderboard = await fetchLeaderboard(guildId, 'total', 0, 1)
 
     if (rawLeaderboard.length < 1)
         return;
