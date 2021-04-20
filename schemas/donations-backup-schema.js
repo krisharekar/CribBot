@@ -5,14 +5,13 @@ const reqString = {
     required: true
 }
 
-const donationsSchema = mongoose.Schema({
+const donationsBackupSchema = mongoose.Schema({
     guildId: reqString,
     userId: reqString,
     donationAmount: {
         type: Number,
         required: true
-    },
-    dailyDonation: Number
+    }
 })
 
-module.exports = mongoose.model('donations', donationsSchema)
+module.exports = mongoose.model('donations-backups', donationsBackupSchema)

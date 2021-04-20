@@ -28,12 +28,13 @@ module.exports = {
 
         const userId = user.user.id
 
-        const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { donationAmount }, { upsert: true, new: true })
+        const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { donationAmount, dailyDonation: donationAmount }, { upsert: true, new: true })
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Set donations for ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('GREEN')
-            .setDescription(`**New Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+            .setDescription(`**New Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\`
+                            **Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``)
 
         message.channel.send(embed)
     }

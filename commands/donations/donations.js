@@ -19,18 +19,20 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(`Donations of ${user.user.username}`, user.user.displayAvatarURL())
                 .setColor('BLUE')
-                .setDescription(`**Amount:** \`⏣ 0\``)
+                .setDescription(`**Amount:** \`⏣ 0\`
+                                **Today's Donation:** \`⏣ 0\``)
 
             return message.channel.send(embed)
         }
 
-        const { donationAmount } = result
+        const { donationAmount, dailyDonation } = result
 
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Donations of ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('BLUE')
-            .setDescription(`**Amount:** \`⏣ ${donationAmount.toLocaleString()}\``)
+            .setDescription(`**Total Donation:** \`⏣ ${donationAmount.toLocaleString()}\`
+                            **Today's Donation:** \`⏣ ${dailyDonation ? dailyDonation.toLocaleString() : '0'}\``)
 
         message.channel.send(embed)
     }

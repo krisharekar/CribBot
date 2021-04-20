@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
-const donationsSchema = require('./schemas/donations-schema')
-const { getDonationsChannel } = require('./cache/caches/donations-channel-cache')
-const { getInfo } = require('./assets/get-info')
-const { addDonationRoles } = require('./donation-roles')
+const donationsSchema = require('../schemas/donations-schema')
+const { getDonationsChannel } = require('../cache/caches/donations-channel-cache')
+const { getInfo } = require('../assets/get-info')
+const { addDonationRoles } = require('../donation-roles')
 
 module.exports = (client) => {
     client.on('message', async message => {
@@ -28,7 +28,7 @@ module.exports = (client) => {
 
         const itemInfo = getInfo(itemName)
         const donationAmount = itemInfo.value*itemAmount
-        const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount } }, { upsert: true, new: true })
+        const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Thank you for your donation ${message.mentions.users.first().tag}`, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
