@@ -15,6 +15,7 @@ const autoRole = require('./z-archived/cache/auto-role')
 const loadCaches = require('./cache/load-caches')
 // const chatbot = require('./z-archived/cache/chatbot')
 const mongo = require('./mongo')
+const { prefixFinder } = require('./prefix-finder')
 const coinDonations = require('./donation-trackers/coin-donations')
 const itemDonations = require('./donation-trackers/item-donations')
 const loadCommands = require('./commands/load-commands')
@@ -71,6 +72,12 @@ client.on('ready', async () => {
 client.on('message', async message => {
 	if (message.channel.id == '805791291312308266' && message.author.id != client.user.id)
 		return message.channel.send('nO')
+		
+		const prefix = prefixFinder(message.guild.id)
+        const mentionMsg = `Hey <@${message.author.id}>! My prefix is \`${prefix}\` \nRun *\`${prefix}help\`* for more help!`
+        const mention = message.content.replace(/ +/g, '')
+        if(mention == `<@${client.user.id}>` || mention == `<@!${client.user.id}>`)
+        message.channel.send(mentionMsg)
 })
 
 // client.on('message', async message => {

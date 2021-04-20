@@ -79,10 +79,6 @@ module.exports = (client, commandOptions) => {
         if(message.author.bot)
         return;
 
-        const mentionRegex = new RegExp(`(<@!?${client.user.id}>)`)
-        if(message.content == `<@${client.user.id}>`) console.log('yes')
-        // console.log(message.content)
-
         const prefix = prefixFinder(message.guild.id)
         const guildPermissions = getPermissions(message.guild.id)
 
