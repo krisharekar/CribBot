@@ -37,7 +37,7 @@ module.exports = (client) => {
             **Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`
             **Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`
             **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
-            .setFooter('If this information was incorrect, report it to Krish')
+            .setFooter('If this information was incorrect, report it to an admin')
 
         message.channel.send(embed)
 
