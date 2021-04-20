@@ -12,14 +12,12 @@ module.exports.fetchLeaderboard = async (guildId, lbName, start, end) => {
     else if (lbName == 'daily')
     rawLb = await donationsSchema.find({ guildId }).sort([['dailyDonation', 'descending']]).exec();
 
-    start && end ? rawLb = rawLb.slice(start, end) : rawLb
+    if (end)
+    rawLb = rawLb.slice(start, end)
 
     lbName == 'total' ? rawLb = rawLb.filter(key => key.donationAmount > 0) : rawLb = rawLb.filter(key => key.dailyDonation > 0)
-    // console.log(rawLb)
-    if(!start && !end)
+
     return rawLb
-    else
-    return rawLb.slice(start, end);
 }
 
 module.exports.computeLeaderboard = async (client, leaderboard, fetchUsers = false) => {

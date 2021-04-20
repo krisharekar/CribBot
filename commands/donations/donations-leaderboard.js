@@ -50,6 +50,7 @@ module.exports = {
         lb = leaderboard.map(e => `**${e.position+start}.** ${e.username}#${e.discriminator}\n**Today's Donations:** \`⏣ ${e.dailyDonation ? e.dailyDonation.toLocaleString() : '0'}\``)
 
         reply += lb.join('\n\n')
+        console.log(reply.length)
 
         const embed = new Discord.MessageEmbed()
             .setTitle(`${message.guild.name}'s Leaderboard`)
