@@ -7,7 +7,7 @@ module.exports = async (client) => {
 		client.guilds.cache.forEach(async g => {
 			updateHighestDonorChannel(client, g.id)
 		})
-	},1000)
+	}, 5 * 60 * 1000)
 }
 
 function abbNum(num) {
