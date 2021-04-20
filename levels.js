@@ -1,5 +1,5 @@
 const mongo = require('./mongo')
-const levelSchema = require('./schemas/level-schema')
+const levelSchema = require('./z-archived/schemas/level-schema')
 
 module.exports = (client) => {
     client.on('message', message => {

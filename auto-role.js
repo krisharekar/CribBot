@@ -1,4 +1,4 @@
-const autoRoleSchema = require('./schemas/autorole-schema')
+const autoRoleSchema = require('./z-archived/schemas/autorole-schema')
 const { getAutoRoles } = require('./cache/caches/auto-role-cache')
 
 module.exports = (client, autoRoleCache) => {

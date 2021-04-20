@@ -1,6 +1,6 @@
 const mongo = require('./mongo')
-const { count } = require('./schemas/counting-schema')
-const countingSchema = require('./schemas/counting-schema')
+const { count } = require('./z-archived/schemas/counting-schema')
+const countingSchema = require('./z-archived/schemas/counting-schema')
 
 module.exports = async (client) => {
 

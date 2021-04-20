@@ -1,5 +1,5 @@
 const mongo = require('./mongo')
-const chatBotSchema = require('./schemas/chatbot-schema')
+const chatBotSchema = require('./z-archived/schemas/chatbot-schema')
 const { prefixFinder } = require('./prefix-finder')
 const fetch = require('node-fetch')
 const alexa = require('alexa-bot-api')
