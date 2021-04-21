@@ -1,7 +1,7 @@
 module.exports.abbNum = (num) => {
     if(!isNaN(num)) {
         console.log(num)
-        return num;
+        return parseInt(num);
     }
     
     num = num.toLowerCase()
