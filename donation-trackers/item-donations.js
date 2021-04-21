@@ -30,8 +30,12 @@ module.exports = (client) => {
         const itemInfo = getInfo(itemName)
         const guildItemInfos = getItemInfos(guildId)
         let donationAmount
-        const guildItemInfo = guildItemInfos.find(key => key.id == itemName)
-        guildItemInfo ? donationAmount = guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
+        let guildItemInfo
+        if(guildItemInfos)
+        guildItemInfo = guildItemInfos.find(key => key.id == itemName)
+        // console.log(guildItemInfo)
+        donationAmount = guildItemInfo ? guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
+        // console.log(donationAmount)
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 
         const embed = new Discord.MessageEmbed()
