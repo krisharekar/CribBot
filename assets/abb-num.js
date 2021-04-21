@@ -1,5 +1,5 @@
 module.exports.abbNum = (num) => {
-    if(!isNaN(num)) {
+    if(!isNaN(num) && !num.includes('e')) {
         console.log(num)
         return parseInt(num);
     }
