@@ -8,7 +8,7 @@ module.exports = {
     commands: ['set-value', 'setvalue', 'sv'],
     description: 'Sets donation value of an item of the server',
     minArgs: 2,
-    usage: '<item> <amount>',
+    usage: '<item> <value>',
     permissions: ['ADMINISTRATOR'],
 
     async execute(message, args, client) {
@@ -20,7 +20,7 @@ module.exports = {
             return message.channel.send(`Item \`${item}\` not found.`)
 
         if (amount < 1)
-            return message.channel.send('Amount cannot be less than 1.')
+            return message.channel.send('Value cannot be less than 1.')
 
         const path = './assets/items.json'
 
