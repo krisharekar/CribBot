@@ -30,7 +30,6 @@ const welcomeCache = new Map()
 
 const { GiveawaysManager } = require('discord-giveaways')
 
-
 require('events').EventEmitter.defaultMaxListeners = 100
 
 module.exports.getClient = () => { return client };
