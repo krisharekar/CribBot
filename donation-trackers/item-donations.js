@@ -3,6 +3,7 @@ const donationsSchema = require('../schemas/donations-schema')
 const { getDonationsChannel } = require('../cache/caches/donations-channel-cache')
 const { getInfo } = require('../assets/get-info')
 const { addDonationRoles } = require('../donation-roles')
+const { getItemInfos } = require('../cache/caches/item-info-cache')
 
 module.exports = (client) => {
     client.on('message', async message => {
@@ -27,7 +28,10 @@ module.exports = (client) => {
         // console.log(itemAmount, itemName)
 
         const itemInfo = getInfo(itemName)
-        const donationAmount = itemInfo.value*itemAmount
+        const guildItemInfos = getItemInfos(guildId)
+        let donationAmount
+        const guildItemInfo = guildItemInfos.find(key => key.id == itemName)
+        guildItemInfo ? donationAmount = guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 
         const embed = new Discord.MessageEmbed()

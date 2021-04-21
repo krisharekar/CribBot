@@ -1,6 +1,8 @@
 const Discord = require('discord.js')
 const fs = require('fs')
 const { abbNum } = require('../../assets/abb-num')
+const itemInfoSchema = require('../../schemas/item-info-schema')
+const { getItemInfos } = require('../../cache/caches/item-info-cache') 
 
 module.exports = {
     commands: ['value', 'v'],
@@ -32,17 +34,29 @@ module.exports = {
         if(!itemInfo)
         return message.channel.send(`Item \`${item}\` not found.`)
 
+        const result = getItemInfos(guildId)
+        console.log(result)
+
         let embed = new Discord.MessageEmbed()
         .setAuthor(`${itemInfo.name}'s Value`, client.user.displayAvatarURL())
         .setColor('BLUE')
         .setThumbnail(itemInfo.link)
 
+        let value = itemInfo.value
+
+        if(result) {
+            for (const guildItemInfo of result) {
+                if(guildItemInfo.id == itemInfo.id)
+                value = guildItemInfo.value
+            }
+        }
+
         if(amount == 1)
-        embed.setDescription(`**Donation Value:** \`⏣ ${(itemInfo.value).toLocaleString()}\``)
+        embed.setDescription(`**Donation Value:** \`⏣ ${(value).toLocaleString()}\``)
 
         else
-        embed.setDescription(`**Donation Value:** \`⏣ ${(itemInfo.value*amount).toLocaleString()}\`
-                            **Donation Value of 1 item:** \`⏣ ${(itemInfo.value).toLocaleString()}\``)
+        embed.setDescription(`**Donation Value:** \`⏣ ${(value*amount).toLocaleString()}\`
+                            **Donation Value of 1 item:** \`⏣ ${(value).toLocaleString()}\``)
 
         message.channel.send(embed)
 
