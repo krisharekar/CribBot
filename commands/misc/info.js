@@ -8,33 +8,30 @@ const os = require('os')
 module.exports = {
 	commands: ['info', 'botinfo', 'about', 'aboutbot'],
 	description: 'Get info about the bot',
-	aliases: ['about'],
-	usage: '',
-	args: false,
-	guildOnly: false,
 
 	execute(message, args, client) {
 
-		let totalMemory 
+		let totalMemory
 		let memoryUsed
 		let sizes
 		let i
 
 		let bytes = process.memoryUsage().heapTotal
 		if (bytes === 0)
-		return totalMemory = '0 Bytes';
-        sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        i = Math.floor(Math.log(bytes) / Math.log(1024));
+			return totalMemory = '0 Bytes';
+		sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+		i = Math.floor(Math.log(bytes) / Math.log(1024));
 		totalMemory = `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
-		
-		 bytes = process.memoryUsage().heapUsed
+
+		bytes = process.memoryUsage().heapUsed
 		if (bytes === 0)
-		return memoryUsed = '0 Bytes';
-        sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        i = Math.floor(Math.log(bytes) / Math.log(1024));
-        memoryUsed = `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+			return memoryUsed = '0 Bytes';
+		sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+		i = Math.floor(Math.log(bytes) / Math.log(1024));
+		memoryUsed = `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
 
 		const core = os.cpus()[0];
+		const owner = client.users.cache.get('714808648517550144')
 
 		const InfoEmbed = new Discord.MessageEmbed()
 			.setTitle(client.user.username)
@@ -47,7 +44,7 @@ module.exports = {
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Users:** ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Channels:** ${client.channels.cache.size.toLocaleString()}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Creation Date:** ${utc(client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Created By:** Krish#7476`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Created By:** ${owner.tag}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Node.js:** ${process.version}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Version:** v${version}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Discord.js:** v${djsversion}`,
