@@ -1,4 +1,9 @@
 module.exports.abbNum = (num) => {
+    if(!isNaN(num)) {
+        console.log(num)
+        return num;
+    }
+    
     num = num.toLowerCase()
     num = num.replace(/,/g, '')
     console.log(parseFloat(num))

@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const fs = require('fs')
+const { abbNum } = require('../../assets/abb-num')
 
 module.exports = {
     commands: ['value', 'v'],
@@ -10,13 +11,15 @@ module.exports = {
     async execute(message, args, client) {
         const guildId = message.guild.id
         const item = args[0]
-        const amount = parseInt(args[1]) || 1
+        let amount = args[1] || 1
+
+        amount = abbNum(amount)
 
         if(item.length < 2)
         return message.channel.send(`Item \`${item}\` not found.`)
 
         if(amount < 1)
-        message.channel.send('Amount cannot be less than 1.')
+        return message.channel.send('Amount cannot be less than 1.')
 
         const path = './assets/items.json'
 
@@ -29,11 +32,17 @@ module.exports = {
         if(!itemInfo)
         return message.channel.send(`Item \`${item}\` not found.`)
 
-        const embed = new Discord.MessageEmbed()
-            .setAuthor(`${itemInfo.name}'s Value`, client.user.displayAvatarURL())
-            .setColor('BLUE')
-            .setThumbnail(itemInfo.link)
-            .setDescription(`**Donation Value:** \`⏣ ${(itemInfo.value*amount).toLocaleString()}\``)
+        let embed = new Discord.MessageEmbed()
+        .setAuthor(`${itemInfo.name}'s Value`, client.user.displayAvatarURL())
+        .setColor('BLUE')
+        .setThumbnail(itemInfo.link)
+
+        if(amount == 1)
+        embed.setDescription(`**Donation Value:** \`⏣ ${(itemInfo.value).toLocaleString()}\``)
+
+        else
+        embed.setDescription(`**Donation Value:** \`⏣ ${(itemInfo.value*amount).toLocaleString()}\`
+                            **Donation Value of 1 item:** \`⏣ ${(itemInfo.value).toLocaleString()}\``)
 
         message.channel.send(embed)
 
