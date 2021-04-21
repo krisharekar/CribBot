@@ -1,4 +1,6 @@
 module.exports.abbNum = (num) => {
+    num = num.toString()
+    console.log(num)
     if(!isNaN(num) && !num.includes('e')) {
         console.log(num)
         return parseInt(num);
