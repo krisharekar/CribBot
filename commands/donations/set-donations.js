@@ -33,8 +33,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Set donations for ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('GREEN')
-            .setDescription(`**New Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\`
-                            **Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``)
+            .setDescription(`**New Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``)
 
         message.channel.send(embed)
     }

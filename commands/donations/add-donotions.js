@@ -35,9 +35,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Added donations to ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('BLUE')
-            .setDescription(`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\`
-                            **Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`
-                            **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+            .setDescription(`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
 
         message.channel.send(embed)
         await removeDonationRoles(client, guildId, userId)

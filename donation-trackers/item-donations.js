@@ -41,10 +41,7 @@ module.exports = (client) => {
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Thank you for your donation ${message.mentions.users.first().tag}`, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
             .setColor('BLUE')
-            .setDescription(`**Item Donated:** \`${itemInfo.name} (${itemAmount})\`
-            **Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`
-            **Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`
-            **Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+            .setDescription(`**Item Donated:** \`${itemInfo.name} (${itemAmount})\`\n**Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
             .setFooter('If this information was incorrect, report it to an admin')
 
         message.channel.send(embed)

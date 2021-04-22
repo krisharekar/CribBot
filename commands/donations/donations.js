@@ -19,8 +19,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(`Donations of ${user.user.username}`, user.user.displayAvatarURL())
                 .setColor('BLUE')
-                .setDescription(`**Total Donation:** \`⏣ 0\`
-                                **Today's Donation:** \`⏣ 0\``)
+                .setDescription(`**Total Donation:** \`⏣ 0\`\n**Today's Donation:** \`⏣ 0\``)
 
             return message.channel.send(embed)
         }
@@ -31,8 +30,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Donations of ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('BLUE')
-            .setDescription(`**Total Donation:** \`⏣ ${donationAmount.toLocaleString()}\`
-                            **Today's Donation:** \`⏣ ${dailyDonation ? dailyDonation.toLocaleString() : '0'}\``)
+            .setDescription(`**Total Donation:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${dailyDonation ? dailyDonation.toLocaleString() : '0'}\``)
 
         message.channel.send(embed)
     }
