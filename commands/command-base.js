@@ -71,8 +71,8 @@ module.exports = (client, commandOptions) => {
     const cooldowns = new Discord.Collection()
 
     client.on('message', message => {
-        if (message.author.id != '714808648517550144') //697815325650976789
-        return;
+        // if (message.author.id != '714808648517550144') //697815325650976789
+        // return;
 
         if (message.author.bot)
             return;
