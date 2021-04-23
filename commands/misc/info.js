@@ -61,7 +61,7 @@ module.exports = {
 				`\u3000 Total: ${totalMemory}`,
 				`\u3000 Used: ${memoryUsed}`
 			])
-			.setFooter('If you find any bugs, report it to Krish')
+			.setFooter(`If you find any bugs, report it to ${owner.tag}`)
 
 		message.channel.send(InfoEmbed)
 	}
