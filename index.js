@@ -57,7 +57,7 @@ client.on('ready', async () => {
 })
 
 client.on('ready', async () => {
-	await client.user.setActivity('Krish', { type: 'LISTENING' })
+	await client.user.setActivity('Kropex', { type: 'LISTENING' })
 })
 
 // client.on('guildMemberAdd', member => {
