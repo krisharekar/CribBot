@@ -3,15 +3,12 @@ const donationsSchema = require('../../schemas/donations-schema')
 const getUserFromMention = require('../../get-user-from-mention')
 
 module.exports = {
-    commands: ['donations', 'donos'],
-    description: 'Shows donations of a user',
-    usage: '<user>',
-    minArgs: 1,
-    permissions: ['MANAGE_GUILD'],
+    commands: ['my-donations', 'mydonations', 'my-donos', 'mydonos'],
+    description: 'Shows donations of the author',
 
     async execute(message, args) {
         const guildId = message.guild.id
-        const user = getUserFromMention(args[0], guildId) || message.guild.members.cache.get(args[0]) || message.member
+        const user = message.member
 
         const userId = user.user.id
 

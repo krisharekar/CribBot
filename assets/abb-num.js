@@ -1,14 +1,14 @@
 module.exports.abbNum = (num) => {
     num = num.toString()
-    console.log(num)
+    // console.log(num)
     if(!isNaN(num) && !num.includes('e')) {
-        console.log(num)
+        // console.log(num)
         return parseInt(num);
     }
     
     num = num.toLowerCase()
     num = num.replace(/,/g, '')
-    console.log(parseFloat(num))
+    // console.log(parseFloat(num))
 
     let number = num
     let temp
