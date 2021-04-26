@@ -22,7 +22,7 @@ module.exports = {
 
         message.channel.send('Searching for stinky freeloaders...')
 
-        const messages = await fetchMessages(channel, 200)
+        const messages = await fetchMessages(channel, limit)
         const freeloaders = []
 
         for (const msg of messages) {
