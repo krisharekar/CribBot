@@ -32,6 +32,7 @@ module.exports = {
             // console.log(msg.author)
 
             if (!exists && !msg.author.bot)
+                if(!freeloaders.find(u => u.id == msg.author.id))
                 freeloaders.push({ name: msg.author.username, id: msg.author.id })
         }
 
