@@ -9,7 +9,7 @@ module.exports = {
 
     async execute(message, args, client) {
         const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
-        const limit = parseInt(limit) || 200
+        const limit = parseInt(args[1]) || 200
 
         if (!channel)
             return message.channel.send('Specify a channel that exists.')
