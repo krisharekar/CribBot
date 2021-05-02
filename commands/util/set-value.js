@@ -59,12 +59,10 @@ module.exports = {
             .setThumbnail(itemInfo.link)
 
         if (exists)
-            embed.setDescription(`**Old Donation Value:** \`⏣ ${(oldValue).toLocaleString()}\`
-                                **New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
+            embed.setDescription(`**Old Donation Value:** \`⏣ ${(oldValue).toLocaleString()}\`\n**New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
 
         else
-        embed.setDescription(`**Old Donation Value:** \`⏣ ${(itemInfo.value).toLocaleString()}\`
-                            **New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
+        embed.setDescription(`**Old Donation Value:** \`⏣ ${(itemInfo.value).toLocaleString()}\`\n**New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
 
         message.channel.send(embed)
         loadCache(guildId)

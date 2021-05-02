@@ -58,8 +58,7 @@ module.exports = {
         embed.setDescription(`**Donation Value:** \`⏣ ${(value).toLocaleString()}\``)
 
         else
-        embed.setDescription(`**Donation Value:** \`⏣ ${(value*amount).toLocaleString()}\`
-                            **Donation Value of 1 item:** \`⏣ ${(value).toLocaleString()}\``)
+        embed.setDescription(`**Donation Value:** \`⏣ ${(value*amount).toLocaleString()}\`\n**Donation Value of 1 item:** \`⏣ ${(value).toLocaleString()}\``)
 
         message.channel.send(embed)
 

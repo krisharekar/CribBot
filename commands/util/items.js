@@ -73,14 +73,3 @@ module.exports = {
         // console.log(newData)
     }
 }
-
-function addSpaces(string, highestLength) {
-    const { length } = string
-    let spaces = (highestLength + 1) - length
-    let spacesString = 'a'
-    for (spaces; spaces > 0; spaces--)
-        spacesString += ' '
-    console.log(`"${spacesString}"`)
-    const newString = `\`${string}${spacesString.substring(1)}:\``
-    return newString
-}
