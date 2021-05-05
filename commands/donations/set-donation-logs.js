@@ -5,7 +5,7 @@ const { loadCache } = require('../../cache/caches/donation-logs-channel-cache')
 module.exports = {
     commands: ['set-donation-logs', 'setdonationlogs', 'setdl'],
     usage: '[channel]',
-    description: 'Sets the donation logs channe;',
+    description: 'Sets the donation logs channel',
     permissions: ['MANAGE_GUILD'],
 
     async execute(message, args, client) {
