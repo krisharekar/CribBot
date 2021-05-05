@@ -38,7 +38,9 @@ module.exports = {
             .setDescription(`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
 
         message.channel.send(embed)
+
+        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
         await removeDonationRoles(client, guildId, userId)
-        await addDonationRoles(client, guildId, userId)      
+        await addDonationRoles(client, guildId, userId)
     }
 }

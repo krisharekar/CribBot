@@ -8,7 +8,8 @@ const reqString = {
 const donationsChannelSchema = mongoose.Schema({
     guildId: reqString,
     donationsChannelIds: [String],
-    highestDonorChannelId: String
+    highestDonorChannelId: String,
+    donationLogsChannelId: String
 })
 
 module.exports = mongoose.model('donation-channels', donationsChannelSchema)

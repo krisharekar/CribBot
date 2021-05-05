@@ -11,6 +11,8 @@ module.exports = {
 
         const result = await donationsChannelSchema.findOne({ guildId })
 
+        if(!result)
+        return message.channel.send('No donations channels have been set.')
         let desc = ''
 
         for(const chan of result.donationsChannelIds) {

@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 const donationsSchema = require('../../schemas/donations-schema')
 const { abbNum } = require('../../assets/abb-num')
 const getUserFromMention = require('../../get-user-from-mention')
+const { addDonationRoles } = require('../../donation-roles')
+const { removeDonationRoles } = require('../../donation-roles')
 
 module.exports = {
     commands: ['set-donations', 'setdonations', 'set-donos', 'setdonos', 'sd'],
@@ -36,5 +38,9 @@ module.exports = {
             .setDescription(`**New Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``)
 
         message.channel.send(embed)
+
+        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
+        await removeDonationRoles(client, guildId, userId)
+        await addDonationRoles(client, guildId, userId)
     }
 }
