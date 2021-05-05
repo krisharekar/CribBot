@@ -39,7 +39,7 @@ module.exports = {
 
         message.channel.send(embed)
 
-        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
+        client.emit('donationsMade', guildId, userId, message.author.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
         await removeDonationRoles(client, guildId, userId)
         await addDonationRoles(client, guildId, userId)
     }

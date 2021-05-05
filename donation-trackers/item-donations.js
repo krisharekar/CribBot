@@ -29,12 +29,15 @@ module.exports = (client) => {
 
         const itemInfo = getInfo(itemName)
         const guildItemInfos = getItemInfos(guildId)
-        let donationAmount
         let guildItemInfo
         if(guildItemInfos)
         guildItemInfo = guildItemInfos.find(key => key.id == itemName)
         // console.log(guildItemInfo)
-        donationAmount = guildItemInfo ? guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
+        const donationAmount = guildItemInfo ? guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
+        const item = {
+            name: itemInfo.name,
+            value: guildItemInfo ? guildItemInfo.value : itemInfo.value
+        }
         // console.log(donationAmount)
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 
@@ -47,5 +50,6 @@ module.exports = (client) => {
         message.channel.send(embed)
 
         await addDonationRoles(client, guildId, userId)
+        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, item, result.donationAmount, result.dailyDonation)
     })
 }
