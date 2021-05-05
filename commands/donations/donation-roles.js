@@ -13,25 +13,19 @@ module.exports = {
         if (!result || !result.donationRoles[0])
             return message.channel.send('No donation roles have been set up.')
 
+        let donationRolesAndAmounts = ''
         const donationRoles = result.donationRoles.sort((a, b) => { return a.donationAmount - b.donationAmount })
+        const highestLength = donationRoles[donationRoles.length - 1].donationAmount.toLocaleString().length
 
-        let roles = ''
-        let donationAmounts = ''
-
-        /**
-         * [{userData.donationAmount}]
-         */
         for (const donationRole of donationRoles) {
             const role = message.guild.roles.cache.get(donationRole.roleId)
-            roles += `${role}\n`
-            donationAmounts += `\`⏣ ${donationRole.donationAmount.toLocaleString()}\`\n`
+            donationRolesAndAmounts += `\`⏣ ${donationRole.donationAmount.toLocaleString().padEnd(highestLength)} :\` ${role}\n`
         }
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(`${message.guild.name}'s Donation Roles`, client.user.displayAvatarURL())
             .setColor('BLUE')
-            .addField('Donation roles', roles, true)
-            .addField('Amount required', donationAmounts, true)
+            .setDescription(`${donationRolesAndAmounts}`)
 
         message.channel.send(embed)
     }
