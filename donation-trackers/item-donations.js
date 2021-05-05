@@ -36,7 +36,8 @@ module.exports = (client) => {
         const donationAmount = guildItemInfo ? guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
         const item = {
             name: itemInfo.name,
-            value: guildItemInfo ? guildItemInfo.value : itemInfo.value
+            value: guildItemInfo ? guildItemInfo.value : itemInfo.value,
+            amount: itemAmount
         }
         // console.log(donationAmount)
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
@@ -44,7 +45,7 @@ module.exports = (client) => {
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Thank you for your donation ${message.mentions.users.first().tag}`, message.mentions.users.first().displayAvatarURL({ dynamic: true }))
             .setColor('BLUE')
-            .setDescription(`**Item Donated:** \`${itemInfo.name} (${itemAmount})\`\n**Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+            .setDescription(`**Item Donated:** \`${itemInfo.name} (${itemAmount.toLocaleString()})\`\n**Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
             .setFooter('If this information was incorrect, report it to an admin')
 
         message.channel.send(embed)

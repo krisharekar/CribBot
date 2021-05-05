@@ -24,7 +24,7 @@ module.exports = (client) => {
         .setTimestamp()
 
         if(itemDonated)
-        embed.addField('Item Donated', `\`${itemDonated.name} (${itemDonated.value})\``)
+        embed.addField('Item Donated', `\`${itemDonated.name} (${itemDonated.amount.toLocaleString()})\``)
 
         embed
         .addField('Total Donations', `\`⏣ ${totalDonations.toLocaleString()}\``)
