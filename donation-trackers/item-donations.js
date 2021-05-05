@@ -19,7 +19,9 @@ module.exports = (client) => {
 
         // console.log(content)
 
-        const userId = message.mentions.users.first().id
+        const user = message.mentions.users.first()
+        if(!user) return;
+        const userId = user.id
         const guildId = message.guild.id
         const temp = (content.substring(content.indexOf('*') + 2))
         // console.log(temp)
