@@ -12,14 +12,7 @@ module.exports = (client) => {
         const channel = client.channels.cache.get('840895477821997066')
         if (channel)
             channel.send('Posted stats to Top.gg!')
-    })
-    setInterval(() => {
-        ap.on('posted', () => {
-            const channel = client.channels.cache.get('840895477821997066')
-            if (channel)
-                channel.send('Posted stats to Top.gg!')
-        })
-    }, 1 * 60 * 60 * 60) // 1hr
+    }) //every 30mins
 
     // const app = express()
 
