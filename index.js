@@ -22,6 +22,7 @@ const loadCommands = require('./commands/load-commands')
 const updateDonorChannel = require('./update-donor-channel')
 const dailyDonations = require('./donation-trackers/daily-donations')
 const donationLogs = require('./donation-logs')
+const topggWebhook = require('./topgg-webhook')
 
 const ttt = require('discord-tictactoe')
 const { EventEmitter } = require('events')
@@ -44,6 +45,7 @@ client.commands = new Discord.Collection()
 
 client.on('ready', async () => {
 	await mongo()
+	await status(client)
 	await welcome(client)
 	await loadCommands(client)
 	await coinDonations(client)
@@ -52,17 +54,17 @@ client.on('ready', async () => {
 	await dailyDonations(client)
 	await loadCaches()
 	await donationLogs(client)
+	await topggWebhook(client)
 	console.log('ok')
 })
 
-client.on('ready', async () => {
-	await client.user.setActivity('Kropex', { type: 'LISTENING' })
-})
+// client.on('ready', async () => {
+// 	await client.user.setActivity('Kropex', { type: 'LISTENING' })
+// })
 
 // client.on('guildMemberAdd', member => {
 // 	if (member.user.id == '807318024976728085') {
 // 		member.kick()
-// 		console.log('Nalaude spotted.')
 // 		return
 // 	}
 // })

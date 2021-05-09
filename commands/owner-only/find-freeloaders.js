@@ -24,30 +24,37 @@ module.exports = {
 
         const messages = await fetchMessages(channel, limit)
         const freeloaders = []
+        const bannedFreeloaders = []
 
         for (const msg of messages) {
             const exists = message.guild.members.cache.get(msg.author.id)
+            // if (!exists && !msg.author.bot)
+            if (!exists) {
+                const bans = await message.guild.fetchBans()
+                if(bans.find(u => u.user == msg.author))
+                bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
 
-            // if(msg.author.bot)
-            // console.log(msg.author)
-
-            if (!exists && !msg.author.bot)
-                if(!freeloaders.find(u => u.id == msg.author.id))
+                else if(!freeloaders.find(u => u.id == msg.author.id))
                 freeloaders.push({ name: msg.author.username, id: msg.author.id })
+            }
         }
 
-        if(!freeloaders.length)
+        if(!freeloaders.length && !bannedFreeloaders.length)
         return message.channel.send('No freeloaders found!')
 
         // console.log(messages.length)
 
         let freeloaderMessage = ''
+        let bannedFreeloaderMessage = ''
 
         for (const freeloader of freeloaders) {
             freeloaderMessage += `${freeloader.name} (${freeloader.id})\n`
         }
+        for (const bannedFreeloader of bannedFreeloaders) {
+            bannedFreeloaderMessage += `${bannedFreeloader.name} (${bannedFreeloader.id})\n`
+        }
 
-        message.channel.send(`FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaderMessage}`)
+        message.channel.send(`FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaderMessage}\n\nFreeloaders who are already banned are:\n${bannedFreeloaderMessage}`)
     }
 }
 
@@ -56,7 +63,7 @@ async function fetchMessages(channel, limit = 500) {
     let lastId;
 
     while (true) {
-        const options = { limit: 100 };
+        const options = limit > 100 ? { limit: 100 } : { limit };
         if (lastId) {
             options.before = lastId;
         }
@@ -69,6 +76,7 @@ async function fetchMessages(channel, limit = 500) {
             break;
         }
     }
+    console.log(allMessages.length)
 
     return allMessages;
 }
