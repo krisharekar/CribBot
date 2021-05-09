@@ -8,14 +8,20 @@ const webhookURL2 = 'https://discord.com/api/webhooks/840900091606597674/SLxBSiW
 const DBL = require('dbl-api')
 module.exports = (client) => {
     const ap = AutoPoster(topggToken, client)
-
     ap.on('posted', () => {
         const channel = client.channels.cache.get('840895477821997066')
         if (channel)
             channel.send('Posted stats to Top.gg!')
     })
+    setInterval(() => {
+        ap.on('posted', () => {
+            const channel = client.channels.cache.get('840895477821997066')
+            if (channel)
+                channel.send('Posted stats to Top.gg!')
+        })
+    }, 1 * 60 * 60 * 60) // 1hr
 
-    const app = express()
+    // const app = express()
 
     // const webhook = new Topgg.Webhook(webhookURL)
 
