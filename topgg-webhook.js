@@ -8,10 +8,21 @@ const webhookURL2 = 'https://discord.com/api/webhooks/840900091606597674/SLxBSiW
 const DBL = require('dbl-api')
 module.exports = (client) => {
     const ap = AutoPoster(topggToken, client)
-    ap.on('posted', () => {
-        const channel = client.channels.cache.get('840895477821997066')
-        if (channel)
-            channel.send('Posted stats to Top.gg!')
+    ap.on('posted', async () => {
+        const message = await client.channels.cache.get('840958539459723274').messages.fetch('840959070356766751')
+        // console.log(message)
+        if(!message)
+        return;
+
+        const embed = new Discord.MessageEmbed()
+        .setAuthor(`${client.user.username}'s TopGG Stats`, client.user.displayAvatarURL())
+        .setColor('BLUE')
+        .addField('Guild Count', client.guilds.cache.size.toLocaleString(), true)
+        .addField('Shard Count', client.options.shardCount || 1, true)
+        .setFooter('Last updated')
+        .setTimestamp()
+
+        message.edit('', embed)
     }) //every 30mins
 
     // const app = express()
