@@ -43,7 +43,7 @@ module.exports = {
 
         // const result = await permissionSchema.find({ guildId, permissions: { $elemMatch: { entityId, commandName }}})
         const result = await permissionSchema.find({ guildId })
-        console.log(result)
+        // console.log(result)
 
         if (result[0]) {
             for (const perm of result[0].permissions) {

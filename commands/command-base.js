@@ -145,7 +145,7 @@ module.exports = (client, commandOptions) => {
                 // console.log(perm)
                 // console.log(permissions)
                 for (const permission of permissions) {
-                    console.log(member.hasPermission(permission))
+                    // console.log(member.hasPermission(permission))
                     if (!member.hasPermission(permission) && perm != 'allow')
                         return message.channel.send(`You don't have permission to use this command.`)
 

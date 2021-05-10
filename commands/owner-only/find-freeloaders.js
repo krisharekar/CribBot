@@ -9,7 +9,8 @@ module.exports = {
 
     async execute(message, args, client) {
         const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
-        const limit = parseInt(args[1]) || 200
+        const limit = (args[1]) || 200
+        // console.log(limit)
 
         if (!channel)
             return message.channel.send('Specify a channel that exists.')
@@ -18,7 +19,7 @@ module.exports = {
         return message.channel.send('Message count must be an integer')
 
         if(limit < 1 || limit > 1000)
-        return message.channel.send('Message count must be between 1 to 1000.')
+        return message.channel.send('Message count must be between 1-1000.')
 
         message.channel.send('Searching for stinky freeloaders...')
 
@@ -32,10 +33,12 @@ module.exports = {
             if (!exists) {
                 const bans = await message.guild.fetchBans()
                 if(bans.find(u => u.user == msg.author))
-                bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
+                bannedFreeloaders.push(`${msg.author.username} (${msg.author.id})`)
+                // bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
 
                 else if(!freeloaders.find(u => u.id == msg.author.id))
-                freeloaders.push({ name: msg.author.username, id: msg.author.id })
+                freeloaders.push(`${msg.author.username} (${msg.author.id})`)
+                // freeloaders.push({ name: msg.author.username, id: msg.author.id })
             }
         }
 
@@ -44,17 +47,20 @@ module.exports = {
 
         // console.log(messages.length)
 
-        let freeloaderMessage = ''
-        let bannedFreeloaderMessage = ''
+        // let freeloaderMessage = ''
+        // let bannedFreeloaderMessage = ''
 
-        for (const freeloader of freeloaders) {
-            freeloaderMessage += `${freeloader.name} (${freeloader.id})\n`
-        }
-        for (const bannedFreeloader of bannedFreeloaders) {
-            bannedFreeloaderMessage += `${bannedFreeloader.name} (${bannedFreeloader.id})\n`
-        }
+        // for (const freeloader of freeloaders) {
+        //     // if(freeloaders[freeloader.length-1] != freeloader)
+        //     freeloaderMessage += `${freeloader.name} (${freeloader.id})\n`
+        //     // else
+        //     // freeloaderMessage += `${freeloader.name} (${freeloader.id})`
+        // }
+        // for (const bannedFreeloader of bannedFreeloaders) {
+        //     bannedFreeloaderMessage += `${bannedFreeloader.name} (${bannedFreeloader.id})\n`
+        // }
 
-        message.channel.send(`FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaderMessage}\n\nFreeloaders who are already banned are:\n${bannedFreeloaderMessage}`)
+        message.channel.send(`FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : 'None'}`)
     }
 }
 
@@ -76,7 +82,7 @@ async function fetchMessages(channel, limit = 500) {
             break;
         }
     }
-    console.log(allMessages.length)
+    // console.log(allMessages.length)
 
     return allMessages;
 }

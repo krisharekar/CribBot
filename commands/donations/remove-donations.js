@@ -6,8 +6,8 @@ const { abbNum } = require('../../assets/abb-num')
 const getUserFromMention = require('../../get-user-from-mention')
 
 module.exports = {
-    commands: ['add-donations', 'adddonations', 'adonos', 'ad'],
-    description: 'Adds donations from a user',
+    commands: ['remove-donations', 'removedonations', 'rdonos', 'rd'],
+    description: 'Removes donations from a user',
     minArgs: 2,
     usage: '<user> <amount>',
     permissions: ['MANAGE_GUILD'],
@@ -30,16 +30,19 @@ module.exports = {
 
         const userId = user.user.id
 
-        const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
+        let result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount: -donationAmount, dailyDonation: -donationAmount } }, { upsert: true, new: true })
 
+        if(result.dailyDonation < 0)
+        result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { dailyDonation: 0 }, { new: true })
+        
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Added donations to ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('BLUE')
-            .setDescription(`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
+            .setDescription(`**Amount Removed:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
 
         message.channel.send(embed)
 
-        client.emit('donationsMade', guildId, userId, message.author.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
+        client.emit('donationsMade', guildId, userId, message.author.id, -donationAmount, undefined, result.donationAmount, result.dailyDonation)
         await removeDonationRoles(client, guildId, userId)
         await addDonationRoles(client, guildId, userId)
     }

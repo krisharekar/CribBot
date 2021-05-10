@@ -2,14 +2,14 @@ const Discord = require('discord.js')
 const { getDonationLogsChannel } = require('./cache/caches/donation-logs-channel-cache')
 
 module.exports = (client) => {
-    client.on('donationsMade', (guildId, userId, adderId, donationAmount, itemDonated, totalDonations, todaysDonations) => {
+    client.on('donationsMade', (guildId, userId, managerId, donationAmount, itemDonated, totalDonations, todaysDonations) => {
         const donationLogsChannel = getDonationLogsChannel(guildId)
         if(!donationLogsChannel)
         return;
 
         const channel = client.channels.cache.get(donationLogsChannel)
         const user = client.users.cache.get(userId)
-        const adder = adderId == client.user.id ? client.user : client.users.cache.get(adderId)
+        const manager = managerId == client.user.id ? client.user : client.users.cache.get(managerId)
 
         if(!channel)
         return;
@@ -19,9 +19,18 @@ module.exports = (client) => {
         .setThumbnail(user.displayAvatarURL({ dynamic: true }))
         .setColor('BLUE')
         .addField('Donor', `${user.tag} (${user.id})`)
-        .addField('Donations added by', ` ${adder.tag} (${adder.id})`)
-        .addField('Amount added', `\`⏣ ${donationAmount.toLocaleString()}\``)
         .setTimestamp()
+
+        if(donationAmount > 0) {
+            embed
+            .addField('Donations added by', `${manager.tag} (${manager.id})`)
+            .addField('Amount added', `\`⏣ ${donationAmount.toLocaleString()}\``)
+        }
+        else {
+            embed
+            .addField('Donations removed by', `${manager.tag} (${manager.id})`)
+            .addField('Amount removed', `\`⏣ ${Math.abs(donationAmount).toLocaleString()}\``)
+        }
 
         if(itemDonated)
         embed.addField('Item Donated', `\`${itemDonated.name} (${itemDonated.amount.toLocaleString()})\``)

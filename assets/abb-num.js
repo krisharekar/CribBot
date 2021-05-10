@@ -34,12 +34,12 @@ module.exports.abbNum = (num) => {
         temp2 = num.substring(num.indexOf('b') + 1)
         number = parseFloat(temp) * 1000000000 + temp2
     }
-    console.log(number)
+    // console.log(number)
     if (number.includes('e')) {
         let temp = number.split('e')
         number = temp[0] * Math.pow(10, temp[1])
     }
-    console.log(number)
+    // console.log(number)
     number = parseInt(number)
     return number
 }
