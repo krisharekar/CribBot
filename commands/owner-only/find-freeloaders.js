@@ -70,7 +70,7 @@ module.exports = {
             // console.log(c)
             return message.channel.send('Damn, found too many freeloaders that Discord wont let me sent such a huge message :C\nMaybe try reducing message count.')
         }
-        message.channel.send(content).then(() => console.log('sent'))
+        message.channel.send(content)
     }
 }
 
@@ -86,11 +86,10 @@ async function fetchMessages(channel, limit = 200) {
 
         const messages = await channel.messages.fetch(options).catch(e => console.log(e))
         allMessages.push(...messages.array());
-        console.log(allMessages.length)
+        // console.log(allMessages.length)
         lastId = messages.last().id;
 
         if (messages.size != 100 || allMessages.length >= limit) {
-            console.log('done')
             break;
         }
     }
