@@ -29,14 +29,15 @@ module.exports = {
 
         for (const msg of messages) {
             const exists = message.guild.members.cache.get(msg.author.id)
-            // if (!exists && !msg.author.bot)
+            if (!exists && msg.author.bot)
+            return;
             if (!exists) {
                 const bans = await message.guild.fetchBans()
-                if(bans.find(u => u.user == msg.author))
+                if(bans.find(u => u.user == msg.author) && !bannedFreeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`))
                 bannedFreeloaders.push(`${msg.author.username} (${msg.author.id})`)
                 // bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
 
-                else if(!freeloaders.find(u => u.id == msg.author.id))
+                else if(!freeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`))
                 freeloaders.push(`${msg.author.username} (${msg.author.id})`)
                 // freeloaders.push({ name: msg.author.username, id: msg.author.id })
             }
