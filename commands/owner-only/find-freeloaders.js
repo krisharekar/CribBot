@@ -68,7 +68,7 @@ module.exports = {
         if (content.length > 2000) {
             // const c = content.match(/(.|[\r\n]){1,10}/g)
             // console.log(c)
-            return message.channel.send('Damn, found too many freeloaders that Discord wont let me sent such a huge message :C\nMaybe try reducing message count.')
+            return message.channel.send('Damn, found so many freeloaders that Discord wont let me sent such a huge message :C\nMaybe try reducing message count.')
         }
         message.channel.send(content)
     }
