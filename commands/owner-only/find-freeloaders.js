@@ -29,7 +29,7 @@ module.exports = {
 
         for (const msg of messages) {
             const exists = message.guild.members.cache.get(msg.author.id)
-            if (!exists && msg.author.bot) {
+            if (!exists && !msg.author.bot) {
                 if (!exists) {
                     const bans = await message.guild.fetchBans()
                     if (bans.find(u => u.user == msg.author)) {
