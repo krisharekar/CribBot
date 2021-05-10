@@ -36,7 +36,7 @@ module.exports = {
         result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { dailyDonation: 0 }, { new: true })
         
         const embed = new Discord.MessageEmbed()
-            .setAuthor(`Added donations to ${user.user.username}`, user.user.displayAvatarURL())
+            .setAuthor(`Removed donations from ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('BLUE')
             .setDescription(`**Amount Removed:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
 
