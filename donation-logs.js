@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const { getDonationLogsChannel } = require('./cache/caches/donation-logs-channel-cache')
 
 module.exports = (client) => {
-    client.on('donationsMade', (guildId, userId, managerId, donationAmount, itemDonated, totalDonations, todaysDonations) => {
+    client.on('donationsMade', (guildId, userId, managerId, donationAmount, itemDonated, totalDonations, todaysDonations, messageLink, channelName) => {
         const donationLogsChannel = getDonationLogsChannel(guildId)
         if(!donationLogsChannel)
         return;
@@ -19,6 +19,7 @@ module.exports = (client) => {
         .setThumbnail(user.displayAvatarURL({ dynamic: true }))
         .setColor('BLUE')
         .addField('Donor', `${user.tag} (${user.id})`)
+        .setFooter(channelName)
         .setTimestamp()
 
         if(donationAmount > 0) {
@@ -38,6 +39,7 @@ module.exports = (client) => {
         embed
         .addField('Total Donations', `\`⏣ ${totalDonations.toLocaleString()}\``)
         .addField('Today\'s Donations', `\`⏣ ${todaysDonations.toLocaleString()}\``)
+        .addField('Message Link', `[Jump to message](${messageLink})`)
 
         channel.send(embed)
         // console.log(`GUILD ID: ${guildId}\nUSER ID: ${userId}\nDONATION AMOUNT: ${donationAmount}`)

@@ -37,9 +37,9 @@ module.exports = {
             .setColor('GREEN')
             .setDescription(`**New Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``)
 
-        message.channel.send(embed)
+        const msg = message.channel.send(embed)
 
-        client.emit('donationsMade', guildId, userId, message.author.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
+        client.emit('donationsMade', guildId, userId, message.author.id, donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
         await removeDonationRoles(client, guildId, userId)
         await addDonationRoles(client, guildId, userId)
     }

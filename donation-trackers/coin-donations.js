@@ -34,9 +34,9 @@ module.exports = (client) => {
             .setDescription(`**Amount Donated:** \`⏣ ${donationAmount.toLocaleString()}\`\n**Today's Donation:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\`\n**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``)
             .setFooter('If this information was incorrect, report it to an admin')
 
-        message.channel.send(embed)
+        const msg = await message.channel.send(embed)
 
         await addDonationRoles(client, guildId, userId)
-        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, undefined, result.donationAmount, result.dailyDonation)
+        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
     })
 }
