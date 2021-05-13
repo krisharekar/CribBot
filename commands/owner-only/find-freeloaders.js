@@ -79,20 +79,20 @@ module.exports = {
         const content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : 'None'}`
 
         if (content.length > 2000) {
-            const index = content.lastIndexOf("\n", 2000)
-            // const temp = content.slice(0, 2000)
-            const index2 = content.lastIndexOf("\n")
-            console.log(index, index2)
+            // const index = content.lastIndexOf("\n", 2000)
+            // // const temp = content.slice(0, 2000)
+            // const index2 = content.lastIndexOf("\n")
+            // console.log(index, index2)
 
-            const newContent = []
-            do {
-                for (const freeloader of freeloaders) {
-                    newContent[0] += `${freeloader}\n`
+            // const newContent = []
+            // do {
+            //     for (const freeloader of freeloaders) {
+            //         newContent[0] += `${freeloader}\n`
 
-                    if (newContent.length > 2000)
-                        newContent.replace(freeloader, '')
-                }
-            } while (freeloaders)
+            //         if (newContent.length > 2000)
+            //             newContent.replace(freeloader, '')
+            //     }
+            // } while (freeloaders)
 
             return message.channel.send('Damn, found so many freeloaders that Discord wont let me sent such a huge message :C\nMaybe try reducing message count.')
         }
