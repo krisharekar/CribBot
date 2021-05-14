@@ -22,6 +22,7 @@ const loadCommands = require('./commands/load-commands')
 const updateDonorChannel = require('./update-donor-channel')
 const dailyDonations = require('./donation-trackers/daily-donations')
 const donationLogs = require('./donation-logs')
+const guildCreateAndDelete = require('./guild-create-and-delete')
 const topggWebhook = require('./topgg-webhook')
 
 const ttt = require('discord-tictactoe')
@@ -54,12 +55,13 @@ client.on('ready', async () => {
 	await dailyDonations(client)
 	await loadCaches()
 	await donationLogs(client)
+	await guildCreateAndDelete(client)
 	await topggWebhook(client)
 	console.log('ok')
 })
 
 // client.on('ready', async () => {
-// 	await client.user.setActivity('Kropex', { type: 'LISTENING' })
+// 	await client.user.setStatus('invisible')
 // })
 
 // client.on('guildMemberAdd', member => {

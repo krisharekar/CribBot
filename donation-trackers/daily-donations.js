@@ -8,11 +8,14 @@ module.exports = async (client) => {
 
 }
 
-async function resetDailyDonations (client) {
+async function resetDailyDonations(client) {
+    let count = 0
+    let failed = 0
     client.guilds.cache.forEach(async g => {
         const guildId = g.id
-        await donationsSchema.updateMany({ guildId, dailyDonation: { $ne: 0 } }, { dailyDonation: 0 }, { new: true }) 
-        const channel = client.channels.cache.get('775970225279074327')
-        channel.send(`UPDATED **${g.name}**'s daily donations.`)
+        await donationsSchema.updateMany({ guildId, dailyDonation: { $ne: 0 } }, { dailyDonation: 0 }, { new: true }).catch(() => failed++)
+        count++
     })
+    const channel = client.channels.cache.get('775970225279074327')
+    channel.send([`UPDATED **${count}** server's daily donations.`, `FAILED to update **${failed}** server's daily donations.`])
 }
