@@ -3,7 +3,6 @@ const { prefix } = require('./config.json')
 module.exports = async (client) => {
     const serverCount = client.guilds.cache.size
     await client.user.setActivity(`${prefix}help | ${serverCount.toLocaleString()} servers`, { type: `PLAYING` });
-    console.log('set status')
     setInterval(async () => {
         const serverCount = client.guilds.cache.size
         await client.user.setActivity(`${prefix}help | ${serverCount.toLocaleString()} servers`, { type: `PLAYING` });
