@@ -41,6 +41,9 @@ module.exports = (client) => {
             value: guildItemInfo ? guildItemInfo.value : itemInfo.value,
             amount: itemAmount
         }
+        console.log(item.value)
+        if(isNaN(item.value))
+        return;
         // console.log(donationAmount)
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 

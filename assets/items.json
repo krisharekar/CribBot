@@ -80,7 +80,7 @@
     {
         "name": "Blue Phallic Object",
         "id": "bluephallicobject",
-        "value": "",
+        "value": "????",
         "link": "https://cdn.discordapp.com/emojis/834192945124474983.png"
     },
     {
@@ -151,7 +151,7 @@
     },
     {
         "name": "Daily Box",
-        "id": "dailybox",
+        "id": "daily",
         "value": "????",
         "link": "https://i.imgur.com/GSGADYX.gif"
     },
@@ -165,7 +165,7 @@
         "name": "Deer",
         "id": "deer",
         "value": 10000,
-        "link": "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/deer_1f98c.png"
+        "link": "https://cdn.discordapp.com/emojis/832746231100473384.png"
     },
     {
         "name": "Dragon",
@@ -337,7 +337,7 @@
     },
     {
         "name": "Melmsie's Beard",
-        "id": "melmsiesbeard",
+        "id": "melmsiebeard",
         "value": "????",
         "link": "https://cdn.discordapp.com/emojis/834815537921916938.png"
     },
@@ -361,7 +361,7 @@
     },
     {
         "name": "Multi Colored Phallic Object",
-        "id": "multicoloredphallicobject",
+        "id": "multiphallicobject",
         "value": "????",
         "link": "https://cdn.discordapp.com/emojis/841123648911966219.gif"
     },
@@ -470,7 +470,7 @@
     {
         "name": "Purple Phallic Object",
         "id": "purplephallicobject",
-        "value": "",
+        "value": "????",
         "link": "https://cdn.discordapp.com/emojis/834192945334452244.png"
     },
     {

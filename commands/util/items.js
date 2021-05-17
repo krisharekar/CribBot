@@ -38,23 +38,28 @@ module.exports = {
         const temp2 = data.slice()
         let guildItem
         const longestName = (temp.sort((a, b) => { return b.name.length - a.name.length })).slice(0, 1)[0].name.length
-        const longestValue = (temp2.sort((a, b) => { return b.value - a.value })).slice(0, 1)[0].value.toLocaleString().length
+        const longestValue = (temp2.sort((a, b) => {
+            return b.value.toLocaleString().length - a.value.toLocaleString().length
+        }
+        )).slice(0, 1)[0].value.toLocaleString().length
         // console.log(data[0])
         console.log(longestValue)
         for (const item of data) {
             // const padString = (item) => item.padEnd((longestName+1)-item.length)+':'
-            const itemName = item.name + ':'.padStart((longestName + 2) - item.name.length)
+            // if(item.name == 'Potato ☭')
+            const itemName = item.name.padEnd(longestName+2) + ':'
             // const value = item.name+':'.padStart((longestName+2)-item.name.length)
             // console.log(itemName, longestName+1-item.name.length)
             if (result)
                 guildItem = result.find(key => key.id == item.id)
             if (guildItem) {
                 // const value = guildItem.value.toLocaleString().padEnd((longestValue + 2) - guildItem.value.length)+'.'
-                const value = guildItem.value.toLocaleString()+''.padStart((longestValue) - guildItem.value.toLocaleString().length)
+                // const value = guildItem.value.toLocaleString().padEnd(longestValue)
+                const value = (!isNaN(guildItem.value) ? guildItem.value.toLocaleString() : guildItem.value).padEnd(longestValue)
                 items += `\`${itemName}\` \`⏣ ${value}\`\n`
             }
             else {
-                const value = item.value.toLocaleString()+''.padStart((longestValue) - item.value.toLocaleString().length)
+                const value = (!isNaN(item.value) ? item.value.toLocaleString() : item.value).padEnd(longestValue)
                 items += `\`${itemName}\` \`⏣ ${value}\`\n`
 
                 // console.log(value)

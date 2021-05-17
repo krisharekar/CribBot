@@ -3,8 +3,8 @@ const donationsChannelSchema = require('../../schemas/donations-channel-schema')
 const { loadCache } = require('../../cache/caches/donations-channel-cache')
 
 module.exports = {
-    commands: ['add-donation-channel', 'adddonationchannel', 'adddonochan', 'adddc'],
-    description: 'Assigns channel where donations will be tracked',
+    commands: ['set-donation-channel', 'setdonationchannel', 'setdonochan', 'setdc'],
+    description: 'Assigns channel where donations will be automatically added',
     usage: '[channel]',
     permissions: ['MANAGE_GUILD'],
 
