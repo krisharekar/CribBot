@@ -10,7 +10,12 @@ module.exports = {
 
     async execute(message, args, client) {
         const guildId = message.guild.id
-        const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]) || message.channel
+        let channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
+        if(!args[0])
+        channel = message.channel
+
+        if(!channel)
+        return message.channel.send(`Channel \`${args[0]}\` doesn\'t exist.`)
         const donationsChannelId = channel.id
 
         const result = await donationsChannelSchema.findOne({ guildId })
