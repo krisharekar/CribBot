@@ -14,7 +14,7 @@ module.exports = {
         let exists = false
 
         const result = await permissionSchema.findOne({ guildId })
-        console.log(result)
+        // console.log(result)
 
         if (!result || !result.permissions[0])
             return message.channel.send('No permissions have been set up.')

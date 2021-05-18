@@ -6,7 +6,7 @@ const { getItemInfos } = require('../../cache/caches/item-info-cache')
 
 module.exports = {
     commands: ['items', 'shop'],
-    description: 'Lists the whole dank memer shop with the donation value',
+    description: 'Lists all dank memer items with the donation value',
     usage: '[page]',
 
     async execute(message, args, client) {

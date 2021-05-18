@@ -17,6 +17,7 @@ module.exports = (client) => {
                     readCommands(path.join(dir, file))
             } else if (file !== baseFile && file !== 'load-commands.js' && file !== 'load-modules.js' && file !== 'economy.js' && file !== 'giveaways.json' && file != 'prefix.json') {
                 const option = require(path.join(__dirname, dir, file))
+                option.module = dir
                 commands.push(option)
                 if (client) {
                     client.commands.set(option)

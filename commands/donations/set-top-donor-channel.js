@@ -1,15 +1,16 @@
 const Discord = require('discord.js')
 const donationsChannelSchema = require('../../schemas/donations-channel-schema')
 const { loadCache } = require('../../cache/caches/highest-donor-channel-cache')
+const updateHighestDonorChannel = require('../../update-donor-channel')
 
 module.exports = {
-    commands: ['set-highest-donor-channel', 'sethighestdonorchannel', 'sethdc'],
-    description: 'Sets highest donor channel',
+    commands: ['set-top-donor-channel', 'settopdonorchannel', 'settdc'],
+    description: 'Sets top donor channel which updates every 5 minutes',
     minArgs: 1,
-    usage: '<channel>',
+    usage: '<voice-channel>',
     permissions: ['MANAGE_GUILD'],
 
-    async execute(message, args) {
+    async execute(message, args, client) {
         const guildId = message.guild.id
         const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
         if (!channel)
@@ -19,6 +20,11 @@ module.exports = {
         await donationsChannelSchema.findOneAndUpdate({ guildId }, { highestDonorChannelId }, { upsert: true })
         loadCache()
 
-        message.channel.send(`Highest donor channel set to \`${channel.name}\``)
+        if(channel.type != 'voice')
+        return message.channel.send('Top donor channel should be a voice channel, as Discord doesn\'t allow special characters in text channel names.')
+        
+        updateHighestDonorChannel(client, guildId)
+
+        message.channel.send(`Top donor channel set to \`${channel.name}\` (${channel.id})`)
     }
 }

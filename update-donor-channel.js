@@ -2,12 +2,17 @@ const { getHighestDonorChannel } = require('./cache/caches/highest-donor-channel
 const { fetchLeaderboard } = require('./assets/leaderboard')
 const { computeLeaderboard } = require('./assets/leaderboard')
 
-module.exports = async (client) => {
-    setInterval(() => {
-		client.guilds.cache.forEach(async g => {
-			updateHighestDonorChannel(client, g.id)
-		})
-	}, 5 * 60 * 1000)
+module.exports = async (client, guildId) => {
+    if (guildId) {
+        updateHighestDonorChannel(client, guildId)
+    }
+    if (!guildId) {
+        setInterval(() => {
+            client.guilds.cache.forEach(async g => {
+                updateHighestDonorChannel(client, g.id)
+            })
+        }, 5 * 60 * 1000)
+    }
 }
 
 function abbNum(num) {
@@ -43,8 +48,8 @@ async function updateHighestDonorChannel(client, guildId) {
 
     const highestDonorChannel = client.guilds.cache.get(guildId).channels.cache.get(highestDonorChannelId)
     // console.log(highestDonorChannel.name)
-    if(!highestDonorChannel)
-    return;
+    if (!highestDonorChannel)
+        return;
 
     const rawLeaderboard = await fetchLeaderboard(guildId, 'total', 0, 1)
 
