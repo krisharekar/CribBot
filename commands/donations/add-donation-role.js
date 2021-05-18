@@ -44,6 +44,6 @@ module.exports = {
 
         await donationRolesSchema.findOneAndUpdate({ guildId }, { $push: { donationRoles: donationRole } }, { upsert: true })
 
-        message.channel.send(`Role \`${role.name}\` will be when a user reaches **⏣ ${donationAmount.toLocaleString()}** amount of donations.`)
+        message.channel.send(`Role \`${role.name}\` will be given when a user reaches **⏣ ${donationAmount.toLocaleString()}** amount of donations.`)
     }
 }
