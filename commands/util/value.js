@@ -2,7 +2,8 @@ const Discord = require('discord.js')
 const fs = require('fs')
 const { abbNum } = require('../../assets/abb-num')
 const itemInfoSchema = require('../../schemas/item-info-schema')
-const { getItemInfos } = require('../../cache/caches/item-info-cache') 
+const { getItemInfos } = require('../../cache/caches/item-info-cache')
+const { prefixFinder } = require('../../prefix-finder')
 
 module.exports = {
     commands: ['value', 'v'],
@@ -12,6 +13,7 @@ module.exports = {
 
     async execute(message, args, client) {
         const guildId = message.guild.id
+        const prefix = prefixFinder(guildId)
         const item = args[0]
         let amount = args[1] || 1
 
@@ -19,12 +21,6 @@ module.exports = {
 
         if(item.length < 2)
         return message.channel.send(`Item \`${item}\` not found.`)
-
-        if(isNaN(amount))
-        return message.channel.send('Amount must be an integer.')
-
-        if(amount < 1)
-        return message.channel.send('Amount cannot be less than 1.')
 
         const path = './assets/items.json'
 
@@ -37,13 +33,20 @@ module.exports = {
         if(!itemInfo)
         return message.channel.send(`Item \`${item}\` not found.`)
 
+        if(isNaN(amount))
+        return message.channel.send('Amount must be an integer.')
+
+        if(amount < 1)
+        return message.channel.send('Amount cannot be less than 1.')
+
         const result = getItemInfos(guildId)
-        console.log(result)
+        // console.log(result)
 
         let embed = new Discord.MessageEmbed()
         .setAuthor(`${itemInfo.name}'s Value`, client.user.displayAvatarURL())
         .setColor('BLUE')
         .setThumbnail(itemInfo.link)
+        .setFooter(`Change the value by using ${prefix}set-value`)
 
         let value = itemInfo.value
 
