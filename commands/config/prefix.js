@@ -10,7 +10,7 @@ module.exports = {
     async execute(message, args, client, prefix) {
         if (!args[0]) {
             const embed = new Discord.MessageEmbed()
-                .setAuthor(`${message.guild.name}'s Prefix`, client.user.displayAvatarURL())
+                .setAuthor(`${message.guild.name}'s Prefix`, message.guild.iconURL({ dynamic: true }))
                 .setColor('BLUE')
                 .setDescription(`**Prefix:** \`${prefix}\``)
 
