@@ -1,12 +1,10 @@
-const Discord = require('discord.js')
-
 module.exports = {
     commands: ['find-freeloaders', 'findfreeloaders', 'ffs'],
-    description: 'Finds freeloaders',
+    description: 'Finds freeloaders and banned freeloaders',
     minArgs: 1,
-    usage: '<channel> [message-count]',
-    ownerOnly: true,
-
+    usage: '<heist-channel> [number-of-members-to-search-from]',
+    permissions: ['MANAGE_GUILD'],
+    
     async execute(message, args, client) {
         const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
         const limit = (args[1]) || 200
