@@ -11,7 +11,10 @@ module.exports = {
 
     async execute(message, args) {
         const guildId = message.guild.id
-        const user = getUserFromMention(args[0], guildId) || message.guild.members.cache.get(args[0]) || message.member
+        const user = getUserFromMention(args[0], guildId) || message.guild.members.cache.get(args[0])
+
+        if(!user)
+        return message.channel.send('Mention a user that exists.')
 
         const userId = user.user.id
 
