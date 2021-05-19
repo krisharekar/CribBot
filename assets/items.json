@@ -132,6 +132,18 @@
         "link": "https://cdn.discordapp.com/emojis/573152241289003036.png"
     },
     {
+        "name": "Corncob",
+        "id": "corncob",
+        "value": "????",
+        "link": "https://cdn.discordapp.com/emojis/834080273942839326.png"
+    },
+    {
+        "name": "Corndog",
+        "id": "corndog",
+        "value": "????",
+        "link": "https://cdn.discordapp.com/emojis/834080273796694056.png"
+    },
+    {
         "name": "Crunchy Taco",
         "id": "crunchytaco",
         "value": "????",
