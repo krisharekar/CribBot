@@ -7,7 +7,7 @@ const getUserFromMention = require('../../get-user-from-mention')
 
 module.exports = {
     commands: ['add-donations', 'adddonations', 'adonos', 'ad'],
-    description: 'Adds donations from a user',
+    description: 'Adds donations to a user',
     minArgs: 2,
     usage: '<user> <amount>',
     permissions: ['MANAGE_GUILD'],
