@@ -72,14 +72,13 @@ client.on('ready', async () => {
 // })
 
 client.on('message', async message => {
-	if (message.channel.id == '805791291312308266' && message.author.id != client.user.id)
-		return message.channel.send('nO')
-		
-		const prefix = prefixFinder(message.guild.id)
-        const mentionMsg = `Hey <@${message.author.id}>! My prefix is \`${prefix}\` \nRun *\`${prefix}help\`* for more help!`
-        const mention = message.content.replace(/ +/g, '')
-        if(mention == `<@${client.user.id}>` || mention == `<@!${client.user.id}>`)
-        message.channel.send(mentionMsg)
+	if (message.author.bot)
+		return;
+	const prefix = prefixFinder(message.guild.id)
+	const mentionMsg = `Hey <@${message.author.id}>! My prefix is \`${prefix}\` \nRun *\`${prefix}help\`* for more help!`
+	const mention = message.content.replace(/ +/g, '')
+	if (mention == `<@${client.user.id}>` || mention == `<@!${client.user.id}>`)
+		message.channel.send(mentionMsg)
 })
 
 // client.on('message', async message => {
