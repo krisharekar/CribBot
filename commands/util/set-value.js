@@ -19,6 +19,9 @@ module.exports = {
         if (item.length < 2)
             return message.channel.send(`Item \`${item}\` not found.`)
 
+        if (isNaN(amount))
+        return message.channel.send('Value must be an integer.')
+
         if (amount < 1)
             return message.channel.send('Value cannot be less than 1.')
 
