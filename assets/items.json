@@ -102,6 +102,12 @@
         "link": "https://cdn.discordapp.com/emojis/792397132828114965.png"
     },
     {
+        "name": "Stack of Cash",
+        "id": "cash",
+        "value": "????",
+        "link": "https://cdn.discordapp.com/emojis/834080273926717470.png"
+    },
+    {
         "name": "Shredded Cheese",
         "id": "cheese",
         "value": 70000,
@@ -138,12 +144,6 @@
         "link": "https://cdn.discordapp.com/emojis/834080273796694056.png"
     },
     {
-        "name": "Crunchy Taco",
-        "id": "crunchytaco",
-        "value": "????",
-        "link": "https://cdn.discordapp.com/emojis/834128399551299624.png"
-    },
-    {
         "name": "Cupid's Big Toe",
         "id": "cupidsbigtoe",
         "value": 100000,
@@ -172,6 +172,12 @@
         "id": "deer",
         "value": 10000,
         "link": "https://cdn.discordapp.com/emojis/832746231100473384.png"
+    },
+    {
+        "name": "Used Diaper",
+        "id": "diaper",
+        "value": "????",
+        "link": "https://cdn.discordapp.com/emojis/834080273947295764.png"
     },
     {
         "name": "Dragon",
@@ -564,12 +570,6 @@
         "link": "https://cdn.discordapp.com/emojis/573150030030962699.png"
     },
     {
-        "name": "Stack of Cash",
-        "id": "stackofcash",
-        "value": "????",
-        "link": "https://cdn.discordapp.com/emojis/834080273926717470.png"
-    },
-    {
         "name": "Stickbug",
         "id": "stickbug",
         "value": "????",
@@ -588,6 +588,12 @@
         "link": "https://cdn.discordapp.com/emojis/834080273796694057.png"
     },
     {
+        "name": "Crunchy Taco",
+        "id": "taco",
+        "value": "????",
+        "link": "https://cdn.discordapp.com/emojis/834128399551299624.png"
+    },
+    {
         "name": "Tidepod",
         "id": "tidepod",
         "value": 20000,
@@ -604,12 +610,6 @@
         "id": "trash",
         "value": "????",
         "link": "https://cdn.discordapp.com/emojis/834091084346949652.png"
-    },
-    {
-        "name": "Used Diaper",
-        "id": "useddiaper",
-        "value": "????",
-        "link": "https://cdn.discordapp.com/emojis/834080273947295764.png"
     },
     {
         "name": "Vaccine",
