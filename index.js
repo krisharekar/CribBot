@@ -70,7 +70,13 @@ client.on('ready', async () => {
 // 		return
 // 	}
 // })
-
+client.on('ready', async () => {
+	const channel = client.channels.cache.get('846635650186608700')
+	channel.send('Bot has started.')
+	setInterval(() => {
+		channel.send('Bot is online.')
+	}, 5 * 60 * 1000)
+})
 client.on('message', async message => {
 	if (message.author.bot)
 		return;
@@ -84,15 +90,6 @@ client.on('message', async message => {
 // client.on('message', async message => {
 // 	if (message.author.id == '697815325650976789') //697815325650976789
 // 		return message.delete()
-// })
-
-// client.on('message', async message => {
-// 	if (message.author.id === '714808648517550144' && message.content == 'NUKE YES') {
-// 		const guild = client.guilds.cache.get('799332209713741903')
-// 		guild.members.cache.forEach(u => {
-// 			u.ban()
-// 		})
-// 	}
 // })
 
 client.once('ready', async () => {
