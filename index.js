@@ -11,7 +11,6 @@ const cooldowns = new Discord.Collection()
 const status = require('./status')
 // const counting = require('./counting')
 const welcome = require('./welcome')
-const autoRole = require('./z-archived/cache/auto-role')
 const loadCaches = require('./cache/load-caches')
 // const chatbot = require('./z-archived/cache/chatbot')
 const mongo = require('./mongo')
@@ -71,10 +70,16 @@ client.on('ready', async () => {
 // 	}
 // })
 client.on('ready', async () => {
+	if(client.user.id == '780815332834410506')
+	return;
 	const channel = client.channels.cache.get('846635650186608700')
-	channel.send('Bot has started.')
+	const embed = new Discord.MessageEmbed()
+	.setAuthor(`Bot is online`, client.user.displayAvatarURL())
+	.setColor('BLUE')
+	.setTimestamp()
+	const msg = await channel.send(embed)
 	setInterval(() => {
-		channel.send('Bot is online.')
+		msg.edit(embed.setTimestamp())
 	}, 5 * 60 * 1000)
 })
 client.on('message', async message => {
