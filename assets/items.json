@@ -55,7 +55,7 @@
     },
     {
         "name": "Beaker of sus fluid",
-        "id": "beakerofsusfluid",
+        "id": "beaker",
         "value": "????",
         "link": "https://cdn.discordapp.com/emojis/834080273918197811.png"
     },
@@ -378,16 +378,16 @@
         "link": "https://cdn.discordapp.com/emojis/841123648911966219.gif"
     },
     {
-        "name": "Musical Note",
-        "id": "musicalnote",
-        "value": "????",
-        "link": "https://cdn.discordapp.com/emojis/834080273892376686.png"
-    },
-    {
         "name": "Normie Box",
         "id": "normie",
         "value": 50000,
         "link": "https://i.imgur.com/GSGADYX.gif"
+    },
+    {
+        "name": "Musical Note",
+        "id": "note",
+        "value": "????",
+        "link": "https://cdn.discordapp.com/emojis/834080273892376686.png"
     },
     {
         "name": "Odd Eye",
