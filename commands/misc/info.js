@@ -36,32 +36,27 @@ module.exports = {
 		const InfoEmbed = new Discord.MessageEmbed()
 			.setTitle(client.user.username)
 			.setThumbnail(client.user.displayAvatarURL())
-			.setColor('RANDOM')
+			.setColor('BLUE')
 			.addField('General', [
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Client:** ${client.user.tag} (${client.user.id})`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Bot:** ${client.user.tag} (${client.user.id})`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Commands:** ${client.commands.size}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Servers:** ${client.guilds.cache.size.toLocaleString()} `,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Users:** ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toLocaleString()}`,
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Channels:** ${client.channels.cache.size.toLocaleString()}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Creation Date:** ${utc(client.user.createdTimestamp).format('Do MMMM YYYY HH:mm:ss')}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Created By:** ${owner.tag}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Developed By:** ${owner.tag}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Node.js:** ${process.version}`,
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Version:** v${version}`,
 				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Discord.js:** v${djsversion}`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Version:** v${version}`,
 				'\u200b'
 			])
-			.addField('System', [
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Platform:** ${process.platform}`,
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Uptime:** ${ms(os.uptime() * 1000, { long: true })}`,
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) CPU:**`,
-				`\u3000 Cores: ${os.cpus().length}`,
-				`\u3000 Model: ${core.model}`,
-				`\u3000 Speed: ${core.speed}MHz`,
-				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ) Memory:**`,
-				`\u3000 Total: ${totalMemory}`,
-				`\u3000 Used: ${memoryUsed}`
-			])
-			.setFooter(`If you find any bugs, report it to ${owner.tag}`)
+			.addField('Links', [
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ)** [Bot's Invite Link](https://discord.com/oauth2/authorize?client_id=744210245403934780&permissions=4294967287&scope=bot)`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ)** [Bot's Invite Link (admin)](https://discord.com/api/oauth2/authorize?client_id=744210245403934780&permissions=8&scope=bot)`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ)** [Bot's Support Server](https://discord.gg/cpWeW7apHD)`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ)** [Vote the Bot on Top.gg](https://top.gg/bot/744210245403934780/vote)`,
+				`**[•](https://www.youtube.com/watch?v=dQw4w9WgXcQ)** [Vote the Bot on Discord Bot List](https://discordbotlist.com/bots/crib-bot/upvote)`]
+			)
 
 		message.channel.send(InfoEmbed)
 	}
