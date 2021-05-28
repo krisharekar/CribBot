@@ -86,7 +86,7 @@ module.exports = {
         await categorySchema.findOneAndUpdate({ guildId }, { $push: { category: categoryObject } }, { upsert: true })
 
         message.channel.send([`Category \`${categoryName}\` has been created.`,
-        `Run \`${prefix}add-other-donations\` to add donations to a user for other categories.`,
+        `Run \`${prefix}add-donations <user> <amount> ${categoryId}\` to add donations to a user for this category.`,
         `Run \`${prefix}remove-category\` to delete a category.`])
     }
 }
