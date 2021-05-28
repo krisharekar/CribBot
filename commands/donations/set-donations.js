@@ -23,11 +23,11 @@ module.exports = {
 
         donationAmount = abbNum(donationAmount)
 
-        if (isNaN(donationAmount) || donationAmount < 1)
-            return message.channel.send('Donation amount must be an integer.')
+        if (isNaN(donationAmount) || donationAmount < 0)
+            return message.channel.send('Donation amount must be a whole number.')
 
         if (donationAmount % 1 != 0)
-            return message.channel.send('Donation amount must be an integer.')
+            return message.channel.send('Donation amount must be a whole number.')
 
         const userId = user.user.id
         let result
