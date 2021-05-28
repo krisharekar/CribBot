@@ -56,6 +56,6 @@ module.exports = (client) => {
         const msg = await message.channel.send(embed)
 
         await addDonationRoles(client, guildId, userId)
-        client.emit('donationsMade', guildId, userId, client.user.id, donationAmount, item, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
+        client.emit('donationsMade', guildId, userId, client.user.id, 'Added', donationAmount, item, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
     })
 }

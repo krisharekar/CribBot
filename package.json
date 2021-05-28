@@ -20,6 +20,7 @@
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
     "ffmpeg-static": "^4.2.7",
+    "heapdump": "^0.3.15",
     "moment": "^2.29.1",
     "mongoose": "^5.12.5",
     "ms": "^2.1.2",

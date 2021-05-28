@@ -7,12 +7,11 @@ const { abbNum } = require('../../assets/abb-num')
 const getUserFromMention = require('../../get-user-from-mention')
 
 module.exports = {
-    commands: ['remove-donations', 'removedonations', 'rdonos', 'rd'],
-    description: 'Removes donations from a user',
+    commands: ['add-donations', 'adddonations', 'adonos', 'ad'],
+    description: 'Adds donations to a user',
     minArgs: 2,
-    usage: '<user> <amount>',
+    usage: '<user> <amount> [category]',
     permissions: ['MANAGE_GUILD'],
-    hiestAndGaw: true,
 
     async execute(message, args, client) {
         const guildId = message.guild.id
@@ -35,26 +34,19 @@ module.exports = {
         let msg
 
         const embed = new Discord.MessageEmbed()
-            .setAuthor(`Removed donations from ${user.user.username}`, user.user.displayAvatarURL())
+            .setAuthor(`Added donations to ${user.user.username}`, user.user.displayAvatarURL())
             .setColor('BLUE')
 
         if (!args[2]) {
-            result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount: -donationAmount, dailyDonation: -donationAmount } }, { upsert: true, new: true })
-
-            if (result.dailyDonation < 0)
-                result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { dailyDonation: 0 }, { new: true })
-
-            if (result.donationAmount < 0)
-                result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { donationAmount: 0 }, { new: true })
+            result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 
             embed
-                .setDescription([`**Amount Removed:** \`⏣ ${donationAmount.toLocaleString()}\``,
+                .setDescription([`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\``,
                 `**Today's Donations:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``,
                 `**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``])
 
             msg = await message.channel.send(embed)
-
-            client.emit('donationsMade', guildId, userId, message.author.id, 'Removed', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
+            client.emit('donationsMade', guildId, userId, message.author.id, 'Added', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
         }
 
         else {
@@ -62,29 +54,27 @@ module.exports = {
 
             switch (categoryId) {
                 case 'total':
-                    result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount: -donationAmount } }, { upsert: true, new: true })
-                    embed.setDescription([`**Amount Removed:** \`⏣ ${donationAmount.toLocaleString()}\``,
-                    `**Today's Donations:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``,
+                    result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount } }, { upsert: true, new: true })
+                    embed.setDescription([`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\``,
                     `**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``])
 
                     msg = await message.channel.send(embed)
-                    client.emit('donationsMade', guildId, userId, message.author.id, 'Removed', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
+                    client.emit('donationsMade', guildId, userId, message.author.id, 'Added', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
                     break;
 
                 case 'today':
                 case 'daily':
-                    result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { dailyDonation: -donationAmount } }, { upsert: true, new: true })
-                    embed.setDescription([`**Amount Removed:** \`⏣ ${donationAmount.toLocaleString()}\``,
-                    `**Today's Donations:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``,
-                    `**Total Donations:** \`⏣ ${result.donationAmount.toLocaleString()}\``])
+                    result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { dailyDonation: donationAmount } }, { upsert: true, new: true })
+                    embed.setDescription([`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\``,
+                    `**Today's Donations:** \`⏣ ${result.dailyDonation ? result.dailyDonation.toLocaleString() : '0'}\``])
 
                     msg = await message.channel.send(embed)
-                    client.emit('donationsMade', guildId, userId, message.author.id, 'Removed', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
+                    client.emit('donationsMade', guildId, userId, message.author.id, 'Added', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
                     break;
 
                 default:
                     categoryResult = await categorySchema.findOne({ guildId }, { category: { $elemMatch: { categoryId } } })
-                    console.log(categoryResult)
+                    // console.log(categoryResult)
 
                     if (!categoryResult || !categoryResult.category.length)
                         return message.channel.send(`Category \`${categoryId}\` doesn\'t exist.`)
@@ -97,7 +87,7 @@ module.exports = {
                     if (!userResult || !userResult.category.length) {
                         const obj = {
                             categoryId,
-                            donationAmount: 0
+                            donationAmount
                         }
                         // console.log('no result')
 
@@ -105,29 +95,18 @@ module.exports = {
                     }
 
                     else
-                        result = await donationsSchema.findOneAndUpdate({ guildId, userId, "category.categoryId": categoryId }, { $inc: { "category.$.donationAmount": -donationAmount } }, { new: true })
+                        result = await donationsSchema.findOneAndUpdate({ guildId, userId, "category.categoryId": categoryId }, { $inc: { "category.$.donationAmount": donationAmount } }, { new: true })
 
-                    let categoryDonation = result.category.find(key => key.categoryId == categoryId)
+                    const categoryDonation = result.category.find(key => key.categoryId == categoryId)
 
                     if (categoryDetails.addTotal)
-                        result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount: -donationAmount, dailyDonation: -donationAmount } }, { new: true })
-
-                    if (categoryDonation.donationAmount < 0)
-                        result = await donationsSchema.findOneAndUpdate({ guildId, userId, "category.categoryId": categoryId }, { "category.$.donationAmount": 0 }, { new: true })
-
-                    if (result.dailyDonation < 0)
-                        result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { dailyDonation: 0 }, { new: true })
-
-                    if (result.donationAmount < 0)
-                        result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { donationAmount: 0 }, { new: true })
-
-                    categoryDonation = result.category.find(key => key.categoryId == categoryId)
+                        result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { new: true })
 
                     const desc = []
 
                     categoryDetails.dankMemerCoins
-                        ? desc.push(`**Amount Removed:** \`⏣ ${donationAmount.toLocaleString()}\``)
-                        : desc.push(`**Amount Removed:** \`${donationAmount.toLocaleString()}\``)
+                        ? desc.push(`**Amount Added:** \`⏣ ${donationAmount.toLocaleString()}\``)
+                        : desc.push(`**Amount Added:** \`${donationAmount.toLocaleString()}\``)
 
                     categoryDetails.dankMemerCoins
                         ? desc.push(`**${categoryDetails.categoryName} Donations:** \`⏣ ${categoryDonation.donationAmount.toLocaleString()}\``)
@@ -141,7 +120,7 @@ module.exports = {
                     embed.setDescription(desc)
 
                     msg = await message.channel.send(embed)
-                    client.emit('donationsMade', guildId, userId, message.author.id, 'Removed', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name, categoryDetails, categoryDonation.donationAmount)
+                    client.emit('donationsMade', guildId, userId, message.author.id, 'Added', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name, categoryDetails, categoryDonation.donationAmount)
                     break;
             }
         }

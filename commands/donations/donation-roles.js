@@ -3,7 +3,7 @@ const donationRolesSchema = require('../../schemas/donation-roles-schema')
 
 module.exports = {
     commands: ['donation-roles', 'donationroles', 'droles'],
-    description: 'Will list all the donation roles of the server',
+    description: 'List of all the donation roles of the server',
 
     async execute(message, args, client) {
         const guildId = message.guild.id

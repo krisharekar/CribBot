@@ -12,7 +12,18 @@ const donationsSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    dailyDonation: Number
+    dailyDonation: Number,
+    weeklyDonation: Number,
+    category: [Object]
 })
 
 module.exports = mongoose.model('donations', donationsSchema)
+
+/**
+ * {
+ *     category: [{
+ *               name: '1y',
+ *               donationAmount: 100000
+ *             }]
+ * }
+ */

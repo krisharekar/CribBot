@@ -70,13 +70,13 @@ client.on('ready', async () => {
 // 	}
 // })
 client.on('ready', async () => {
-	if(client.user.id == '780815332834410506')
-	return;
+	if (client.user.id == '780815332834410506')
+		return;
 	const channel = client.channels.cache.get('846635650186608700')
 	const embed = new Discord.MessageEmbed()
-	.setAuthor(`Bot is online`, client.user.displayAvatarURL())
-	.setColor('BLUE')
-	.setTimestamp()
+		.setAuthor(`Bot is online`, client.user.displayAvatarURL())
+		.setColor('BLUE')
+		.setTimestamp()
 	const msg = await channel.send(embed)
 	setInterval(() => {
 		msg.edit(embed.setTimestamp())

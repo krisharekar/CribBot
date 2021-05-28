@@ -24,7 +24,7 @@ module.exports = {
         .setAuthor('Tax Calculator')
         .setColor('BLUE')
         .setDescription([`**Amount user recieves:** \`⏣ ${amountRecieved.toLocaleString()}\``,
-                        `**Amount Lost due to tax:** \`⏣ ${amountLost.toLocaleString()}\``,
+                        `**Amount lost due to tax:** \`⏣ ${amountLost.toLocaleString()}\``,
                         `**Amount to be paid to cover tax:** \`⏣ ${amountToBePaid.toLocaleString()}\``])
         .setFooter('Tax Rate: 8%')
 
