@@ -70,7 +70,7 @@ module.exports.removeDonationRoles = async (client, guildId, userId, channelId) 
     const rolesError = []
 
     for (const donationRole of result.donationRoles) {
-        if (userDonations <= donationRole.donationAmount) {
+        if (userDonations < donationRole.donationAmount) {
             if (user.roles.cache.has(donationRole.roleId)) {
                 let error
                 await user.roles.remove(donationRole.roleId).catch(() => error = true)
