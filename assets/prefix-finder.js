@@ -1,7 +1,7 @@
-const { getPrefix } = require('./cache/caches/prefix-cache')
+const { getPrefix } = require('../cache/caches/prefix-cache')
 
 module.exports.prefixFinder = (guildId) => {
-    const config = require('./config.json')
+    const config = require('../config.json')
     const guildPrefix = getPrefix(guildId)
 
     if (!guildPrefix)

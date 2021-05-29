@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const donationsSchema = require('../../schemas/donations-schema')
 const categorySchema = require('../../schemas/category-schema')
-const getUserFromMention = require('../../get-user-from-mention')
+const getUserFromMention = require('../../assets/get-user-from-mention')
 
 module.exports = {
     commands: ['my-donations', 'mydonations', 'my-donos', 'mydonos', 'myd'],

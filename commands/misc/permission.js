@@ -1,6 +1,6 @@
 const permissionSchema = require('../../schemas/permission-schema')
 const { loadCache } = require('../../cache/caches/permissions-cache')
-const getUserFromMention = require('../../get-user-from-mention')
+const getUserFromMention = require('../../assets/get-user-from-mention')
 
 module.exports = {
     commands: ['permission', 'perm'],

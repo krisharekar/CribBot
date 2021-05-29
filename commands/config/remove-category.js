@@ -1,9 +1,4 @@
 const Discord = require('discord.js')
-const donationsSchema = require('../../schemas/donations-schema')
-const { addDonationRoles } = require('../../donation-roles')
-const { removeDonationRoles } = require('../../donation-roles')
-const { abbNum } = require('../../assets/abb-num')
-const getUserFromMention = require('../../get-user-from-mention')
 const categorySchema = require('../../schemas/category-schema')
 
 module.exports = {

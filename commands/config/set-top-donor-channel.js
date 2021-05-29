@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const donationsChannelSchema = require('../../schemas/donations-channel-schema')
 const { loadCache } = require('../../cache/caches/highest-donor-channel-cache')
-const updateHighestDonorChannel = require('../../update-donor-channel')
+const updateHighestDonorChannel = require('../../assets/update-donor-channel')
 
 module.exports = {
     commands: ['set-top-donor-channel', 'settopdonorchannel', 'settdc'],

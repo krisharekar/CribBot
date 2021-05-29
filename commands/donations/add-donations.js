@@ -1,10 +1,10 @@
 const Discord = require('discord.js')
 const donationsSchema = require('../../schemas/donations-schema')
 const categorySchema = require('../../schemas/category-schema')
-const { addDonationRoles } = require('../../donation-roles')
-const { removeDonationRoles } = require('../../donation-roles')
+const { addDonationRoles } = require('../../assets/donation-roles')
+const { removeDonationRoles } = require('../../assets/donation-roles')
 const { abbNum } = require('../../assets/abb-num')
-const getUserFromMention = require('../../get-user-from-mention')
+const getUserFromMention = require('../../assets/get-user-from-mention')
 
 module.exports = {
     commands: ['add-donations', 'adddonations', 'adonos', 'ad'],
@@ -125,7 +125,7 @@ module.exports = {
             }
         }
 
-        await removeDonationRoles(client, guildId, userId)
-        await addDonationRoles(client, guildId, userId)
+        await removeDonationRoles(client, guildId, userId, msg.channel.id)
+        await addDonationRoles(client, guildId, userId, msg.channel.id)
     }
 }

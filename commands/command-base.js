@@ -1,4 +1,4 @@
-const { prefixFinder } = require('../prefix-finder')
+const { prefixFinder } = require('../assets/prefix-finder')
 // const { getBlacklists } = require('../cache/caches/blacklists-cache')
 const { getPermissions } = require('../cache/caches/permissions-cache')
 const Discord = require('discord.js')

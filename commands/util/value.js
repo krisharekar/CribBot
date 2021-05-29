@@ -3,7 +3,6 @@ const fs = require('fs')
 const { abbNum } = require('../../assets/abb-num')
 const itemInfoSchema = require('../../schemas/item-info-schema')
 const { getItemInfos } = require('../../cache/caches/item-info-cache')
-const { prefixFinder } = require('../../prefix-finder')
 
 module.exports = {
     commands: ['value', 'v'],
@@ -11,9 +10,8 @@ module.exports = {
     minArgs: 1,
     usage: '<item> [amount]',
 
-    async execute(message, args, client) {
+    async execute(message, args, client, prefix) {
         const guildId = message.guild.id
-        const prefix = prefixFinder(guildId)
         const item = args[0]
         let amount = args[1] || 1
 

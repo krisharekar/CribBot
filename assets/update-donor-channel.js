@@ -1,6 +1,6 @@
-const { getHighestDonorChannel } = require('./cache/caches/highest-donor-channel-cache')
-const { fetchLeaderboard } = require('./assets/leaderboard')
-const { computeLeaderboard } = require('./assets/leaderboard')
+const { getHighestDonorChannel } = require('../cache/caches/highest-donor-channel-cache')
+const { fetchLeaderboard } = require('./leaderboard')
+const { computeLeaderboard } = require('./leaderboard')
 
 module.exports = async (client, guildId) => {
     if (guildId) {

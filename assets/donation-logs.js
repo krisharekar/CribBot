@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const { getDonationLogsChannel } = require('./cache/caches/donation-logs-channel-cache')
+const { getDonationLogsChannel } = require('../cache/caches/donation-logs-channel-cache')
 
 module.exports = (client) => {
     client.on('donationsMade', (guildId, userId, managerId, type, donationAmount, itemDonated, totalDonations, todaysDonations, messageLink, channelName, categoryDetails, categoryDonations) => {

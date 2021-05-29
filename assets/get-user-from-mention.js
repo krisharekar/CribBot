@@ -1,4 +1,4 @@
-const { getClient } = require('./index')
+const { getClient } = require('../index')
 const client = getClient()
 
 module.exports = function getUserFromMention(mention, guildId) {

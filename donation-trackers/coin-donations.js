@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const donationsSchema = require('../schemas/donations-schema')
 const { getDonationsChannel } = require('../cache/caches/donations-channel-cache')
-const { addDonationRoles } = require('../donation-roles')
+const { addDonationRoles } = require('../assets/donation-roles')
 
 module.exports = (client) => {
     client.on('message', async message => {
@@ -36,7 +36,7 @@ module.exports = (client) => {
 
         const msg = await message.channel.send(embed)
 
-        await addDonationRoles(client, guildId, userId)
+        await addDonationRoles(client, guildId, userId, msg.channel.id)
         client.emit('donationsMade', guildId, userId, client.user.id, 'Added', donationAmount, undefined, result.donationAmount, result.dailyDonation, msg.url, msg.channel.name)
     })
 }
