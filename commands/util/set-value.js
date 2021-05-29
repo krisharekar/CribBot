@@ -19,12 +19,6 @@ module.exports = {
         if (item.length < 2)
             return message.channel.send(`Item \`${item}\` not found.`)
 
-        if (isNaN(amount))
-        return message.channel.send('Value must be an integer.')
-
-        if (amount < 1)
-            return message.channel.send('Value cannot be less than 1.')
-
         const path = './assets/items.json'
 
         const rawData = fs.readFileSync(path, 'utf-8')
@@ -34,7 +28,16 @@ module.exports = {
         const itemInfo = data.find(data => regex.test(data.name.replace(/\s/g, '')), 'utf-8')
 
         if (!itemInfo)
+            itemInfo = data.find(data => regex.test(data.name.replace(/[\s']/g, '')), 'utf-8')
+
+        if (!itemInfo)
             return message.channel.send(`Item \`${item}\` not found.`)
+
+        if (isNaN(amount))
+            return message.channel.send('Value must be an integer.')
+
+        if (amount < 1)
+            return message.channel.send('Value cannot be less than 1.')
 
         const newItemInfo = {
             id: itemInfo.id,
@@ -65,7 +68,7 @@ module.exports = {
             embed.setDescription(`**Old Donation Value:** \`⏣ ${(oldValue).toLocaleString()}\`\n**New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
 
         else
-        embed.setDescription(`**Old Donation Value:** \`⏣ ${(itemInfo.value).toLocaleString()}\`\n**New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
+            embed.setDescription(`**Old Donation Value:** \`⏣ ${(itemInfo.value).toLocaleString()}\`\n**New Donation Value:** \`⏣ ${(newItemInfo.value).toLocaleString()}\``)
 
         message.channel.send(embed)
         loadCache(guildId)
