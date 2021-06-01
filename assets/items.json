@@ -2,7 +2,7 @@
     {
         "name": "Aetheryx' Flower",
         "id": "aetheryxflower",
-        "value": "????",
+        "value": 300000000,
         "link": "https://cdn.discordapp.com/emojis/834800790605791232.png"
     },
     {
@@ -14,19 +14,19 @@
     {
         "name": "Ammo",
         "id": "ammo",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273964073035.png"
     },
     {
         "name": "Ant",
         "id": "ant",
-        "value": "????",
+        "value": 25000,
         "link": "https://cdn.discordapp.com/emojis/834080273725259798.png"
     },
     {
         "name": "A plus",
         "id": "aplus",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273930387486.png"
     },
     {
@@ -38,13 +38,13 @@
     {
         "name": "Baby",
         "id": "baby",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273942577192.png"
     },
     {
         "name": "Ban Hammer",
         "id": "banhammer",
-        "value": "????",
+        "value": 1000000,
         "link": "https://cdn.discordapp.com/emojis/834080273942577242.png"
     },
     {
@@ -56,13 +56,13 @@
     {
         "name": "Beaker of sus fluid",
         "id": "beaker",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273918197811.png"
     },
     {
         "name": "Binary",
         "id": "binary",
-        "value": "????",
+        "value": 15000000,
         "link": "https://cdn.discordapp.com/emojis/834080273896833074.png"
     },
     {
@@ -74,7 +74,7 @@
     {
         "name": "Blue Phallic Object",
         "id": "bluephallicobject",
-        "value": "????",
+        "value": 100000,
         "link": "https://cdn.discordapp.com/emojis/834192945124474983.png"
     },
     {
@@ -86,7 +86,7 @@
     {
         "name": "Bottle of Whiskey",
         "id": "bottleofwhiskey",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273922523197.png"
     },
     {
@@ -104,7 +104,7 @@
     {
         "name": "Stack of Cash",
         "id": "cash",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273926717470.png"
     },
     {
@@ -134,13 +134,13 @@
     {
         "name": "Corncob",
         "id": "corncob",
-        "value": "????",
+        "value": 1000000,
         "link": "https://cdn.discordapp.com/emojis/834080273942839326.png"
     },
     {
         "name": "Corndog",
         "id": "corndog",
-        "value": "????",
+        "value": 1000000,
         "link": "https://cdn.discordapp.com/emojis/834080273796694056.png"
     },
     {
@@ -158,7 +158,7 @@
     {
         "name": "Daily Box",
         "id": "daily",
-        "value": "????",
+        "value": 100000,
         "link": "https://i.imgur.com/GSGADYX.gif"
     },
     {
@@ -176,7 +176,7 @@
     {
         "name": "Used Diaper",
         "id": "diaper",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273947295764.png"
     },
     {
@@ -194,13 +194,13 @@
     {
         "name": "Ectoplasm",
         "id": "ectoplasm",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273889099796.png"
     },
     {
         "name": "Energy Drink",
         "id": "energydrink",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273909284924.png"
     },
     {
@@ -223,8 +223,8 @@
     },
     {
         "name": "Fishing Bait",
-        "id": "fishingbait",
-        "value": "????",
+        "id": "bait",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273951883305.png"
     },
     {
@@ -242,7 +242,7 @@
     {
         "name": "Garbage",
         "id": "garbage",
-        "value": "????",
+        "value": 3000,
         "link": "https://cdn.discordapp.com/emojis/834091084392693760.png"
     },
     {
@@ -266,7 +266,7 @@
     {
         "name": "Golden Phallic Object",
         "id": "goldenphallicobject",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834192944956702746.png"
     },
     {
@@ -290,19 +290,19 @@
     {
         "name": "Jelly Fish",
         "id": "jellyfish",
-        "value": "????",
+        "value": 75000,
         "link": "https://cdn.discordapp.com/emojis/841405707739463708.png"
     },
     {
         "name": "Junk",
         "id": "junk",
-        "value": "????",
+        "value": 3000,
         "link": "https://cdn.discordapp.com/emojis/834091084359139378.png"
     },
     {
         "name": "Ladybug",
         "id": "ladybug",
-        "value": "????",
+        "value": 50000,
         "link": "https://cdn.discordapp.com/emojis/834080273964073036.png"
     },
     {
@@ -320,7 +320,7 @@
     {
         "name": "Law Degree",
         "id": "lawdegree",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273963548733.png"
     },
     {
@@ -338,7 +338,7 @@
     {
         "name": "Like Button",
         "id": "likebutton",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273922523196.png"
     },
     {
@@ -350,7 +350,7 @@
     {
         "name": "Melmsie's Beard",
         "id": "melmsiebeard",
-        "value": "????",
+        "value": 400000000,
         "link": "https://cdn.discordapp.com/emojis/834815537921916938.png"
     },
     {
@@ -362,19 +362,19 @@
     {
         "name": "Meme pills",
         "id": "memepills",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273804689409.png"
     },
     {
         "name": "Motivational Poster",
         "id": "motivationalposter",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273964072995.png"
     },
     {
         "name": "Multi Colored Phallic Object",
         "id": "multiphallicobject",
-        "value": "????",
+        "value": 25000000,
         "link": "https://cdn.discordapp.com/emojis/841123648911966219.gif"
     },
     {
@@ -386,19 +386,19 @@
     {
         "name": "Musical Note",
         "id": "note",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273892376686.png"
     },
     {
         "name": "Odd Eye",
         "id": "oddeye",
-        "value": 696969696969,
+        "value": 69420,
         "link": "https://cdn.discordapp.com/emojis/787964747848089642.gif"
     },
     {
         "name": "Orange Phallic Object",
         "id": "orangephallicobject",
-        "value": "????",
+        "value": 100000,
         "link": "https://cdn.discordapp.com/emojis/834192945132601426.png"
     },
     {
@@ -434,7 +434,7 @@
     {
         "name": "Pepe Statue",
         "id": "pepestatue",
-        "value": "????",
+        "value": 1000000,
         "link": "https://cdn.discordapp.com/emojis/834978069629894663.png"
     },
     {
@@ -445,8 +445,8 @@
     },
     {
         "name": "Pet Collar",
-        "id": "petcollar",
-        "value": "????",
+        "id": "collar",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273951883304.png"
     },
     {
@@ -458,7 +458,7 @@
     {
         "name": "Pink Phallic Object",
         "id": "pinkphallicobject",
-        "value": 5,
+        "value": 10,
         "link": "https://cdn.discordapp.com/emojis/718136370320769074.png"
     },
     {
@@ -470,19 +470,19 @@
     {
         "name": "Police Badge",
         "id": "policebadge",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273918197810.png"
     },
     {
         "name": "Potato ☭",
         "id": "potato",
-        "value": "????",
+        "value": 500000,
         "link": "https://cdn.discordapp.com/emojis/834080273913872384.png"
     },
     {
         "name": "Purple Phallic Object",
         "id": "purplephallicobject",
-        "value": "????",
+        "value": 100000,
         "link": "https://cdn.discordapp.com/emojis/834192945334452244.png"
     },
     {
@@ -506,7 +506,7 @@
     {
         "name": "Robbers Mask",
         "id": "robbersmask",
-        "value": "????",
+        "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273889099797.png"
     },
     {
@@ -518,7 +518,7 @@
     {
         "name": "Santa's Bag",
         "id": "santasbag",
-        "value": "????",
+        "value": 50000000,
         "link": "https://cdn.discordapp.com/emojis/834080273930911754.png"
     },
     {
@@ -530,13 +530,13 @@
     {
         "name": "Seaweed",
         "id": "seaweed",
-        "value": "????",
+        "value": 2000,
         "link": "https://cdn.discordapp.com/emojis/841405708103581726.png"
     },
     {
         "name": "Shop Coupon",
-        "id": "shopcoupon",
-        "value": "????",
+        "id": "coupon",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273892114482.png"
     },
     {
@@ -560,37 +560,31 @@
     {
         "name": "Spider",
         "id": "spider",
-        "value": "????",
+        "value": 500000,
         "link": "https://cdn.discordapp.com/emojis/834080274241028186.png"
     },
     {
         "name": "Fidget Spinner",
         "id": "spinner",
-        "value": 10000,
+        "value": 20000,
         "link": "https://cdn.discordapp.com/emojis/573150030030962699.png"
     },
     {
         "name": "Stickbug",
         "id": "stickbug",
-        "value": "????",
+        "value": 50000,
         "link": "https://cdn.discordapp.com/emojis/834080273960271872.png"
     },
     {
         "name": "Stonk Machine",
         "id": "stonkmachine",
-        "value": "????",
-        "link": "https://cdn.discordapp.com/emojis/834080273796694057.png"
-    },
-    {
-        "name": "Stonk Machine",
-        "id": "stonkmachine",
-        "value": "????",
+        "value": 25000000,
         "link": "https://cdn.discordapp.com/emojis/834080273796694057.png"
     },
     {
         "name": "Crunchy Taco",
         "id": "taco",
-        "value": "????",
+        "value": 15000000,
         "link": "https://cdn.discordapp.com/emojis/834128399551299624.png"
     },
     {
@@ -602,19 +596,19 @@
     {
         "name": "Tip Jar",
         "id": "tipjar",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273926717471.png"
     },
     {
         "name": "Trash",
         "id": "trash",
-        "value": "????",
+        "value": 10000,
         "link": "https://cdn.discordapp.com/emojis/834091084346949652.png"
     },
     {
         "name": "Vaccine",
         "id": "vaccine",
-        "value": "????",
+        "value": 10000000,
         "link": "https://cdn.discordapp.com/emojis/834080273981243412.png"
     },
     {
@@ -626,7 +620,7 @@
     {
         "name": "Worm",
         "id": "worm",
-        "value": "????",
+        "value": 10000,
         "link": "https://cdn.discordapp.com/emojis/834080273993039892.png"
     }
 ]
