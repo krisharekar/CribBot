@@ -1,1 +1,1 @@
-worker: node index.js
+worker: node --inspect=8080 index.js

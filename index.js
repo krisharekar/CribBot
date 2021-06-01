@@ -24,22 +24,9 @@ const donationLogs = require('./assets/donation-logs')
 const guildCreateAndDelete = require('./assets/guild-create-and-delete')
 const topggWebhook = require('./assets/topgg-webhook')
 
-const ttt = require('discord-tictactoe')
-const { EventEmitter } = require('events')
-
-// const autoRoleCache = new Map()
-const welcomeCache = new Map()
-
-const { GiveawaysManager } = require('discord-giveaways')
-
 require('events').EventEmitter.defaultMaxListeners = 100
 
 module.exports.getClient = () => { return client };
-
-new ttt({
-	language: 'en',
-	command: '>ttt'
-}, client)
 
 client.commands = new Discord.Collection()
 
