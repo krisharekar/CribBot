@@ -7,10 +7,10 @@ const { getItemInfos } = require('../cache/caches/item-info-cache')
 
 module.exports = (client) => {
     client.on('message', async message => {
+        if (message.author.id != '270904126974590976')
+            return;
         const channelId = getDonationsChannel(message.guild.id)
         if (!channelId || !channelId.includes(message.channel.id))
-            return;
-        if (message.author.id != '270904126974590976')
             return;
 
         const { content } = message
@@ -20,7 +20,7 @@ module.exports = (client) => {
         // console.log(content)
 
         const user = message.mentions.users.first()
-        if(!user) return;
+        if (!user) return;
         const userId = user.id
         const guildId = message.guild.id
         const temp = (content.substring(content.indexOf('*') + 2))
@@ -32,18 +32,18 @@ module.exports = (client) => {
         const itemInfo = getInfo(itemName)
         const guildItemInfos = getItemInfos(guildId)
         let guildItemInfo
-        if(guildItemInfos)
-        guildItemInfo = guildItemInfos.find(key => key.id == itemName)
+        if (guildItemInfos)
+            guildItemInfo = guildItemInfos.find(key => key.id == itemName)
         // console.log(guildItemInfo)
-        const donationAmount = guildItemInfo ? guildItemInfo.value*itemAmount : itemInfo.value*itemAmount
+        const donationAmount = guildItemInfo ? guildItemInfo.value * itemAmount : itemInfo.value * itemAmount
         const item = {
             name: itemInfo.name,
             value: guildItemInfo ? guildItemInfo.value : itemInfo.value,
             amount: itemAmount
         }
         console.log(item.value)
-        if(isNaN(item.value))
-        return;
+        if (isNaN(item.value))
+            return;
         // console.log(donationAmount)
         const result = await donationsSchema.findOneAndUpdate({ guildId, userId }, { $inc: { donationAmount, dailyDonation: donationAmount } }, { upsert: true, new: true })
 

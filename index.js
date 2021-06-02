@@ -70,7 +70,7 @@ client.on('ready', async () => {
 	}, 5 * 60 * 1000)
 })
 client.on('message', async message => {
-	if (message.author.bot)
+	if (message.author.bot || !message.guild)
 		return;
 	const prefix = prefixFinder(message.guild.id)
 	const mentionMsg = `Hey <@${message.author.id}>! My prefix is \`${prefix}\` \nRun *\`${prefix}help\`* for more help!`

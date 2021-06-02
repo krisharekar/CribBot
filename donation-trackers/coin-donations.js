@@ -5,10 +5,10 @@ const { addDonationRoles } = require('../assets/donation-roles')
 
 module.exports = (client) => {
     client.on('message', async message => {
+        if (message.author.id != '270904126974590976')
+            return;
         const channelId = getDonationsChannel(message.guild.id)
         if (!channelId || !channelId.includes(message.channel.id))
-            return;
-        if (message.author.id != '270904126974590976')
             return;
 
         const { content } = message

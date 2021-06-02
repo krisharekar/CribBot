@@ -74,7 +74,7 @@ module.exports = (client, commandOptions) => {
         // if (message.author.id != '714808648517550144') //697815325650976789
         // return;
 
-        if (message.author.bot)
+        if (message.author.bot || !message.guild)
             return;
 
         const prefix = prefixFinder(message.guild.id)
