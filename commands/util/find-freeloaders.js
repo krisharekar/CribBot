@@ -4,7 +4,7 @@ module.exports = {
     minArgs: 1,
     usage: '<heist-channel> [number-of-members-to-search-from]',
     permissions: ['MANAGE_GUILD'],
-    
+
     async execute(message, args, client) {
         const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0])
         const limit = (args[1]) || 200
@@ -16,12 +16,12 @@ module.exports = {
         if (isNaN(limit))
             return message.channel.send('Message count must be an integer')
 
-        // if (limit < 1 || limit > 1000)
-        //     return message.channel.send('Message count must be between 1-1000.')
+        if (limit < 1 || limit > 1000)
+            return message.channel.send('Message count must be between 1-1000.')
 
         const botMsg = await message.channel.send([`Searching for stinky freeloaders...`,
-        `Indexing: ${'□'.repeat(10)} 0%`,
-        `Searching: ${'□'.repeat(10)} 0%`])
+            `Indexing: ${'□'.repeat(10)} 0%`,
+            `Searching: ${'□'.repeat(10)} 0%`])
 
         const messages = await fetchMessages(channel, limit, botMsg)
         const freeloaders = []
@@ -33,11 +33,11 @@ module.exports = {
 
         for (const msg of messages) {
             num++
-            if(num%100 == 0 || number < 1) {
-                loaded = loaded+increment
+            if (num % 100 == 0 || number < 1) {
+                loaded = loaded + increment
                 await botMsg.edit([`Searching for stinky freeloaders...`,
-                `Indexing: ${'■'.repeat(10)} 100%`,
-                `Searching: ${'■'.repeat(loaded.toFixed() <= 10 ? loaded.toFixed() : 10)}${'□'.repeat(10 - loaded.toFixed() >= 0 ? 10 - loaded.toFixed() : 0)} ${Math.round(loaded * 10) <= 100 ? Math.round(loaded * 10) : 100}%`])
+                    `Indexing: ${'■'.repeat(10)} 100%`,
+                    `Searching: ${'■'.repeat(loaded.toFixed() <= 10 ? loaded.toFixed() : 10)}${'□'.repeat(10 - loaded.toFixed() >= 0 ? 10 - loaded.toFixed() : 0)} ${Math.round(loaded * 10) <= 100 ? Math.round(loaded * 10) : 100}%`])
             }
             const exists = message.guild.members.cache.get(msg.author.id)
             if (!exists && !msg.author.bot) {
@@ -59,40 +59,21 @@ module.exports = {
         if (!freeloaders.length && !bannedFreeloaders.length)
             return message.channel.send('No freeloaders found!')
 
-        // console.log(messages.length)
-
-        // let freeloaderMessage = ''
-        // let bannedFreeloaderMessage = ''
-
-        // for (const freeloader of freeloaders) {
-        //     // if(freeloaders[freeloader.length-1] != freeloader)
-        //     freeloaderMessage += `${freeloader.name} (${freeloader.id})\n`
-        //     // else
-        //     // freeloaderMessage += `${freeloader.name} (${freeloader.id})`
-        // }
-        // for (const bannedFreeloader of bannedFreeloaders) {
-        //     bannedFreeloaderMessage += `${bannedFreeloader.name} (${bannedFreeloader.id})\n`
-        // }
-
-        const content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : 'None'}`
+        let content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : 'None'}`
 
         if (content.length > 2000) {
-            // const index = content.lastIndexOf("\n", 2000)
-            // // const temp = content.slice(0, 2000)
-            // const index2 = content.lastIndexOf("\n")
-            // console.log(index, index2)
+            const num = Math.ceil(content.length / 2000)
+            let temp = content
+            content = []
+            for (i = 1; i <= num; i++) {
+                const index = temp.lastIndexOf("\n", 2000)
+                console.log(index)
+                message.channel.send(temp.slice(0, index))
+                temp = temp.slice(index)
+            }
 
-            // const newContent = []
-            // do {
-            //     for (const freeloader of freeloaders) {
-            //         newContent[0] += `${freeloader}\n`
-
-            //         if (newContent.length > 2000)
-            //             newContent.replace(freeloader, '')
-            //     }
-            // } while (freeloaders)
-
-            return message.channel.send('Damn, found so many freeloaders that Discord wont let me sent such a huge message :C\nMaybe try reducing message count.')
+            // return message.channel.send('Damn, found so many freeloaders that Discord wont let me sent such a huge message :C\nMaybe try reducing message count.')
+            return;
         }
         message.channel.send(content)
     }
@@ -115,8 +96,8 @@ async function fetchMessages(channel, limit = 200, message) {
         allMessages.push(...messages.array());
         // console.log(loaded)
         const content = [`Searching for stinky freeloaders...`,
-        `Indexing: ${'■'.repeat(loaded.toFixed() <= 10 ? loaded.toFixed() : 10)}${'□'.repeat(10 - loaded.toFixed() >= 0 ? 10 - loaded.toFixed() : 0)} ${Math.round(loaded * 10) <= 100 ? Math.round(loaded * 10) : 100}%`,
-        `Searching: ${'□'.repeat(10)} 0%`]
+            `Indexing: ${'■'.repeat(loaded.toFixed() <= 10 ? loaded.toFixed() : 10)}${'□'.repeat(10 - loaded.toFixed() >= 0 ? 10 - loaded.toFixed() : 0)} ${Math.round(loaded * 10) <= 100 ? Math.round(loaded * 10) : 100}%`,
+            `Searching: ${'□'.repeat(10)} 0%`]
         await message.edit(content)
         loaded = loaded + increment
         // console.log(loaded)
