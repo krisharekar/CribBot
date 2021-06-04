@@ -145,15 +145,21 @@ module.exports = (client, commandOptions) => {
                 // console.log(perm)
                 // console.log(permissions)
                 for (const permission of permissions) {
-                    // console.log(member.hasPermission(permission))
-                    if (!member.hasPermission(permission) && perm != 'allow')
+                    console.log(member.hasPermission(permission))
+                    if (!member.hasPermission(permission) && perm != 'allow') {
+                        // console.log(1)
                         return message.channel.send(`You don't have permission to use this command.`)
+                    }
 
-                    if (!member.hasPermission('ADMINISTRATOR') && perm != 'allow')
+                    if (!member.hasPermission('ADMINISTRATOR') && perm == 'deny') {
+                        // console.log(2)
                         return message.channel.send(`You don't have permission to use this command.`)
+                    }
                 }
-                if (!permissions.length && !member.hasPermission('ADMINISTRATOR') && perm == 'deny')
+                if (!permissions.length && !member.hasPermission('ADMINISTRATOR') && perm == 'deny') {
+                    // console.log(3)
                     return message.channel.send(`You don't have permission to use this command.`)
+                }
 
                 // for(const requiredRole of requiredRoles){
                 //     const role = guild.roles.cache.find(role => role.name === requiredRole)
