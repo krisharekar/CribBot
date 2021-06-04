@@ -14,8 +14,13 @@ module.exports = {
         const userId = user.user.id
 
         let result = await donationsSchema.findOne({ guildId, userId })
+        
+        let donationAmount, dailyDonation
 
-        const { donationAmount, dailyDonation } = result
+        if (result) {
+            donationAmount = result.donationAmount
+            dailyDonation = result.dailyDonation
+        }
 
         const categoryResult = await categorySchema.findOne({ guildId })
         const desc = []

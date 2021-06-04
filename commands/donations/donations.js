@@ -20,7 +20,13 @@ module.exports = {
         const userId = user.user.id
 
         let result = await donationsSchema.findOne({ guildId, userId })
-        const { donationAmount, dailyDonation } = result
+
+        let donationAmount, dailyDonation
+
+        if (result) {
+            donationAmount = result.donationAmount
+            dailyDonation = result.dailyDonation
+        }
 
         const categoryResult = await categorySchema.findOne({ guildId })
         const desc = []
@@ -46,7 +52,7 @@ module.exports = {
             }
         }
 
-        desc.push(`**Total Donations:** \`⏣ ${donationAmount ? donationAmount.toLocaleString(): '0'}\``)
+        desc.push(`**Total Donations:** \`⏣ ${donationAmount ? donationAmount.toLocaleString() : '0'}\``)
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(`Donations of ${user.user.username}`, user.user.displayAvatarURL())
