@@ -24,26 +24,22 @@ module.exports = {
             `Searching: ${'□'.repeat(10)} 0%`])
 
         const messages = await fetchMessages(channel, limit, botMsg)
+        if (!messages)
+            return message.channel.send(`Either, I don\'t have permission to view that channel, or that channel has no messages in it.`)
         const freeloaders = []
         const bannedFreeloaders = []
         const number = messages.length / 100
         const increment = 10 / number
         let num = 0
         let loaded = 0
+        let banErr
+        const bans = await message.guild.fetchBans().catch(() => banErr = true)
 
         for (const msg of messages) {
-            num++
-            if (num % 100 == 0 || number < 1) {
-                loaded = loaded + increment
-                await botMsg.edit([`Searching for stinky freeloaders...`,
-                    `Indexing: ${'■'.repeat(10)} 100%`,
-                    `Searching: ${'■'.repeat(loaded.toFixed() <= 10 ? loaded.toFixed() : 10)}${'□'.repeat(10 - loaded.toFixed() >= 0 ? 10 - loaded.toFixed() : 0)} ${Math.round(loaded * 10) <= 100 ? Math.round(loaded * 10) : 100}%`])
-            }
             const exists = message.guild.members.cache.get(msg.author.id)
             if (!exists && !msg.author.bot) {
                 if (!exists) {
-                    const bans = await message.guild.fetchBans()
-                    if (bans.find(u => u.user == msg.author)) {
+                    if (!banErr && bans.find(u => u.user == msg.author)) {
                         if (!bannedFreeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`))
                             bannedFreeloaders.push(`${msg.author.username} (${msg.author.id})`)
                         // bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
@@ -54,12 +50,21 @@ module.exports = {
                     // freeloaders.push({ name: msg.author.username, id: msg.author.id })
                 }
             }
+            num++
+            if (num % 100 == 0 || (number < 1 && num == messages.length)) {
+                loaded = loaded + increment
+                await botMsg.edit([`Searching for stinky freeloaders...`,
+                    `Indexing: ${'■'.repeat(10)} 100%`,
+                    `Searching: ${'■'.repeat(loaded.toFixed() <= 10 ? loaded.toFixed() : 10)}${'□'.repeat(10 - loaded.toFixed() >= 0 ? 10 - loaded.toFixed() : 0)} ${Math.round(loaded * 10) <= 100 ? Math.round(loaded * 10) : 100}%`])
+            }
         }
-
+        console.log('aaaa')
         if (!freeloaders.length && !bannedFreeloaders.length)
             return message.channel.send('No freeloaders found!')
 
-        let content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : 'None'}`
+        const bannedErr = banErr ? 'Couldn\'t show freeloaders who were already banned because I don\'t have ban members permission.' : 'None'
+
+        let content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : bannedErr}`
 
         if (content.length > 2000) {
             const num = Math.ceil(content.length / 2000)
@@ -92,7 +97,10 @@ async function fetchMessages(channel, limit = 200, message) {
             options.before = lastId;
         }
 
-        const messages = await channel.messages.fetch(options).catch(e => console.log(e))
+        let err
+        const messages = await channel.messages.fetch(options).catch(() => err = true)
+        if (!messages.size || err)
+            return false;
         allMessages.push(...messages.array());
         // console.log(loaded)
         const content = [`Searching for stinky freeloaders...`,
