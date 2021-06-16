@@ -9,6 +9,7 @@ module.exports = {
 	maxArgs: 1,
 
 	execute(message, args, client, prefix) {
+        console.log(`help: ${message.content}`)
 		const { commands } = client
 
 		if (!args.length || args[0] == 'help') {
