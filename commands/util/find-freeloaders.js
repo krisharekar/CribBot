@@ -88,7 +88,9 @@ module.exports = {
             let temp = content
             content = []
             for (i = 1; i <= num; i++) {
-                const index = temp.lastIndexOf("\n", 2000)
+                let index = temp.lastIndexOf("\n", 2000)
+                if (!index)
+                index = temp.lastIndexOf(" ", 2000)
                 console.log(index)
                 message.channel.send(temp.slice(0, index))
                 temp = temp.slice(index)
