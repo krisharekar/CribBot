@@ -3,6 +3,7 @@ module.exports = {
     description: 'Finds freeloaders and banned freeloaders',
     minArgs: 1,
     usage: '<heist-channel> [number-of-members-to-search-from]',
+    flags: [{ flag: '--onlyid', desc: 'Displays only ids of the freeloaders '}],
     permissions: ['MANAGE_GUILD'],
 
     async execute(message, args, client) {
@@ -39,15 +40,30 @@ module.exports = {
             const exists = message.guild.members.cache.get(msg.author.id)
             if (!exists && !msg.author.bot) {
                 if (!exists) {
-                    if (!banErr && bans.find(u => u.user == msg.author)) {
-                        if (!bannedFreeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`))
-                            bannedFreeloaders.push(`${msg.author.username} (${msg.author.id})`)
-                        // bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
-                    }
+                    if (args.join(' ').toLowerCase().includes('--onlyid')) {
+                        if (!banErr && bans.find(u => u.user == msg.author)) {
+                            if (!bannedFreeloaders.find(key => key == `${msg.author.id}`)) {
+                                bannedFreeloaders.push(`${msg.author.id}`)
+                            }
+                            // bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
+                        }
 
-                    else if (!freeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`))
-                        freeloaders.push(`${msg.author.username} (${msg.author.id})`)
-                    // freeloaders.push({ name: msg.author.username, id: msg.author.id })
+                        else if (!freeloaders.find(key => key == `${msg.author.id}`)) {
+                            freeloaders.push(`${msg.author.id}`)
+                        }
+                    } else {
+                        if (!banErr && bans.find(u => u.user == msg.author)) {
+                            if (!bannedFreeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`)) {
+                                bannedFreeloaders.push(`${msg.author.username} (${msg.author.id})`)
+                            }
+                            // bannedFreeloaders.push({ name: msg.author.username, id: msg.author.id })
+                        }
+
+                        else if (!freeloaders.find(key => key == `${msg.author.username} (${msg.author.id})`)) {
+                            freeloaders.push(`${msg.author.username} (${msg.author.id})`)
+                        }
+                        // freeloaders.push({ name: msg.author.username, id: msg.author.id })
+                    }
                 }
             }
             num++
