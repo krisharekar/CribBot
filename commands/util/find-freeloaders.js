@@ -89,6 +89,7 @@ module.exports = {
             content = []
             for (i = 1; i <= num; i++) {
                 let index = temp.lastIndexOf("\n", 2000)
+                console.log(`INDEX: ${index}`)
                 if (!index)
                 index = temp.lastIndexOf(" ", 2000)
                 console.log(index)
