@@ -34,13 +34,14 @@ module.exports = {
         let num = 0
         let loaded = 0
         let banErr
+        const onlyId = args.join(' ').toLowerCase().includes('--onlyid')
         const bans = await message.guild.fetchBans().catch(() => banErr = true)
 
         for (const msg of messages) {
             const exists = message.guild.members.cache.get(msg.author.id)
             if (!exists && !msg.author.bot) {
                 if (!exists) {
-                    if (args.join(' ').toLowerCase().includes('--onlyid')) {
+                    if (onlyId) {
                         if (!banErr && bans.find(u => u.user == msg.author)) {
                             if (!bannedFreeloaders.find(key => key == `${msg.author.id}`)) {
                                 bannedFreeloaders.push(`${msg.author.id}`)
@@ -80,7 +81,7 @@ module.exports = {
 
         const bannedErr = banErr ? 'Couldn\'t show freeloaders who were already banned because I don\'t have ban members permission.' : 'None'
 
-        let content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? freeloaders.join('\n') : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? bannedFreeloaders.join('\n') : bannedErr}`
+        let content = `FREELOADER ALERT!\n\nFreeloaders are:\n${freeloaders.length ? (onlyId ? freeloaders.join(' ') : freeloaders.join('\n')) : 'None'}\n\nFreeloaders who are already banned are:\n${bannedFreeloaders.length ? (onlyId ? bannedFreeloaders.join(' ') : bannedFreeloaders.join('\n')) : bannedErr}`
 
         if (content.length > 2000) {
             const num = Math.ceil(content.length / 2000)
