@@ -23,6 +23,7 @@ const dailyDonations = require('./donation-trackers/daily-donations')
 const donationLogs = require('./assets/donation-logs')
 const guildCreateAndDelete = require('./assets/guild-create-and-delete')
 const topggWebhook = require('./assets/topgg-webhook')
+const app = require('./app')
 
 require('events').EventEmitter.defaultMaxListeners = 100
 
@@ -43,6 +44,7 @@ client.on('ready', async () => {
 	await donationLogs(client)
 	await guildCreateAndDelete(client)
 	await topggWebhook(client)
+	await app()
 	console.log('ok')
 })
 
@@ -69,6 +71,19 @@ client.on('ready', async () => {
 		msg.edit(embed.setTimestamp())
 	}, 5 * 60 * 1000)
 })
+
+process.on('unhandledRejection', (reason, promise) => {
+	const channel = client.channels.cache.get('857277964021399601')
+	if(channel)
+	channel.send([`${client.user.username} ERROR\n`, 'Unhandled Rejection at:', `\`\`\`js\n${promise}\`\`\``, 'Reason:', `\`\`\`js\n${reason}\`\`\``])
+})
+
+process.on('uncaughtException', (error) => {
+	const channel = client.channels.cache.get('857277964021399601')
+	if(channel)
+	channel.send([`${client.user.username} ERROR\n`, 'Error:', `\`\`\`js\n${error}\`\`\``])
+})
+
 client.on('message', async message => {
 	if (message.author.bot || !message.guild)
 		return;
@@ -84,11 +99,38 @@ client.on('message', async message => {
 // 		return message.delete()
 // })
 
+client.on('message', message => {
+	if(message.author.bot)
+	return;
+	console.log('yes')
+	const commandBase = require('./commands/command-base.js')
+
+	const prefix = prefixFinder(message.guild.id)
+	const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+	if (!prefixRegex.test(message.content))
+	return console.log('no match');
+
+	const [, matchedPrefix] = message.content.match(prefixRegex);
+	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/)
+	const commandName = args.shift().toLowerCase()
+
+	const command = client.commands.find(cmd => cmd.commands.includes(commandName))
+	if (!command) {
+		return console.log('no command')
+	};
+	console.log('m')
+	commandBase(client, command, message, args, prefix)
+})
+
 client.once('ready', async () => {
 	console.log('Bot is online')
 
 	const baseFile = 'command-base.js'
 	const commandBase = require(`./commands/${baseFile}`)
+
+	// console.log(client.commands)
 
 	const readCommands = (dir) => {
 		const files = fs.readdirSync(path.join(__dirname, dir))
@@ -99,7 +141,7 @@ client.once('ready', async () => {
 				readCommands(path.join(dir, file))
 			} else if (file !== baseFile && file !== 'load-commands.js') {
 				const option = require(path.join(__dirname, dir, file))
-				commandBase(client, option)
+				// commandBase(client, option)
 			}
 		}
 	}
@@ -107,4 +149,4 @@ client.once('ready', async () => {
 	readCommands('commands')
 })
 
-client.login(config.token)
+client.login(config.testing_token)

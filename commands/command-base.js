@@ -44,7 +44,7 @@ const validatePermissions = (permissions) => {
     }
 }
 
-module.exports = (client, commandOptions) => {
+module.exports = (client, commandOptions, message, args, prefix) => {
     let {
         commands = [],
         description,
@@ -70,109 +70,68 @@ module.exports = (client, commandOptions) => {
 
     const cooldowns = new Discord.Collection()
 
-    client.on('message', message => {
-        // if (message.author.id != '714808648517550144') //697815325650976789
-        // return;
+    // if (message.author.id != '714808648517550144') //697815325650976789
+    // return;
 
-        if (message.author.bot || !message.guild)
-            return;
+    const guildPermissions = getPermissions(message.guild.id)
 
-        const prefix = prefixFinder(message.guild.id)
-        const guildPermissions = getPermissions(message.guild.id)
+    const { member, content, guild } = message
 
-        const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const command = commands[0]
 
-        const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
-        if (!prefixRegex.test(message.content)) return;
+    if (!cooldowns.has(command)) {
+        cooldowns.set(command, new Discord.Collection());
+    }
 
-        const [, matchedPrefix] = message.content.match(prefixRegex);
-        // const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
-        // const command = args.shift().toLowerCase();
+    const now = Date.now();
+    const timestamps = cooldowns.get(command);
+    const cooldownAmount = (cooldown || 3) * 1000;
 
-        // if (!message.content.startsWith(prefix) || message.author.bot)
-        //     return;
-        // const users = getBlacklists(message.guild.id)
+    if (timestamps.has(message.author.id)) {
+        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
-        // if(users && users.includes(message.author.id))
-        // return;
+        if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
+            return message.reply(`You can use this command after \`${timeLeft.toFixed(1)}\` more seconds.`);
+        }
+    }
 
-        const { member, content, guild } = message
+    if (ownerOnly && message.author.id != '714808648517550144')
+        return;
 
-        for (const alias of commands) {
-            const command = `${alias.toLowerCase()}`
-            let cmdName
-
-            const args = content.slice(matchedPrefix.length).trim().split(/ +/)
-
-            const commandName = args.shift().toLowerCase()
-
-            if (commandName === command) {
-                cmdName = commands[0]
-
-                if (!cooldowns.has(command)) {
-                    cooldowns.set(command, new Discord.Collection());
-                }
-
-                const now = Date.now();
-                const timestamps = cooldowns.get(command);
-                const cooldownAmount = (cooldown || 3) * 1000;
-
-                if (timestamps.has(message.author.id)) {
-                    const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-                    if (now < expirationTime) {
-                        const timeLeft = (expirationTime - now) / 1000;
-                        return message.reply(`You can use this command after \`${timeLeft.toFixed(1)}\` more seconds.`);
-                    }
-                }
-
-                if (ownerOnly && message.author.id != '714808648517550144')
-                    return;
-
-                let perm
-                // console.log(guildPermissions)
-                if (guildPermissions) {
-                    for (const permission of guildPermissions) {
-                        // console.log(commandName, permission.commandName)
-                        if (cmdName == permission.commandName && (permission.entityId == message.author.id || message.member.roles.cache.has(permission.entityId))) {
-                            perm = permission.permission
-                            // console.log(perm)
-                            if (perm == 'allow')
-                                break;
-                        }
-                    }
-                }
+    let perm
+    // console.log(guildPermissions)
+    if (guildPermissions) {
+        for (const permission of guildPermissions) {
+            // console.log(commandName, permission.commandName)
+            if (command == permission.commandName && (permission.entityId == message.author.id || message.member.roles.cache.has(permission.entityId))) {
+                perm = permission.permission
                 // console.log(perm)
-                // console.log(permissions)
-                for (const permission of permissions) {
-                    console.log(member.hasPermission(permission))
-                    if (!member.hasPermission(permission) && perm != 'allow') {
-                        // console.log(1)
-                        return message.channel.send(`You don't have permission to use this command.`)
-                    }
-
-                    if (!member.hasPermission('ADMINISTRATOR') && perm == 'deny') {
-                        // console.log(2)
-                        return message.channel.send(`You don't have permission to use this command.`)
-                    }
-                }
-                if (!permissions.length && !member.hasPermission('ADMINISTRATOR') && perm == 'deny') {
-                    // console.log(3)
-                    return message.channel.send(`You don't have permission to use this command.`)
-                }
-
-                // for(const requiredRole of requiredRoles){
-                //     const role = guild.roles.cache.find(role => role.name === requiredRole)
-
-                //     if(!role || !member.roles.cache.has(role.id))
-                //     return message.channel.send(`You must have the \`${requiredRole}\` role to use this command.`)
-                // }
-
-                if (args.length < minArgs || (maxArgs != null && args.length > maxArgs))
-                    return message.channel.send(`Incorrect usage.\nThe correct usage would be \`${prefix}${alias} ${usage}\``)
-
-                execute(message, args, client, prefix)
+                if (perm == 'allow')
+                    break;
             }
         }
-    })
+    }
+    for (const permission of permissions) {
+        console.log(member.hasPermission(permission))
+        if (!member.hasPermission(permission) && perm != 'allow') {
+            // console.log(1)
+            return message.channel.send(`You don't have permission to use this command.`)
+        }
+
+        if (!member.hasPermission('ADMINISTRATOR') && perm == 'deny') {
+            // console.log(2)
+            return message.channel.send(`You don't have permission to use this command.`)
+        }
+    }
+    if (!permissions.length && !member.hasPermission('ADMINISTRATOR') && perm == 'deny') {
+        // console.log(3)
+        return message.channel.send(`You don't have permission to use this command.`)
+    }
+
+    if (args.length < minArgs || (maxArgs != null && args.length > maxArgs))
+        return message.channel.send(`Incorrect usage.\nThe correct usage would be \`${prefix}${alias} ${usage}\``)
+
+    execute(message, args, client, prefix)
 }
+

@@ -13,14 +13,14 @@ module.exports = (client) => {
         for (const file of files) {
             const stat = fs.lstatSync(path.join(__dirname, dir, file))
             if (stat.isDirectory()) {
-                if (file !== 'owner-only') 
-                    readCommands(path.join(dir, file))
+                // if (file !== 'owner-only') 
+                readCommands(path.join(dir, file))
             } else if (file !== baseFile && file !== 'load-commands.js' && file !== 'load-modules.js' && file !== 'economy.js' && file !== 'giveaways.json' && file != 'prefix.json') {
                 const option = require(path.join(__dirname, dir, file))
-                option.module = dir
+                option.module = dir == '.' ? 'help' : dir
                 commands.push(option)
                 if (client) {
-                    client.commands.set(option)
+                    client.commands.set(option.commands[0], option)
                 }
             }
         }
