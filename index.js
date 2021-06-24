@@ -101,7 +101,6 @@ client.on('message', async message => {
 client.on('message', message => {
 	if(message.author.bot)
 	return;
-	console.log('yes')
 	const commandBase = require('./commands/command-base.js')
 
 	const prefix = prefixFinder(message.guild.id)
@@ -122,29 +121,4 @@ client.on('message', message => {
 	commandBase(client, command, message, args, prefix)
 })
 
-client.once('ready', async () => {
-	console.log('Bot is online')
-
-	const baseFile = 'command-base.js'
-	const commandBase = require(`./commands/${baseFile}`)
-
-	// console.log(client.commands)
-
-	const readCommands = (dir) => {
-		const files = fs.readdirSync(path.join(__dirname, dir))
-
-		for (const file of files) {
-			const stat = fs.lstatSync(path.join(__dirname, dir, file))
-			if (stat.isDirectory()) {
-				readCommands(path.join(dir, file))
-			} else if (file !== baseFile && file !== 'load-commands.js') {
-				const option = require(path.join(__dirname, dir, file))
-				// commandBase(client, option)
-			}
-		}
-	}
-
-	readCommands('commands')
-})
-
-client.login(config.testing_token)
+client.login(config.token)
