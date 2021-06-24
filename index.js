@@ -25,7 +25,7 @@ const guildCreateAndDelete = require('./assets/guild-create-and-delete')
 const topggWebhook = require('./assets/topgg-webhook')
 // const app = require('./app')
 
-require('events').EventEmitter.defaultMaxListeners = 100
+// require('events').EventEmitter.defaultMaxListeners = 100
 
 module.exports.getClient = () => { return client };
 
