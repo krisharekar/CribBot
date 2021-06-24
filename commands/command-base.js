@@ -44,7 +44,7 @@ const validatePermissions = (permissions) => {
     }
 }
 
-module.exports = (client, commandOptions, message, args, prefix) => {
+module.exports = (client, commandOptions, message, args, prefix, alias) => {
     let {
         commands = [],
         description,

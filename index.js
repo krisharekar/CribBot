@@ -118,7 +118,7 @@ client.on('message', message => {
 	if (!command) {
 		return;
 	};
-	commandBase(client, command, message, args, prefix)
+	commandBase(client, command, message, args, prefix, commandName)
 })
 
 client.login(config.token)
