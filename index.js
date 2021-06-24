@@ -23,7 +23,7 @@ const dailyDonations = require('./donation-trackers/daily-donations')
 const donationLogs = require('./assets/donation-logs')
 const guildCreateAndDelete = require('./assets/guild-create-and-delete')
 const topggWebhook = require('./assets/topgg-webhook')
-const app = require('./app')
+// const app = require('./app')
 
 require('events').EventEmitter.defaultMaxListeners = 100
 
@@ -44,7 +44,6 @@ client.on('ready', async () => {
 	await donationLogs(client)
 	await guildCreateAndDelete(client)
 	await topggWebhook(client)
-	await app()
 	console.log('ok')
 })
 
@@ -110,7 +109,7 @@ client.on('message', message => {
 
 	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
 	if (!prefixRegex.test(message.content))
-	return console.log('no match');
+	return;
 
 	const [, matchedPrefix] = message.content.match(prefixRegex);
 	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/)
@@ -118,9 +117,8 @@ client.on('message', message => {
 
 	const command = client.commands.find(cmd => cmd.commands.includes(commandName))
 	if (!command) {
-		return console.log('no command')
+		return;
 	};
-	console.log('m')
 	commandBase(client, command, message, args, prefix)
 })
 
