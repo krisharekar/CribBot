@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --inspect=8080 --trace-warnings index.js"
+    "start": "node --inspect=8080 --trace-warnings --expose-gc index.js"
   },
   "author": "Krish",
   "license": "ISC",
