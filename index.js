@@ -23,6 +23,7 @@ const dailyDonations = require('./donation-trackers/daily-donations')
 const donationLogs = require('./assets/donation-logs')
 const guildCreateAndDelete = require('./assets/guild-create-and-delete')
 const topggWebhook = require('./assets/topgg-webhook')
+require('dotenv').config()
 // const app = require('./app')
 
 // require('events').EventEmitter.defaultMaxListeners = 100
@@ -121,4 +122,4 @@ client.on('message', message => {
 	commandBase(client, command, message, args, prefix, commandName)
 })
 
-client.login(config.token)
+client.login(process.env.TESTING_TOKEN)

@@ -1,1 +1,1 @@
-worker: node --inspect=8080 index.js
+worker: node --inspect=8080 --trace-warnings --expose-gc index.js

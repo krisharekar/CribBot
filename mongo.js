@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 module.exports = async () => {
-    await mongoose.connect('mongodb+srv://Krish:KrishCribBot123@bot.dl9uq.mongodb.net/data', {
+    await mongoose.connect(process.env.MONGODB_CONN, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false
