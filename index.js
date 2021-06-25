@@ -122,4 +122,4 @@ client.on('message', message => {
 	commandBase(client, command, message, args, prefix, commandName)
 })
 
-client.login(process.env.TESTING_TOKEN)
+client.login(process.env.TOKEN)
