@@ -26,9 +26,10 @@ module.exports = {
         let commandName
 
         for (const cmd of client.commands) {
-            if (cmd[0].commands.includes(command)) {
+            console.log(cmd)
+            if (cmd[1].commands.includes(command)) {
                 exists = true
-                commandName = cmd[0].commands[0]
+                commandName = cmd[0]
                 break
             }
         }
