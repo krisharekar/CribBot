@@ -36,16 +36,10 @@ module.exports = {
         let banErr
         const onlyId = args.join(' ').toLowerCase().includes('--onlyid')
         const bans = await message.guild.fetchBans().catch(() => banErr = true)
-        const userIds = []
-        messages.forEach(key => {
-            if (!userIds.includes(key.author.id))
-            userIds.push(key.author.id)
-        })
-        console.log(userIds)
-        await message.guild.members.fetch({ user: userIds })
+        await message.guild.members.fetch()
 
         for (const msg of messages) {
-            const exists = message.guild.members.cache.get(msg.author.id)
+            const exists = message.guild.members.cache.has(msg.author.id)
             if (!exists && !msg.author.bot) {
                 if (!exists) {
                     if (onlyId) {
