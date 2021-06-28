@@ -1,8 +1,9 @@
 const donationsSchema = require('../schemas/donations-schema')
 
-module.exports.fetchLeaderboard = async (guildId, lbName) => {
+module.exports.fetchLeaderboard = async (guildId, lbName, client) => {
     if (!guildId) throw new TypeError('A guild id was not provided.');
     if (!lbName) throw new TypeError('Leaderboard name was not provided.');
+    if (!client) throw new TypeError('Client was not provided.');
 
     let rawLb
     // rawLb = await donationsSchema.find({ guildId, "category.categoryId": 'owo' }).sort([['category.donationAmount', 'descending']])
@@ -17,7 +18,7 @@ module.exports.fetchLeaderboard = async (guildId, lbName) => {
 
         case 'daily':
             rawLb = await donationsSchema.find({ guildId }).sort([['dailyDonation', 'descending']]).exec();
-            console.log(rawLb)
+            // console.log(rawLb)
             rawLb = rawLb.filter(key => key.dailyDonation > 0)
             break;
 
@@ -36,7 +37,12 @@ module.exports.fetchLeaderboard = async (guildId, lbName) => {
             rawLb = rawLb.filter(key => key.category.find(c => c.categoryId == lbName).donationAmount > 0)
             break;
     }
-
+    const users = []
+    rawLb.forEach(key => {
+        users.push(key.userId)
+    })
+    await client.guilds.cache.get(guildId).members.fetch({ user: users })
+    rawLb = rawLb.filter(key => client.guilds.cache.get(guildId).members.cache.has(key.userId))
     return rawLb
 }
 

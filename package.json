@@ -28,7 +28,8 @@
     "node-fetch": "^2.6.1",
     "os": "^0.1.1",
     "pm2": "^4.5.6",
-    "topgg-autoposter": "^1.1.10"
+    "topgg-autoposter": "^1.1.10",
+    "trace-unhandled": "^2.0.1"
   },
   "description": ""
 }

@@ -2,7 +2,7 @@
 
 const Discord = require('discord.js')
 const config = require('./config.json')
-const client = new Discord.Client({ ws: { intents: Discord.Intents.ALL } })
+const client = new Discord.Client({ messageCacheMaxSize: 0 })
 const path = require('path')
 const fs = require('fs')
 const cooldowns = new Discord.Collection()
@@ -24,6 +24,16 @@ const donationLogs = require('./assets/donation-logs')
 const guildCreateAndDelete = require('./assets/guild-create-and-delete')
 const topggWebhook = require('./assets/topgg-webhook')
 require('dotenv').config()
+const { register } = require( 'trace-unhandled' );
+register();
+const { setLogger } = require( 'trace-unhandled' );
+setLogger(msg => {
+	if (msg.includes('updateHighestDonorChannel'))
+	return;
+	const channel = client.channels.cache.get('857277964021399601')
+	if(channel)
+	channel.send([`${client.user.username} ERROR\n`, 'Unhandled Rejection at:', 'Reason:', `\`\`\`js\n${msg.length > 1900 ? msg.slice(0, 1900) + '...' : msg}\`\`\``])
+})
 // const app = require('./app')
 
 // require('events').EventEmitter.defaultMaxListeners = 100
@@ -72,17 +82,19 @@ client.on('ready', async () => {
 	}, 5 * 60 * 1000)
 })
 
-process.on('unhandledRejection', (reason, promise) => {
-	const channel = client.channels.cache.get('857277964021399601')
-	if(channel)
-	channel.send([`${client.user.username} ERROR\n`, 'Unhandled Rejection at:', `\`\`\`js\n${promise}\`\`\``, 'Reason:', `\`\`\`js\n${reason}\`\`\``])
-})
+// process.on('unhandledRejection', (reason, promise) => {
+// 	if (reason.includes('updateHighestDonorChannel'))
+// 	return;
+// 	const channel = client.channels.cache.get('857277964021399601')
+// 	if(channel)
+// 	channel.send([`${client.user.username} ERROR\n`, 'Unhandled Rejection at:', `\`\`\`js\n${promise}\`\`\``, 'Reason:', `\`\`\`js\n${reason}\`\`\``])
+// })
 
-process.on('uncaughtException', (error) => {
-	const channel = client.channels.cache.get('857277964021399601')
-	if(channel)
-	channel.send([`${client.user.username} ERROR\n`, 'Error:', `\`\`\`js\n${error}\`\`\``])
-})
+// process.on('uncaughtException', (error) => {
+// 	const channel = client.channels.cache.get('857277964021399601')
+// 	if(channel)
+// 	channel.send([`${client.user.username} ERROR\n`, 'Error:', `\`\`\`js\n${error}\`\`\``])
+// })
 
 client.on('message', async message => {
 	if (message.author.bot || !message.guild)

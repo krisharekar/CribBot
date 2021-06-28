@@ -51,7 +51,7 @@ async function updateHighestDonorChannel(client, guildId) {
     if (!highestDonorChannel)
         return;
 
-    const rawLeaderboard = await fetchLeaderboard(guildId, 'total', 0, 1)
+    const rawLeaderboard = await fetchLeaderboard(guildId, 'total', client)
 
     if (rawLeaderboard.length < 1)
         return;
@@ -63,6 +63,5 @@ async function updateHighestDonorChannel(client, guildId) {
     // console.log(leaderboard[0].donationAmount)
     // console.log(highestAmount)
 
-    await highestDonorChannel.edit({ name: `${highestDonor} (${highestAmount})` }).catch(e => console.log(e))
-    console.log(`${highestDonor} (${highestAmount})`)
+    await highestDonorChannel.edit({ name: `${highestDonor} (${highestAmount})` }).catch()
 }

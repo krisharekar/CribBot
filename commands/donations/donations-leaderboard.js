@@ -4,7 +4,7 @@ const { fetchLeaderboard } = require('../../assets/leaderboard')
 const { computeLeaderboard } = require('../../assets/leaderboard')
 
 module.exports = {
-    commands: ['donations-leaderboard', 'donationsleaderboard', 'donos-leaderboard', 'donosleaderboard', 'donoslb', 'dlb'],
+    commands: ['donations-leaderboard', 'donationsleaderboard', 'donoslb', 'dlb'],
     description: 'Shows donations leaderboard of the server',
     minArgs: 1,
     usage: '<total/daily> [page]',
@@ -26,7 +26,7 @@ module.exports = {
             return message.channel.send('Page must be a number.')
 
         let reply = ''
-        let rawLb = await fetchLeaderboard(guildId, lbName)
+        let rawLb = await fetchLeaderboard(guildId, lbName, client)
         const pageCount = Math.ceil(rawLb.length / 10)
 
         if (rawLb.length < 1)

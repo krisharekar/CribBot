@@ -11,7 +11,10 @@ module.exports = {
         try { result = await eval('(async () => {' + toEval + '})()') } catch (e) { result = (e) }
         if (typeof result === 'object') if (Promise && Promise.resolve) await Promise.resolve(result)
         if (typeof result === 'object') result = JSON.stringify(result)
+        if (result)
         result.length > 1900 ? result = result.substring(0, 1900) + '...' : result
+        else
+        result = undefined
 
         let description = `**Ran:**\n\`\`\`js\n${toEval}\n\`\`\`\n**Result:**\n\`\`\`js\n${result}\n\`\`\``
         if (typeof result !== 'undefined') description += `\n**Type:**\n\`\`\`js\n${typeof result}\n\`\`\``
