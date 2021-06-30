@@ -85,7 +85,7 @@
     },
     {
         "name": "Bottle of Whiskey",
-        "id": "bottleofwhiskey",
+        "id": "whiskey",
         "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273922523197.png"
     },
@@ -367,7 +367,7 @@
     },
     {
         "name": "Motivational Poster",
-        "id": "motivationalposter",
+        "id": "poster",
         "value": 5000000,
         "link": "https://cdn.discordapp.com/emojis/834080273964072995.png"
     },

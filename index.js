@@ -27,6 +27,8 @@ require('dotenv').config()
 const { register } = require( 'trace-unhandled' );
 register();
 const { setLogger } = require( 'trace-unhandled' );
+const weeklyDonations = require('./donation-trackers/weekly-donations')
+
 setLogger(msg => {
 	if (msg.includes('updateHighestDonorChannel'))
 	return;
@@ -51,6 +53,7 @@ client.on('ready', async () => {
 	await itemDonations(client)
 	await updateDonorChannel(client)
 	await dailyDonations(client)
+	await weeklyDonations(client)
 	await loadCaches()
 	await donationLogs(client)
 	await guildCreateAndDelete(client)
