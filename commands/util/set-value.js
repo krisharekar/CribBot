@@ -25,7 +25,7 @@ module.exports = {
         let data = JSON.parse(rawData)
         // console.log(data.length)
         const regex = new RegExp(item, 'i');
-        const itemInfo = data.find(data => regex.test(data.name.replace(/\s/g, '')), 'utf-8')
+        let itemInfo = data.find(data => regex.test(data.name.replace(/\s/g, '')), 'utf-8')
 
         if (!itemInfo)
             itemInfo = data.find(data => regex.test(data.name.replace(/[\s']/g, '')), 'utf-8')
