@@ -21,7 +21,7 @@ function embedBuilder(client, guild, type) {
         .setColor(type == 'added' ? 'GREEN' : 'RED')
         .setThumbnail(guild.iconURL())
         .addField('Server Name', guild.name)
-        .addField('Server Owner', guild.owner ? `${guild.owner.user.tag} (${guild.owner.user.id})` : '')
+        .addField('Server Owner', guild.owner ? `${guild.owner.user.tag} (${guild.owner.user.id})` : 'N/A')
         .addField('Member Count', `Total: ${memberCount}\nHumans: ${humanCount}\nBots: ${botCount}`)
     // .addField('Member Count', memberCount)
     // .addField('Human Count', humanCount)
