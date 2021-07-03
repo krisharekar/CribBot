@@ -13,7 +13,7 @@ module.exports = (client) => {
 }
 
 function embedBuilder(client, guild, type) {
-    const memberCount = guild.members.cache.size
+    const memberCount = guild.memberCount
     const humanCount = guild.members.cache.filter(u => !u.user.bot).size
     const botCount = guild.members.cache.filter(u => u.user.bot).size
     const embed = new Discord.MessageEmbed()
