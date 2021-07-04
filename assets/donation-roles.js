@@ -30,7 +30,6 @@ module.exports.addDonationRoles = async (client, guildId, userId, channelId) => 
                     reason = `Donation role added (user reached ${donationRole.donationAmount.toLocaleString()} amount of donations)`
                     await user.roles.add(donationRole.roleId, reason).catch(() => error = true)
                     const role = guild.roles.cache.get(donationRole.roleId)
-                    console.gl  
                     error
                         ? rolesError.push(role.name)
                         : rolesGiven.push(role.name)

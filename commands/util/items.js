@@ -43,7 +43,6 @@ module.exports = {
         }
         )).slice(0, 1)[0].value.toLocaleString().length
         // console.log(data[0])
-        console.log(longestValue)
         for (const item of data) {
             // const padString = (item) => item.padEnd((longestName+1)-item.length)+':'
             // if(item.name == 'Potato ☭')

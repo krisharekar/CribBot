@@ -18,7 +18,6 @@ module.exports = {
 			// console.log(temp[0])
 			// console.log(temp.sort((a, b) => { return b[0].length - a[0].length })[0])
 			const highestLength = (temp.sort((a, b) => { return b.commands[0].length - a.commands[0].length }))[0].commands[0].length
-			console.log(highestLength)
 			const mainCommands = []
 			let modules = []
 			const allCommands = new Discord.Collection()
@@ -46,7 +45,6 @@ module.exports = {
 			}
 
 			modules = modules.sort((a, b) => { return a.localeCompare(b) })
-			console.log(modules)
 			const helpEmbed = new Discord.MessageEmbed()
 				.setAuthor('Help Menu', client.user.displayAvatarURL())
 				.setColor('BLUE')

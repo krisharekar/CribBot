@@ -36,8 +36,8 @@ module.exports = {
         if (isNaN(amount))
             return message.channel.send('Value must be an integer.')
 
-        if (amount < 1)
-            return message.channel.send('Value cannot be less than 1.')
+        if (amount < 0)
+            return message.channel.send('Value cannot be less than 0.')
 
         const newItemInfo = {
             id: itemInfo.id,

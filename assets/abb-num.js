@@ -1,6 +1,5 @@
 module.exports.abbNum = (num) => {
     num = num.toString().toLowerCase()
-    console.log(num)
     if(!isNaN(num) && !num.includes('e')) {
         // console.log(num)
         return parseInt(num);
