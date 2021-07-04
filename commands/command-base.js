@@ -54,6 +54,7 @@ module.exports = (client, commandOptions, message, args, prefix, alias) => {
         permissions = [],
         requiredRoles = [],
         cooldown = 2,
+        module,
         ownerOnly,
         execute
     } = commandOptions
@@ -104,7 +105,7 @@ module.exports = (client, commandOptions, message, args, prefix, alias) => {
     if (guildPermissions) {
         for (const permission of guildPermissions) {
             // console.log(commandName, permission.commandName)
-            if (command == permission.commandName && (permission.entityId == message.author.id || message.member.roles.cache.has(permission.entityId))) {
+            if ((command == permission.commandName || module == permission.commandName) && (permission.entityId == message.author.id || message.member.roles.cache.has(permission.entityId))) {
                 perm = permission.permission
                 // console.log(perm)
                 if (perm == 'allow')
@@ -113,7 +114,6 @@ module.exports = (client, commandOptions, message, args, prefix, alias) => {
         }
     }
     for (const permission of permissions) {
-        console.log(member.hasPermission(permission))
         if (!member.hasPermission(permission) && perm != 'allow') {
             // console.log(1)
             return message.channel.send(`You don't have permission to use this command.`)
