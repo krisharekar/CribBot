@@ -35,7 +35,7 @@ module.exports = (client) => {
         if (guildItemInfos)
             guildItemInfo = guildItemInfos.find(key => key.id == itemName)
         // console.log(guildItemInfo)
-        if (guildItemInfo.value == 0) //disabled item
+        if (guildItemInfo && guildItemInfo.value == 0) //disabled item
             return;
         const donationAmount = guildItemInfo ? guildItemInfo.value * itemAmount : itemInfo.value * itemAmount
         const item = {
