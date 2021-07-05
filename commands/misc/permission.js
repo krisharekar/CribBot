@@ -29,7 +29,7 @@ module.exports = {
         let isModule = false
 
         for (const cmd of client.commands) {
-            if (cmd[1].commands.includes(commandOrModule)) {
+            if (cmd[1].commands.includes(commandOrModule) && cmd[1].module != 'owner-only') {
                 exists = true
                 commandName = cmd[0]
                 break;
