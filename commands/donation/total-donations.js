@@ -2,6 +2,7 @@ const donationsSchema = require("../../schemas/donations-schema")
 
 module.exports = {
     commands: ['total-donations', 'totaldonations', 'totaldonos', 'td'],
+    description: 'Shows the total donations of the server',
 
     async execute(message, args) {
         const guildId = message.guild.id
