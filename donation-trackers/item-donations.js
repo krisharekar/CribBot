@@ -23,11 +23,16 @@ module.exports = (client) => {
         if (!user) return;
         const userId = user.id
         const guildId = message.guild.id
-        const temp = (content.substring(content.indexOf('*') + 2))
-        // console.log(temp)
-        const itemAmount = parseInt(temp.substring(0, temp.indexOf('*')).replace(/,/g, ''))
-        const itemName = temp.substring(temp.indexOf('*') + 3, temp.indexOf(', '))
-        // console.log(itemAmount, itemName)
+        const tempStr = content.includes('**Tip**') ? content.substring(0, content.lastIndexOf('**Tip**')) : content
+        console.log(tempStr)
+        const strWithoutItem = (tempStr.substring(0, tempStr.lastIndexOf('**')))
+        const strWithoutItemAmount = (tempStr.substring(tempStr.lastIndexOf('**') + 3))
+        console.log(strWithoutItem)
+        console.log(strWithoutItemAmount)
+        const itemAmount = parseInt(strWithoutItem.substring(strWithoutItem.lastIndexOf('**') + 2).replace(/,/g, ''))
+        const itemName = strWithoutItemAmount.substring(0, strWithoutItemAmount.indexOf(', '))
+        console.log(itemAmount, itemName)
+        console.log(strWithoutItem.substring(strWithoutItem.lastIndexOf('**') + 2))
 
         const itemInfo = getInfo(itemName)
         const guildItemInfos = getItemInfos(guildId)
